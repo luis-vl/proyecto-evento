@@ -1,5 +1,1 @@
 Nuevo archivo de prueba
-
-probando cambios en file.txt
-
-acumulando cambios
