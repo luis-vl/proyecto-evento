@@ -1,4 +1,3 @@
-
 DROP DATABASE Teatro;
 CREATE DATABASE Teatro;
 USE Teatro;
@@ -30,21 +29,40 @@ CREATE TABLE Supervisor (
   direccion VARCHAR(150),
   telefono VARCHAR(20),
   cedula VARCHAR(20),
-  fecha_nacimiento DATE
+  fecha_nacimiento DATE,
+  estado bool
+);
+
+CREATE TABLE Salon (
+  id_salon INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50),
+  capacidad INT,
+  precio FLOAT,
+  estado bool
 );
 
 CREATE TABLE Evento (
   id_evento INT PRIMARY KEY AUTO_INCREMENT,
   id_cliente INT NOT NULL,
-  fecha DATE,
+  nombre VARCHAR(80),
+  fecha_registro DATETIME,
+  fecha_evento DATETIME,
   duracion INT,
-  cantidad_personas INT
+  cantidad_personas INT,
+  id_salon INT NOT NULL,
+  precio_boleto FLOAT,
+  porcentaje_cliente FLOAT,
+  porcentaje_teatro FLOAT,
+  precio_salon FLOAT,
+  foreign key(id_cliente) references Cliente(id_cliente),
+  FOREIGN KEY(id_salon) REFERENCES Salon(id_salon)
 );
 
 CREATE TABLE Servicio (
   id_servicio INT PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(80),
-  precio FLOAT
+  precio FLOAT,
+  estado bool
 );
 
 CREATE TABLE Venta_Boleto (
@@ -53,13 +71,6 @@ CREATE TABLE Venta_Boleto (
   fecha DATE,
   cantidad_boletos INT,
   FOREIGN KEY(id_evento) REFERENCES Evento(id_evento)
-);
-
-CREATE TABLE Salon (
-  id_salon INT PRIMARY KEY AUTO_INCREMENT,
-  nombre VARCHAR(50),
-  capacidad INT,
-  precio FLOAT
 );
 
 CREATE TABLE Empresa (
@@ -76,27 +87,17 @@ CREATE TABLE Mantenimiento (
   id_supervisor INT NOT NULL,
   tipo_mantenimiento VARCHAR(100),
   costo FLOAT,
+  fecha_registro DATETIME,
   FOREIGN KEY(id_salon) REFERENCES Salon(id_salon),
   FOREIGN KEY(id_empresa) REFERENCES Empresa(id_empresa),
   FOREIGN KEY(id_supervisor) REFERENCES Supervisor(id_supervisor)
-);
-
-CREATE TABLE Detalle_Evento (
-  id_evento INT NOT NULL,
-  id_salon INT NOT NULL,
-  precio_boleto FLOAT,
-  porcent_teatro FLOAT,
-  porcent_cliente FLOAT,
-  precio_salon FLOAT,
-  FOREIGN KEY(id_evento) REFERENCES Evento(id_evento),
-  FOREIGN KEY(id_salon) REFERENCES Salon(id_salon),
-  PRIMARY KEY(id_evento, id_salon)
 );
 
 CREATE TABLE Evento_Servicio (
   id_evento INT NOT NULL,
   id_servicio INT NOT NULL,
   precio FLOAT,
+  fecha_registro DATETIME,
   foreign key(id_evento) references Evento(id_evento),
   foreign key(id_servicio) references Servicio(id_servicio),
   PRIMARY KEY(id_evento, id_servicio)
