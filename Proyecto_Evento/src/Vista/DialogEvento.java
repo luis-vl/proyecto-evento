@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 
 /**
