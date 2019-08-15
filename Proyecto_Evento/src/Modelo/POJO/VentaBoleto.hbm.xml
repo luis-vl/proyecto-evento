@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.POJO.VentaBoleto" table="venta_boleto" catalog="teatro" optimistic-lock="version">
+        <id name="idVentaBoleto" type="int">
+            <column name="id_venta_boleto" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="evento" class="Modelo.POJO.Evento" fetch="select">
+            <column name="id_evento" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" />
+        </property>
+        <property name="cantidadBoletos" type="java.lang.Integer">
+            <column name="cantidad_boletos" />
+        </property>
+    </class>
+</hibernate-mapping>

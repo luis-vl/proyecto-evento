@@ -6,31 +6,32 @@
 package Modelo;
 
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.SessionFactory;
 
 /**
+ * Hibernate Utility class with a convenient method to get Session Factory
+ * object.
  *
  * @author luisv
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
 
+    private static final SessionFactory sessionFactory;
+    
     static {
         try {
-            
-            Configuration config = new Configuration().configure();
-            config.setProperty("hibernate.connection.username", "Luisdb");
-            config.setProperty("hibernate.connection.password", "Pass/1024");
-            SessionFactory factor = config.buildSessionFactory();
-            sessionFactory = factor;
-        } catch (HibernateException he) {
-            System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
-            throw new ExceptionInInitializerError(he);
+            // Create the SessionFactory from standard (hibernate.cfg.xml) 
+            // config file.
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+        } catch (HibernateException ex) {
+            // Log the exception. 
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
         }
     }
     
-    public static SessionFactory buildSessionFactory(){
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }

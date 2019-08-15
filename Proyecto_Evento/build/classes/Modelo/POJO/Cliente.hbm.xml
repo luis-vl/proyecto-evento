@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.POJO.Cliente" table="cliente" catalog="teatro" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="id_cliente" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="50" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="150" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
+        </property>
+        <property name="cedula" type="string">
+            <column name="cedula" length="20" />
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fecha_nacimiento" length="10" />
+        </property>
+        <set name="entidads" table="entidad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.POJO.Entidad" />
+        </set>
+        <set name="eventos" table="evento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cliente" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.POJO.Evento" />
+        </set>
+    </class>
+</hibernate-mapping>

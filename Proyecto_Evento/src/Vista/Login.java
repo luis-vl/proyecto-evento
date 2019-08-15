@@ -7,13 +7,12 @@ package Vista;
 
 import Controlador.TextPrompt;
 import Modelo.HibernateUtil;
-import Modelo.POJO.Users;
+import Modelo.POJO.Usuario;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -21,8 +20,6 @@ import org.hibernate.criterion.Restrictions;
  * @author fernando
  */
 public class Login extends javax.swing.JDialog {
-
-    private final SessionFactory instancia;
 
     /**
      * Creates new form Login
@@ -35,7 +32,6 @@ public class Login extends javax.swing.JDialog {
         initComponents();
         TextPrompt placeholder1 = new TextPrompt("Introduce tu usuario", this.txtUsuario);
         TextPrompt placeholder2 = new TextPrompt("Introduce tu contraseña", this.txtContraseña);
-        instancia = HibernateUtil.buildSessionFactory();
     }
 
     /**
@@ -52,17 +48,14 @@ public class Login extends javax.swing.JDialog {
         pFormulario = new javax.swing.JPanel();
         lblIconoUsuario = new javax.swing.JLabel();
         lblIconoContraseña = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        cbRecordarUsuario = new javax.swing.JCheckBox();
-        btnCancelar = new javax.swing.JButton();
-        lblIconoUsuario1 = new javax.swing.JLabel();
         txtUsuario = new Controlador.TextBox();
-        lblIconoContraseña1 = new javax.swing.JLabel();
         txtContraseña = new Controlador.PasswordField();
+        btnIniciarSesion = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        cbxRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Acceso");
-        setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
         pPrincipal.setBackground(new java.awt.Color(42, 42, 42));
@@ -76,7 +69,7 @@ public class Login extends javax.swing.JDialog {
         pPrincipal.add(lblNombrePrograma, java.awt.BorderLayout.NORTH);
 
         pFormulario.setBackground(new java.awt.Color(57, 60, 76));
-        pFormulario.setPreferredSize(new java.awt.Dimension(500, 250));
+        pFormulario.setPreferredSize(new java.awt.Dimension(500, 350));
         pFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIconoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
@@ -84,6 +77,8 @@ public class Login extends javax.swing.JDialog {
 
         lblIconoContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contraseña.png"))); // NOI18N
         pFormulario.add(lblIconoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 34));
+        pFormulario.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 32));
+        pFormulario.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 32));
 
         btnIniciarSesion.setBackground(new java.awt.Color(100, 221, 23));
         btnIniciarSesion.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
@@ -94,12 +89,7 @@ public class Login extends javax.swing.JDialog {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        pFormulario.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 148, -1));
-
-        cbRecordarUsuario.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        cbRecordarUsuario.setForeground(new java.awt.Color(160, 160, 160));
-        cbRecordarUsuario.setText("Recordar Usuario");
-        pFormulario.add(cbRecordarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
+        pFormulario.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 148, -1));
 
         btnCancelar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -109,11 +99,11 @@ public class Login extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pFormulario.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 148, -1));
-        pFormulario.add(lblIconoUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 27, -1, -1));
-        pFormulario.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 32));
-        pFormulario.add(lblIconoContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 109, -1, -1));
-        pFormulario.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 32));
+        pFormulario.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 148, -1));
+
+        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxRol.setPreferredSize(new java.awt.Dimension(56, 35));
+        pFormulario.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 300, -1));
 
         pPrincipal.add(pFormulario, java.awt.BorderLayout.PAGE_END);
 
@@ -136,15 +126,14 @@ public class Login extends javax.swing.JDialog {
         }
 
         try {
-            Session session = instancia.openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             String str = txtUsuario.getText().trim();
             
-            Criteria criteria = session.createCriteria(Users.class).add(Restrictions.eq("usuario", str));
-            Users u = (Users) criteria.list().get(0);
+            Criteria criteria = session.createCriteria(Usuario.class).add(Restrictions.eq("nombreUsario", str));
+            Usuario u = (Usuario) criteria.uniqueResult();
             
-            //System.out.println(txtUsuario.getText() + " - " + txtContraseña.getPassword());
-            
-            if (txtUsuario.getText().trim().equals(u.getUsuario()) && txtContraseña.getText().equals(u.getPass())) {
+            if (txtUsuario.getText().trim().equals(u.getNombreUsario()) && txtContraseña.getText().equals(u.getContrasena())) {
+                session.close();
                 Principal p = new Principal();
                 p.setVisible(true);
                 this.dispose();
@@ -185,6 +174,7 @@ public class Login extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(() -> {
@@ -202,11 +192,9 @@ public class Login extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JCheckBox cbRecordarUsuario;
+    private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JLabel lblIconoContraseña;
-    private javax.swing.JLabel lblIconoContraseña1;
     private javax.swing.JLabel lblIconoUsuario;
-    private javax.swing.JLabel lblIconoUsuario1;
     private javax.swing.JLabel lblNombrePrograma;
     private javax.swing.JPanel pFormulario;
     private javax.swing.JPanel pPrincipal;

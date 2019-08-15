@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.POJO.Salon" table="salon" catalog="teatro" optimistic-lock="version">
+        <id name="idSalon" type="java.lang.Integer">
+            <column name="id_salon" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="capacidad" type="java.lang.Integer">
+            <column name="capacidad" />
+        </property>
+        <property name="precio" type="java.lang.Float">
+            <column name="precio" precision="12" scale="0" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="eventos" table="evento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_salon" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.POJO.Evento" />
+        </set>
+        <set name="mantenimientos" table="mantenimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_salon" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.POJO.Mantenimiento" />
+        </set>
+    </class>
+</hibernate-mapping>
