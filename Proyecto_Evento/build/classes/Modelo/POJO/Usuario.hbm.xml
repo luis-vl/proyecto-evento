@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.POJO.Usuario" table="usuario" catalog="teatro" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="id_usuario" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreUsario" type="string">
+            <column name="nombre_usario" length="20" />
+        </property>
+        <property name="rol" type="string">
+            <column name="rol" length="20" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

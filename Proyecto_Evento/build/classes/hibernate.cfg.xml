@@ -41,10 +41,21 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/teatro?serverTimezone=UTC</property>
-    <property name="hibernate.connection.username">Luisdb</property>
-    <property name="hibernate.connection.password">Pass/1024</property>
-    <mapping resource="Modelo/POJO/Users.hbm.xml"/>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Sistema/123</property>
+    <mapping resource="Modelo/POJO/Cliente.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Entidad.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Supervisor.hbm.xml"/>
+    <mapping resource="Modelo/POJO/EventoServicio.hbm.xml"/>
+    <mapping resource="Modelo/POJO/VentaBoleto.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Usuario.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Mantenimiento.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Evento.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Empresa.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Salon.hbm.xml"/>
+    <mapping resource="Modelo/POJO/Servicio.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

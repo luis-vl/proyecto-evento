@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.POJO.Entidad" table="entidad" catalog="teatro" optimistic-lock="version">
+        <id name="idEntidad" type="java.lang.Integer">
+            <column name="id_entidad" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="Modelo.POJO.Cliente" fetch="select">
+            <column name="id_cliente" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" />
+        </property>
+        <property name="ruc" type="string">
+            <column name="ruc" length="50" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="150" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

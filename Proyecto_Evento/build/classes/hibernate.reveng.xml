@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <!--
 DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
@@ -41,5 +41,15 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="teatro"/>
-  <table-filter match-name="users"/>
+  <table-filter match-name="evento"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="entidad"/>
+  <table-filter match-name="evento_servicio"/>
+  <table-filter match-name="venta_boleto"/>
+  <table-filter match-name="servicio"/>
+  <table-filter match-name="supervisor"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="mantenimiento"/>
+  <table-filter match-name="salon"/>
 </hibernate-reverse-engineering>
