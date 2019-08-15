@@ -41,12 +41,6 @@ public class Registrar_Entidad extends javax.swing.JDialog {
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JFormattedTextField();
         txtRUC = new javax.swing.JTextField();
-        btnAgregarRepresentante = new javax.swing.JButton();
-        pControlador = new javax.swing.JPanel();
-        pFoto2 = new javax.swing.JPanel();
-        btnAgregarFoto = new javax.swing.JButton();
-        btnEliminarFoto = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -93,9 +87,6 @@ public class Registrar_Entidad extends javax.swing.JDialog {
 
         txtRUC.setText("RUC");
 
-        btnAgregarRepresentante.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnAgregarRepresentante.setText("Agregar Representante");
-
         javax.swing.GroupLayout pDatosUsuarioLayout = new javax.swing.GroupLayout(pDatosUsuario);
         pDatosUsuario.setLayout(pDatosUsuarioLayout);
         pDatosUsuarioLayout.setHorizontalGroup(
@@ -103,10 +94,9 @@ public class Registrar_Entidad extends javax.swing.JDialog {
             .addGroup(pDatosUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregarRepresentante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                     .addComponent(txtCorreo)
                     .addComponent(txtPrimerNombre)
-                    .addComponent(txtDireccion)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(txtTelefono)
                     .addComponent(txtRUC))
                 .addContainerGap())
@@ -124,84 +114,16 @@ public class Registrar_Entidad extends javax.swing.JDialog {
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAgregarRepresentante)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pSuperior.add(pDatosUsuario, java.awt.BorderLayout.CENTER);
-
-        pControlador.setBackground(new java.awt.Color(57, 60, 76));
-        pControlador.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        pFoto2.setBackground(java.awt.SystemColor.activeCaptionBorder);
-
-        javax.swing.GroupLayout pFoto2Layout = new javax.swing.GroupLayout(pFoto2);
-        pFoto2.setLayout(pFoto2Layout);
-        pFoto2Layout.setHorizontalGroup(
-            pFoto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        pFoto2Layout.setVerticalGroup(
-            pFoto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        btnAgregarFoto.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnAgregarFoto.setText("Agregar Foto");
-
-        btnEliminarFoto.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnEliminarFoto.setText("Eliminar Foto");
-
-        btnRegistrar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pControladorLayout = new javax.swing.GroupLayout(pControlador);
-        pControlador.setLayout(pControladorLayout);
-        pControladorLayout.setHorizontalGroup(
-            pControladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pControladorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pControladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminarFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pFoto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAgregarFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pControladorLayout.setVerticalGroup(
-            pControladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pControladorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pFoto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnAgregarFoto)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminarFoto)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrar)
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
-
-        pSuperior.add(pControlador, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(pSuperior, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-        //        this.dispose();
-        //        Login l = new Login();
-        //        l.setVisible(true);
-    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
@@ -256,16 +178,10 @@ public class Registrar_Entidad extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarFoto;
-    private javax.swing.JButton btnAgregarRepresentante;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminarFoto;
     private javax.swing.JButton btnOK;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel pControlador;
     private javax.swing.JPanel pDatosUsuario;
-    private javax.swing.JPanel pFoto2;
     private javax.swing.JPanel pInferior;
     private javax.swing.JPanel pSuperior;
     private javax.swing.JFormattedTextField txtCorreo;
