@@ -160,37 +160,37 @@ public class panelCatalogo extends javax.swing.JPanel {
 
     private void miClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClienteActionPerformed
         // TODO add your handling code here:
-        Registrar_Cliente rc = new Registrar_Cliente((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Cliente rc = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);
         rc.setVisible(true);
     }//GEN-LAST:event_miClienteActionPerformed
 
     private void miSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalonActionPerformed
         // TODO add your handling code here:
-        Registrar_Salón rs = new Registrar_Salón((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Salón rs = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
         rs.setVisible(true);
     }//GEN-LAST:event_miSalonActionPerformed
 
     private void miEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEntidadActionPerformed
         // TODO add your handling code here:
-        Registrar_Entidad re = new Registrar_Entidad((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
         re.setVisible(true);
     }//GEN-LAST:event_miEntidadActionPerformed
 
     private void miVtaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVtaBoletoActionPerformed
         // TODO add your handling code here:
-        Registrar_Venta_Boleto rvb = new Registrar_Venta_Boleto((JFrame) this.getRootPane().getParent(), true);
+        Dialog_VentaBoleto rvb = new Dialog_VentaBoleto((JFrame) this.getRootPane().getParent(), true);
         rvb.setVisible(true);
     }//GEN-LAST:event_miVtaBoletoActionPerformed
 
     private void miEmpresaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEmpresaMActionPerformed
         // TODO add your handling code here:
-        Registrar_Entidad re = new Registrar_Entidad((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
         re.setVisible(true);
     }//GEN-LAST:event_miEmpresaMActionPerformed
 
     private void miSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSupervisorActionPerformed
         // TODO add your handling code here:
-        Registrar_Supervisor rs = new Registrar_Supervisor((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Supervisor rs = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
         rs.setVisible(true);
     }//GEN-LAST:event_miSupervisorActionPerformed
 
