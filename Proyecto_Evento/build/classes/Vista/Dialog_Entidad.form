@@ -120,6 +120,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.form
                           <Component id="txtPrimerNombre" alignment="0" pref="300" max="32767" attributes="0"/>
                           <Component id="txtDireccion" alignment="0" pref="300" max="32767" attributes="0"/>
                           <Component id="txtTelefono" alignment="0" pref="300" max="32767" attributes="0"/>
@@ -128,6 +129,13 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+=======
+                          <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPrimerNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDireccion" alignment="0" pref="404" max="32767" attributes="0"/>
+                          <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtRUC" alignment="0" max="32767" attributes="0"/>
+>>>>>>> master:Proyecto_Evento/build/classes/Vista/Registrar_Entidad.form
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
@@ -137,6 +145,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.form
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtPrimerNombre" min="-2" pref="26" max="-2" attributes="0"/>
@@ -153,6 +162,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtRUC" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace pref="43" max="32767" attributes="0"/>
+=======
+                      <Component id="txtPrimerNombre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtCorreo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtRUC" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="147" max="32767" attributes="0"/>
+>>>>>>> master:Proyecto_Evento/build/classes/Vista/Registrar_Entidad.form
                   </Group>
               </Group>
             </DimensionLayout>
@@ -181,6 +202,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtRUC">
               <Properties>
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.form
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Bahnschrift" size="14" style="0"/>
                 </Property>
@@ -215,6 +237,8 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Bahnschrift" size="12" style="0"/>
                 </Property>
+=======
+>>>>>>> master:Proyecto_Evento/build/classes/Vista/Registrar_Entidad.form
                 <Property name="text" type="java.lang.String" value="RUC"/>
               </Properties>
             </Component>

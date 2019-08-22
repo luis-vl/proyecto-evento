@@ -40,10 +40,13 @@ public class Dialog_Entidad extends javax.swing.JDialog {
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtRUC = new javax.swing.JTextField();
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.java
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+=======
+>>>>>>> master:Proyecto_Evento/src/Vista/Registrar_Entidad.java
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -92,6 +95,7 @@ public class Dialog_Entidad extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel1.setText("Nombre");
 
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.java
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel2.setText("Direccion");
 
@@ -101,6 +105,8 @@ public class Dialog_Entidad extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel4.setText("RUC");
 
+=======
+>>>>>>> master:Proyecto_Evento/src/Vista/Registrar_Entidad.java
         javax.swing.GroupLayout pDatosUsuarioLayout = new javax.swing.GroupLayout(pDatosUsuario);
         pDatosUsuario.setLayout(pDatosUsuarioLayout);
         pDatosUsuarioLayout.setHorizontalGroup(
@@ -108,6 +114,7 @@ public class Dialog_Entidad extends javax.swing.JDialog {
             .addGroup(pDatosUsuarioLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.java
                     .addComponent(txtPrimerNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
@@ -117,11 +124,20 @@ public class Dialog_Entidad extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(50, 50, 50))
+=======
+                    .addComponent(txtCorreo)
+                    .addComponent(txtPrimerNombre)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtRUC))
+                .addContainerGap())
+>>>>>>> master:Proyecto_Evento/src/Vista/Registrar_Entidad.java
         );
         pDatosUsuarioLayout.setVerticalGroup(
             pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pDatosUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.java
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,6 +154,18 @@ public class Dialog_Entidad extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
+=======
+                .addComponent(txtPrimerNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
+>>>>>>> master:Proyecto_Evento/src/Vista/Registrar_Entidad.java
         );
 
         pSuperior.add(pDatosUsuario, java.awt.BorderLayout.CENTER);
@@ -205,10 +233,13 @@ public class Dialog_Entidad extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOK;
     private javax.swing.ButtonGroup buttonGroup1;
+<<<<<<< HEAD:Proyecto_Evento/src/Vista/Dialog_Entidad.java
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+=======
+>>>>>>> master:Proyecto_Evento/src/Vista/Registrar_Entidad.java
     private javax.swing.JPanel pDatosUsuario;
     private javax.swing.JPanel pInferior;
     private javax.swing.JPanel pSuperior;
