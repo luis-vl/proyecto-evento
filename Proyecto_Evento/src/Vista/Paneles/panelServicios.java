@@ -146,19 +146,19 @@ public class panelServicios extends javax.swing.JPanel {
 
     private void btnContratServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratServicioActionPerformed
         // TODO add your handling code here:
-        Dialog_ContratarServicio v = new Dialog_ContratarServicio((JFrame) this.getRootPane().getParent(), true);
+        DialogContratarServicio v = new DialogContratarServicio((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
     }//GEN-LAST:event_btnContratServicioActionPerformed
 
     private void btnAddServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddServicioActionPerformed
         // TODO add your handling code here:
-        Dialog_Servicio ds = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
+        DialogServicio ds = new DialogServicio((JFrame) this.getRootPane().getParent(), true);
         ds.setVisible(true);
     }//GEN-LAST:event_btnAddServicioActionPerformed
 
     private void btnEditServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditServicioActionPerformed
         // TODO add your handling code here:
-        Dialog_Servicio v = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
+        DialogServicio v = new DialogServicio((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
     }//GEN-LAST:event_btnEditServicioActionPerformed
 
