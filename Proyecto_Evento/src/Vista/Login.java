@@ -70,18 +70,13 @@ public class Login extends javax.swing.JDialog {
 
         pFormulario.setBackground(new java.awt.Color(57, 60, 76));
         pFormulario.setPreferredSize(new java.awt.Dimension(500, 350));
-        pFormulario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblIconoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
-        pFormulario.add(lblIconoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         lblIconoContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contraseña.png"))); // NOI18N
-        pFormulario.add(lblIconoContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, 34));
-        pFormulario.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, 32));
-        pFormulario.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 32));
 
         btnIniciarSesion.setBackground(new java.awt.Color(100, 221, 23));
-        btnIniciarSesion.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnIniciarSesion.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesión");
         btnIniciarSesion.setPreferredSize(new java.awt.Dimension(145, 31));
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -89,9 +84,8 @@ public class Login extends javax.swing.JDialog {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        pFormulario.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 148, -1));
 
-        btnCancelar.setFont(new java.awt.Font("Lucida Sans", 0, 12)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(145, 31));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,11 +93,49 @@ public class Login extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pFormulario.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 148, -1));
 
         cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxRol.setPreferredSize(new java.awt.Dimension(56, 35));
-        pFormulario.add(cbxRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 300, -1));
+
+        javax.swing.GroupLayout pFormularioLayout = new javax.swing.GroupLayout(pFormulario);
+        pFormulario.setLayout(pFormularioLayout);
+        pFormularioLayout.setHorizontalGroup(
+            pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFormularioLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblIconoUsuario)
+                    .addComponent(lblIconoContraseña))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pFormularioLayout.createSequentialGroup()
+                        .addComponent(btnIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbxRol, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
+        );
+        pFormularioLayout.setVerticalGroup(
+            pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFormularioLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconoUsuario))
+                .addGap(18, 18, 18)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIconoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(cbxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         pPrincipal.add(pFormulario, java.awt.BorderLayout.PAGE_END);
 

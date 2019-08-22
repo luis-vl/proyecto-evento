@@ -342,13 +342,13 @@ public class panelEventos extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        DialogEvento de = new DialogEvento((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
         de.setVisible(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEventoActionPerformed
         // TODO add your handling code here:
-        DialogEvento de = new DialogEvento((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
         de.setVisible(true);
     }//GEN-LAST:event_btnEditEventoActionPerformed
 
