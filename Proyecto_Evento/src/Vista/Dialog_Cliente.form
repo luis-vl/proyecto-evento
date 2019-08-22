@@ -84,7 +84,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Datos del Cliente">
-              <Font PropertyName="font" name="Lucida Sans" size="12" style="1"/>
+              <Font PropertyName="font" name="Dialog" size="12" style="1"/>
               <Color PropertyName="color" blue="fa" green="fa" red="fa" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -149,7 +149,7 @@
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtCorreo1" min="-2" pref="26" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

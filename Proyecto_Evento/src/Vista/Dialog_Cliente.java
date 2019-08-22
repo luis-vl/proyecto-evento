@@ -78,7 +78,7 @@ public class Dialog_Cliente extends javax.swing.JDialog {
         getContentPane().add(pInferior, java.awt.BorderLayout.PAGE_END);
 
         pDatosUsuario.setBackground(new java.awt.Color(57, 60, 76));
-        pDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
+        pDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
         pDatosUsuario.setForeground(new java.awt.Color(255, 255, 255));
 
         txtPrimerNombre.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -170,7 +170,7 @@ public class Dialog_Cliente extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         getContentPane().add(pDatosUsuario, java.awt.BorderLayout.CENTER);
