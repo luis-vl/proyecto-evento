@@ -6,14 +6,8 @@
 
 package Vista.Paneles;
 
-import Modelo.HibernateUtil;
-import Modelo.POJO.*;
 import Vista.*;
-import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 
 /**
  *
@@ -24,7 +18,6 @@ public class panelCatalogo extends javax.swing.JPanel {
     /** Creates new form panelCatalogo */
     public panelCatalogo() {
         initComponents();
-        mostrarDatos();
     }
 
     /** This method is called from within the constructor to
@@ -44,12 +37,12 @@ public class panelCatalogo extends javax.swing.JPanel {
         miEmpresaM = new javax.swing.JMenuItem();
         miSupervisor = new javax.swing.JMenuItem();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaDatos = new javax.swing.JTable();
+        tablaRegistrar = new javax.swing.JTable();
         pButtonsTablas = new javax.swing.JPanel();
         btnAddRegistro = new javax.swing.JButton();
         panelEspacio2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cbxMostrar = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         miCliente.setText("Cliente");
         miCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +94,7 @@ public class panelCatalogo extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaRegistrar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,7 +105,7 @@ public class panelCatalogo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tablaDatos);
+        jScrollPane2.setViewportView(tablaRegistrar);
 
         add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -120,7 +113,6 @@ public class panelCatalogo extends javax.swing.JPanel {
         pButtonsTablas.setLayout(new javax.swing.BoxLayout(pButtonsTablas, javax.swing.BoxLayout.LINE_AXIS));
 
         btnAddRegistro.setBackground(new java.awt.Color(100, 221, 23));
-        btnAddRegistro.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnAddRegistro.setText("Agregar..");
         btnAddRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -137,7 +129,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         panelEspacio2.setLayout(panelEspacio2Layout);
         panelEspacio2Layout.setHorizontalGroup(
             panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
         panelEspacio2Layout.setVerticalGroup(
             panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,17 +142,11 @@ public class panelCatalogo extends javax.swing.JPanel {
         jLabel1.setText("Mostrar: ");
         pButtonsTablas.add(jLabel1);
 
-        cbxMostrar.setBackground(new java.awt.Color(57, 105, 138));
-        cbxMostrar.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        cbxMostrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Clientes", "Salones", "Entidad", "Servicios", "Empresa Mantenimiento", "Supervisor" }));
-        cbxMostrar.setMaximumSize(new java.awt.Dimension(300, 32767));
-        cbxMostrar.setPreferredSize(new java.awt.Dimension(300, 20));
-        cbxMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxMostrarActionPerformed(evt);
-            }
-        });
-        pButtonsTablas.add(cbxMostrar);
+        jComboBox2.setBackground(new java.awt.Color(57, 105, 138));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setMaximumSize(new java.awt.Dimension(300, 32767));
+        jComboBox2.setPreferredSize(new java.awt.Dimension(300, 20));
+        pButtonsTablas.add(jComboBox2);
 
         add(pButtonsTablas, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -174,83 +160,44 @@ public class panelCatalogo extends javax.swing.JPanel {
 
     private void miClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClienteActionPerformed
         // TODO add your handling code here:
-        Registrar_Cliente rc = new Registrar_Cliente((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Cliente rc = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);
         rc.setVisible(true);
     }//GEN-LAST:event_miClienteActionPerformed
 
     private void miSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalonActionPerformed
         // TODO add your handling code here:
-        Registrar_Salón rs = new Registrar_Salón((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Salón rs = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
         rs.setVisible(true);
     }//GEN-LAST:event_miSalonActionPerformed
 
     private void miEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEntidadActionPerformed
         // TODO add your handling code here:
-        Registrar_Entidad re = new Registrar_Entidad((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
         re.setVisible(true);
     }//GEN-LAST:event_miEntidadActionPerformed
 
     private void miVtaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVtaBoletoActionPerformed
         // TODO add your handling code here:
-        Registrar_Venta_Boleto rvb = new Registrar_Venta_Boleto((JFrame) this.getRootPane().getParent(), true);
+        Dialog_VentaBoleto rvb = new Dialog_VentaBoleto((JFrame) this.getRootPane().getParent(), true);
         rvb.setVisible(true);
     }//GEN-LAST:event_miVtaBoletoActionPerformed
 
     private void miEmpresaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEmpresaMActionPerformed
         // TODO add your handling code here:
-        Registrar_Entidad re = new Registrar_Entidad((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
         re.setVisible(true);
     }//GEN-LAST:event_miEmpresaMActionPerformed
 
     private void miSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSupervisorActionPerformed
         // TODO add your handling code here:
-        Registrar_Supervisor rs = new Registrar_Supervisor((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Supervisor rs = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
         rs.setVisible(true);
     }//GEN-LAST:event_miSupervisorActionPerformed
 
-    private void cbxMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxMostrarActionPerformed
-        // TODO add your handling code here:
-        mostrarDatos();
-    }//GEN-LAST:event_cbxMostrarActionPerformed
-
-    private void mostrarDatos() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria ctr;
-        DefaultTableModel tModel = new DefaultTableModel();
-        tablaDatos.setModel(tModel);
-        switch(cbxMostrar.getSelectedIndex()){
-            case 0://Clientes
-                ctr = session.createCriteria(Cliente.class);
-                
-                tModel.setColumnIdentifiers(new String[]{"NOMBRES","APELLIDOS","DIRECCION","TELEFONO","CEDULA","FECHA NACIMIENTO"});
-                
-                List<Cliente> clientes = ctr.list();
-                clientes.forEach((c) -> {
-                    tModel.addRow(new Object[]{c.getNombre(),c.getApellido(),c.getDireccion(),c.getTelefono(),c.getCedula(),c.getFechaNacimiento()});
-                });
-                break;
-                
-            case 1://Salon
-                ctr = session.createCriteria(Salon.class);
-                
-                tModel.setColumnIdentifiers(new String[]{"NOMBRE","CAPACIDAD","PRECIO"});
-                
-                List<Salon> salones = ctr.list();
-                salones.forEach((s) -> {
-                    tModel.addRow(new Object[]{s.getNombre(),s.getCapacidad(),s.getPrecio()});
-                });
-                break;
-                
-            case 2:
-                
-                break;
-        }
-        session.close();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRegistro;
-    private javax.swing.JComboBox<String> cbxMostrar;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem miCliente;
@@ -262,7 +209,7 @@ public class panelCatalogo extends javax.swing.JPanel {
     private javax.swing.JPanel pButtonsTablas;
     private javax.swing.JPanel panelEspacio2;
     private javax.swing.JPopupMenu popupRegistrar;
-    private javax.swing.JTable tablaDatos;
+    private javax.swing.JTable tablaRegistrar;
     // End of variables declaration//GEN-END:variables
 
 }
