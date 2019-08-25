@@ -33,7 +33,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         miCliente = new javax.swing.JMenuItem();
         miSalon = new javax.swing.JMenuItem();
         miEntidad = new javax.swing.JMenuItem();
-        miVtaBoleto = new javax.swing.JMenuItem();
+        miServicios = new javax.swing.JMenuItem();
         miEmpresaM = new javax.swing.JMenuItem();
         miSupervisor = new javax.swing.JMenuItem();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -68,13 +68,13 @@ public class panelCatalogo extends javax.swing.JPanel {
         });
         popupRegistrar.add(miEntidad);
 
-        miVtaBoleto.setText("Venta Boletos");
-        miVtaBoleto.addActionListener(new java.awt.event.ActionListener() {
+        miServicios.setText("Venta Boletos");
+        miServicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVtaBoletoActionPerformed(evt);
+                miServiciosActionPerformed(evt);
             }
         });
-        popupRegistrar.add(miVtaBoleto);
+        popupRegistrar.add(miServicios);
 
         miEmpresaM.setText("Empresa de Mantenimiento");
         miEmpresaM.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +129,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         panelEspacio2.setLayout(panelEspacio2Layout);
         panelEspacio2Layout.setHorizontalGroup(
             panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 298, Short.MAX_VALUE)
+            .addGap(0, 130, Short.MAX_VALUE)
         );
         panelEspacio2Layout.setVerticalGroup(
             panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +176,11 @@ public class panelCatalogo extends javax.swing.JPanel {
         re.setVisible(true);
     }//GEN-LAST:event_miEntidadActionPerformed
 
-    private void miVtaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVtaBoletoActionPerformed
+    private void miServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miServiciosActionPerformed
         // TODO add your handling code here:
-        Dialog_VentaBoleto rvb = new Dialog_VentaBoleto((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Servicio rvb = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
         rvb.setVisible(true);
-    }//GEN-LAST:event_miVtaBoletoActionPerformed
+    }//GEN-LAST:event_miServiciosActionPerformed
 
     private void miEmpresaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEmpresaMActionPerformed
         // TODO add your handling code here:
@@ -204,8 +204,8 @@ public class panelCatalogo extends javax.swing.JPanel {
     private javax.swing.JMenuItem miEmpresaM;
     private javax.swing.JMenuItem miEntidad;
     private javax.swing.JMenuItem miSalon;
+    private javax.swing.JMenuItem miServicios;
     private javax.swing.JMenuItem miSupervisor;
-    private javax.swing.JMenuItem miVtaBoleto;
     private javax.swing.JPanel pButtonsTablas;
     private javax.swing.JPanel panelEspacio2;
     private javax.swing.JPopupMenu popupRegistrar;

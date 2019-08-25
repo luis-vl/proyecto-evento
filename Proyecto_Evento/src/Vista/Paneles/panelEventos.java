@@ -61,10 +61,12 @@ public class panelEventos extends javax.swing.JPanel {
         txtPorTeatro = new javax.swing.JTextField();
         txtPorCliente = new javax.swing.JTextField();
         txtPrecBoleto = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
         tEventos.setBackground(new java.awt.Color(56, 60, 76));
+        tEventos.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
         tEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -149,7 +151,8 @@ public class panelEventos extends javax.swing.JPanel {
 
         pBoletos.setBackground(new java.awt.Color(42, 42, 42));
         pBoletos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Boletos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Sans", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
-        pBoletos.setMaximumSize(new java.awt.Dimension(2147483647, 300));
+        pBoletos.setMaximumSize(new java.awt.Dimension(2147483647, 200));
+        pBoletos.setMinimumSize(new java.awt.Dimension(10, 200));
         pBoletos.setPreferredSize(new java.awt.Dimension(0, 200));
         pBoletos.setLayout(new java.awt.BorderLayout());
 
@@ -179,7 +182,7 @@ public class panelEventos extends javax.swing.JPanel {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalVentas)
@@ -222,7 +225,7 @@ public class panelEventos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(lblVendidos, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -257,7 +260,7 @@ public class panelEventos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(lblPendientes, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -269,29 +272,38 @@ public class panelEventos extends javax.swing.JPanel {
 
         pPrecios.setBackground(new java.awt.Color(42, 42, 42));
 
-        jLabel8.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel8.setText("Precio del Boleto: ");
+        jLabel8.setText("Precio del Boleto");
 
-        jLabel9.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel9.setText("Porcentaje del Cliente: ");
+        jLabel9.setText("Porcentaje del Cliente");
 
-        jLabel10.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel10.setText("Porcentaje del Teatro: ");
+        jLabel10.setText("Porcentaje del Teatro");
 
-        jLabel11.setFont(new java.awt.Font("Lucida Sans", 0, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel11.setText("Precio del Salón: ");
+        jLabel11.setText("Precio del Salón");
 
         txtPrecSalon.setEditable(false);
+        txtPrecSalon.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         txtPorTeatro.setEditable(false);
+        txtPorTeatro.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         txtPorCliente.setEditable(false);
+        txtPorCliente.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         txtPrecBoleto.setEditable(false);
+        txtPrecBoleto.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(100, 221, 23));
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("VENDER BOLETO");
 
         javax.swing.GroupLayout pPreciosLayout = new javax.swing.GroupLayout(pPrecios);
         pPrecios.setLayout(pPreciosLayout);
@@ -301,16 +313,18 @@ public class panelEventos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pPreciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPrecBoleto)
-                    .addComponent(txtPorCliente)
-                    .addComponent(txtPorTeatro)
                     .addGroup(pPreciosLayout.createSequentialGroup()
                         .addGroup(pPreciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtPrecSalon, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pPreciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPorCliente, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPorTeatro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPrecSalon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pPreciosLayout.setVerticalGroup(
@@ -319,20 +333,22 @@ public class panelEventos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrecBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPrecBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPorCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPorTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPorTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrecSalon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(txtPrecSalon, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pDetallleEvento.add(pPrecios);
@@ -359,6 +375,7 @@ public class panelEventos extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditEvento;
     private javax.swing.JComboBox<String> cbFiltro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

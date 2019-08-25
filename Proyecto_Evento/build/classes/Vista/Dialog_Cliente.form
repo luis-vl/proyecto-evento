@@ -84,7 +84,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Datos del Cliente">
-              <Font PropertyName="font" name="Lucida Sans" size="12" style="1"/>
+              <Font PropertyName="font" name="Dialog" size="12" style="1"/>
               <Color PropertyName="color" blue="fa" green="fa" red="fa" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -149,7 +149,7 @@
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtCorreo1" min="-2" pref="26" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,7 +160,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Primer Nombre"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrimerApellido">
@@ -168,7 +167,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Primer Apellido"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDireccion">
@@ -176,7 +174,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefono">
@@ -184,12 +181,10 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCorreo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cedula"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>
@@ -200,7 +195,6 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCorreo1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cedula"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="14" style="0"/>
             </Property>

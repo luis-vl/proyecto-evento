@@ -82,18 +82,13 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
         pDatosSupervisor.setForeground(new java.awt.Color(255, 255, 255));
 
         txtPrimerNombre.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txtPrimerNombre.setText("Primer Nombre");
 
         txtPrimerApellido.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txtPrimerApellido.setText("Primer Apellido");
 
         txtDireccion.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txtDireccion.setText("Dirección");
 
         txtTelefono.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txtTelefono.setText("Teléfono");
 
-        txtCorreo.setText("Cedula");
         txtCorreo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
