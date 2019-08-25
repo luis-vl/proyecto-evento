@@ -5,7 +5,10 @@
  */
 package Vista;
 
+import Modelo.POJO.*;
 import java.awt.CardLayout;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,37 +20,67 @@ import javax.swing.event.ChangeEvent;
  * @author luisv
  */
 public class Dialog_Evento extends javax.swing.JDialog {
-    
+
     private final CardLayout clayout;
 
     /**
      * Creates new form DialogEvento
+     *
      * @param parent
      * @param modal
      */
     public Dialog_Evento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         clayout = (CardLayout) pCards.getLayout();
-        
-        sCliente.addChangeListener((ChangeEvent e) -> {
+
+        spCliente.addChangeListener((ChangeEvent e) -> {
             setPorcentaje((JSpinner) e.getSource());
         });
-        sTeatro.addChangeListener((ChangeEvent e) -> {
+        spTeatro.addChangeListener((ChangeEvent e) -> {
             setPorcentaje((JSpinner) e.getSource());
         });
     }
-    
+
     private void setPorcentaje(JSpinner spinner) {
         Integer val = (Integer) spinner.getValue();
         Integer porcentaje = 100 - val;
-        
-        if (spinner == sCliente) {
-            sTeatro.getModel().setValue(porcentaje);
-        }else {
-            sCliente.getModel().setValue(porcentaje);
+
+        if (spinner == spCliente) {
+            spTeatro.getModel().setValue(porcentaje);
+        } else {
+            spCliente.getModel().setValue(porcentaje);
         }
+    }
+    
+    private void setSalon() {
+        System.out.println("Salon: "+tSalon.getSelectedRow());
+        
+    }
+    
+    private void setServicio() {
+        System.out.println("Servicio: " + Arrays.toString(tServicios.getSelectedRows()));
+    }
+
+    private void getCampos() {
+        Evento evento = new Evento();
+        evento.setNombre(txtNombreEvt.getText());
+        evento.setCliente(cliente);
+        evento.setFechaEvento(getFechaEvt());
+        evento.setDuracion((Integer) spDuracion.getValue());
+        evento.setCantidadPersonas((Integer) spCantPersonas.getValue());
+        evento.setSalon(salon);
+        evento.setPrecioBoleto((Float) spPrecio.getValue());
+        evento.setPorcentCliente((Float) spCliente.getValue()/100);
+        evento.setPorcentTeatro((Float) spTeatro.getValue()/100);
+        evento.setFechaRegistro(new Date());
+        
+        EventoServicio es = new EventoServicio();
+        es.setEvento(evento);
+        es.setServicio(servicio);
+        es.setPrecio(servicio.getPrecio());
+        es.setFechaRegistro(new Date());
     }
 
     /**
@@ -61,45 +94,45 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
         pCards = new javax.swing.JPanel();
         pNombreEvt = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombreEvt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         pCliente = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtCliente = new javax.swing.JTextField();
+        btnNewCliente = new javax.swing.JButton();
+        btnFindCliente = new javax.swing.JButton();
         pDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbxHora = new javax.swing.JComboBox<>();
+        cbxMinutos = new javax.swing.JComboBox<>();
+        cbxPeriodo = new javax.swing.JComboBox<>();
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spDuracion = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        spCantPersonas = new javax.swing.JSpinner();
         pSalon = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tSalon = new javax.swing.JTable();
         pBoleto = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        sPrecio = new javax.swing.JSpinner();
-        sCliente = new javax.swing.JSpinner();
+        spPrecio = new javax.swing.JSpinner();
+        spCliente = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        sTeatro = new javax.swing.JSpinner();
+        spTeatro = new javax.swing.JSpinner();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         pServicios = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tServicios = new javax.swing.JTable();
         pButtons = new javax.swing.JPanel();
         btnAnterior = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
@@ -111,7 +144,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
         pNombreEvt.setBackground(new java.awt.Color(57, 60, 76));
 
-        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        txtNombreEvt.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,7 +157,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(pNombreEvtLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addComponent(jTextField1)
+                .addComponent(txtNombreEvt)
                 .addGap(82, 82, 82))
         );
         pNombreEvtLayout.setVerticalGroup(
@@ -132,7 +165,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pNombreEvtLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombreEvt, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -144,15 +177,15 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingrese los Datos del Cliente");
 
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
-        jTextField2.setText("Pepe José Luna");
+        txtCliente.setEditable(false);
+        txtCliente.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        txtCliente.setText("Pepe José Luna");
 
-        jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jButton1.setText("Nuevo Cliente");
+        btnNewCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        btnNewCliente.setText("Nuevo Cliente");
 
-        jButton2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jButton2.setText("Buscar Cliente");
+        btnFindCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        btnFindCliente.setText("Buscar Cliente");
 
         javax.swing.GroupLayout pClienteLayout = new javax.swing.GroupLayout(pCliente);
         pCliente.setLayout(pClienteLayout);
@@ -163,10 +196,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
                 .addGap(79, 79, 79)
                 .addGroup(pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pClienteLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addComponent(btnNewCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                         .addGap(144, 144, 144)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
-                    .addComponent(jTextField2))
+                        .addComponent(btnFindCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                    .addComponent(txtCliente))
                 .addGap(77, 77, 77))
         );
         pClienteLayout.setVerticalGroup(
@@ -175,10 +208,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFindCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
 
@@ -190,14 +223,14 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Datos del Evento");
 
-        jComboBox1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        cbxHora.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        cbxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        jComboBox2.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50" }));
+        cbxMinutos.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        cbxMinutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50" }));
 
-        jComboBox3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
+        cbxPeriodo.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        cbxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
 
         jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jTextField3.setText("10/02/2019");
@@ -214,8 +247,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel7.setText("Duración");
 
-        jSpinner1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        spDuracion.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        spDuracion.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
 
         jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel8.setText("horas");
@@ -223,8 +256,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel9.setText("Cantidad de personas");
 
-        jSpinner2.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(10, 5, null, 10));
+        spCantPersonas.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        spCantPersonas.setModel(new javax.swing.SpinnerNumberModel(10, 5, null, 10));
 
         javax.swing.GroupLayout pDatosLayout = new javax.swing.GroupLayout(pDatos);
         pDatos.setLayout(pDatosLayout);
@@ -241,21 +274,21 @@ public class Dialog_Evento extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pDatosLayout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cbxPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel6)))
                     .addGroup(pDatosLayout.createSequentialGroup()
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(spCantPersonas, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
@@ -272,19 +305,19 @@ public class Dialog_Evento extends javax.swing.JDialog {
                 .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spCantPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -296,8 +329,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Seleccione el Salón");
 
-        jTable1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tSalon.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        tSalon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -316,8 +349,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tSalon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tSalon);
 
         javax.swing.GroupLayout pSalonLayout = new javax.swing.GroupLayout(pSalon);
         pSalon.setLayout(pSalonLayout);
@@ -349,11 +382,11 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel12.setText("Precio del boleto");
 
-        sPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        sPrecio.setModel(new javax.swing.SpinnerNumberModel(10, 1, null, 1));
+        spPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        spPrecio.setModel(new javax.swing.SpinnerNumberModel(10, 1, null, 1));
 
-        sCliente.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        sCliente.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        spCliente.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        spCliente.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
 
         jLabel13.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel13.setText("Porcentaje del cliente");
@@ -361,8 +394,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel14.setText("Porcentaje del teatro");
 
-        sTeatro.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        sTeatro.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        spTeatro.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        spTeatro.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
 
         jLabel15.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel15.setText("%");
@@ -378,7 +411,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBoletoLayout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addGroup(pBoletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sPrecio, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spPrecio, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(66, 66, 66)
                 .addGroup(pBoletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,7 +419,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
                         .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(53, 53, 53))
                     .addGroup(pBoletoLayout.createSequentialGroup()
-                        .addComponent(sCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -395,7 +428,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
                         .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(93, 93, 93))
                     .addGroup(pBoletoLayout.createSequentialGroup()
-                        .addComponent(sTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -409,18 +442,18 @@ public class Dialog_Evento extends javax.swing.JDialog {
                     .addGroup(pBoletoLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(spPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pBoletoLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pBoletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)))
                     .addGroup(pBoletoLayout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pBoletoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spTeatro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))))
                 .addGap(0, 179, Short.MAX_VALUE))
         );
@@ -433,8 +466,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Servicios (opcional)");
 
-        jTable2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tServicios.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        tServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -453,9 +486,9 @@ public class Dialog_Evento extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setPreferredSize(new java.awt.Dimension(500, 64));
-        jTable2.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jScrollPane2.setViewportView(jTable2);
+        tServicios.setPreferredSize(new java.awt.Dimension(500, 64));
+        tServicios.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane2.setViewportView(tServicios);
 
         javax.swing.GroupLayout pServiciosLayout = new javax.swing.GroupLayout(pServicios);
         pServicios.setLayout(pServiciosLayout);
@@ -526,6 +559,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (pServicios.isShowing()) {
             try {
+                setSalon();
+                setServicio();
                 Thread.sleep(1000);
                 JOptionPane.showMessageDialog(this, "Se guardó con Exito!!!");
                 this.dispose();
@@ -581,12 +616,12 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnFindCliente;
+    private javax.swing.JButton btnNewCliente;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cbxHora;
+    private javax.swing.JComboBox<String> cbxMinutos;
+    private javax.swing.JComboBox<String> cbxPeriodo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -606,12 +641,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel pBoleto;
     private javax.swing.JPanel pButtons;
@@ -621,8 +650,14 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private javax.swing.JPanel pNombreEvt;
     private javax.swing.JPanel pSalon;
     private javax.swing.JPanel pServicios;
-    private javax.swing.JSpinner sCliente;
-    private javax.swing.JSpinner sPrecio;
-    private javax.swing.JSpinner sTeatro;
+    private javax.swing.JSpinner spCantPersonas;
+    private javax.swing.JSpinner spCliente;
+    private javax.swing.JSpinner spDuracion;
+    private javax.swing.JSpinner spPrecio;
+    private javax.swing.JSpinner spTeatro;
+    private javax.swing.JTable tSalon;
+    private javax.swing.JTable tServicios;
+    private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextField txtNombreEvt;
     // End of variables declaration//GEN-END:variables
 }
