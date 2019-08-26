@@ -5,6 +5,7 @@
  */
 package Vista.Paneles;
 
+import Negocio.Backend;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -19,6 +20,7 @@ public class panelServicios extends javax.swing.JPanel {
      */
     public panelServicios() {
         initComponents();
+        Backend.ConsultaServicio(this.tServicios);
     }
 
     /**
@@ -101,7 +103,7 @@ public class panelServicios extends javax.swing.JPanel {
         add(pBotonesServicio, java.awt.BorderLayout.PAGE_START);
 
         pServicioEvt.setBackground(new java.awt.Color(42, 42, 42));
-        pServicioEvt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios contratados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
+        pServicioEvt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios contratados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         pServicioEvt.setLayout(new java.awt.BorderLayout());
 
         tServicioEvento.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,7 +124,7 @@ public class panelServicios extends javax.swing.JPanel {
         add(pServicioEvt, java.awt.BorderLayout.CENTER);
 
         pServicios.setBackground(new java.awt.Color(42, 42, 42));
-        pServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalogo Servicios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
+        pServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalogo Servicios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         pServicios.setPreferredSize(new java.awt.Dimension(400, 448));
         pServicios.setLayout(new java.awt.BorderLayout());
 

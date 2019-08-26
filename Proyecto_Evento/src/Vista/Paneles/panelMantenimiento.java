@@ -5,6 +5,7 @@
  */
 package Vista.Paneles;
 
+import Negocio.Backend;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -19,6 +20,8 @@ public class panelMantenimiento extends javax.swing.JPanel {
      */
     public panelMantenimiento() {
         initComponents();
+        Backend.ConsultaMantenimiento(this.jTable4);
+        
     }
 
     /**
@@ -103,6 +106,7 @@ public class panelMantenimiento extends javax.swing.JPanel {
         // TODO add your handling code here:
         Dialog_Mantenimiento v = new Dialog_Mantenimiento((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
