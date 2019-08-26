@@ -6,6 +6,7 @@
 package Vista.Paneles;
 
 import Modelo.HibernateUtil;
+import Modelo.ModelSalon;
 import Modelo.POJO.*;
 import Vista.*;
 import java.util.List;
@@ -151,7 +152,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         pButtonsTablas.add(jLabel1);
 
         cbxMostrar.setBackground(new java.awt.Color(57, 105, 138));
-        cbxMostrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxMostrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Salon", "Entidad", "Servicios", "Empresa Mantenimiento", "Supervisor" }));
         cbxMostrar.setMaximumSize(new java.awt.Dimension(300, 32767));
         cbxMostrar.setPreferredSize(new java.awt.Dimension(300, 20));
         cbxMostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +219,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         DefaultTableModel tModel = new DefaultTableModel();
         tDatos.setModel(tModel);
         switch (cbxMostrar.getSelectedIndex()) {
-            case 0:
+            case 0://Cliente
                 String[] columnNames = new String[]{"NOMBRE", "APELLIDO", "DIRECCION", "TELEFONO", "CEDULA", "FECHA NACIMIENTO"};
                 tModel.setColumnIdentifiers(columnNames);
 
@@ -230,7 +231,9 @@ public class panelCatalogo extends javax.swing.JPanel {
                 });
 
                 break;
-            case 1:
+                
+            case 1://Salon
+                new ModelSalon(tDatos).cargarDatos();
                 break;
             case 2:
                 break;

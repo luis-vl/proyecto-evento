@@ -165,11 +165,13 @@
               <Color blue="8a" green="69" red="39" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Cliente"/>
+                <StringItem index="1" value="Salon"/>
+                <StringItem index="2" value="Entidad"/>
+                <StringItem index="3" value="Servicios"/>
+                <StringItem index="4" value="Empresa Mantenimiento"/>
+                <StringItem index="5" value="Supervisor"/>
               </StringArray>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
