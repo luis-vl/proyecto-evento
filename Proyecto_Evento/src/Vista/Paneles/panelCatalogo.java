@@ -9,8 +9,6 @@ package Vista.Paneles;
 import Negocio.Backend;
 import Vista.*;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
