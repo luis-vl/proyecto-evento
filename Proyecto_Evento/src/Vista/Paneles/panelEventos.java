@@ -5,7 +5,7 @@
  */
 package Vista.Paneles;
 
-import Modelo.POJO.Evento;
+import Modelo.POJO.*;
 import Modelo.TablaModel;
 import Vista.*;
 import javax.swing.JFrame;
@@ -25,14 +25,6 @@ public class panelEventos extends javax.swing.JPanel {
     public panelEventos() {
         initComponents();
         
-        //cargarDatos();
-    }
-    
-    private void cargarDatos() {
-        columnNames = new String[]{"NOMBRE","CLIENTE","FECHA","DURACION","CANTIDAD PERSONAS"};
-        tModel = new TablaModel(Evento.class);
-        tEventos.setModel(tModel);
-        tModel.setColumnNames(columnNames);
     }
 
     /**

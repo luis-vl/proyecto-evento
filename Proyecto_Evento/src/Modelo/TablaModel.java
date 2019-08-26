@@ -7,7 +7,6 @@ package Modelo;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
