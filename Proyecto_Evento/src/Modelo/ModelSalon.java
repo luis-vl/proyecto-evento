@@ -22,7 +22,6 @@ public class ModelSalon {
     private final Criteria ctr;
     private final DefaultTableModel tModel;
     List<Salon> salones;
-    private final JTable tabla;
     private final String[] colNames = {"NOMBRE","CAPACIDAD","PRECIO"};
 
     public ModelSalon(javax.swing.JTable tabla) {
@@ -32,8 +31,7 @@ public class ModelSalon {
 
         salones = ctr.list();
 
-        this.tabla = tabla;
-        this.tabla.setModel(tModel);
+        tabla.setModel(tModel);
         tModel.setColumnIdentifiers(colNames);
     }
 
