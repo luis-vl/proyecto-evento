@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
 import Modelo.POJO.*;
 import java.awt.CardLayout;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
+import org.hibernate.Session;
 
 /**
  *
@@ -22,6 +24,7 @@ import javax.swing.event.ChangeEvent;
 public class Dialog_Evento extends javax.swing.JDialog {
 
     private final CardLayout clayout;
+    private Session session;
 
     /**
      * Creates new form DialogEvento
@@ -41,6 +44,8 @@ public class Dialog_Evento extends javax.swing.JDialog {
         spTeatro.addChangeListener((ChangeEvent e) -> {
             setPorcentaje((JSpinner) e.getSource());
         });
+        
+        session = HibernateUtil.getSessionFactory().openSession();
     }
 
     private void setPorcentaje(JSpinner spinner) {
@@ -53,34 +58,49 @@ public class Dialog_Evento extends javax.swing.JDialog {
             spCliente.getModel().setValue(porcentaje);
         }
     }
-    
-    private void setSalon() {
-        System.out.println("Salon: "+tSalon.getSelectedRow());
-        
-    }
-    
-    private void setServicio() {
-        System.out.println("Servicio: " + Arrays.toString(tServicios.getSelectedRows()));
+
+    private Salon getSalon() {
+        Salon s = new Salon();
+        return new Salon();
     }
 
-    private void getCampos() {
+    private Servicio getServicio() {
+        System.out.println("Servicio: " + Arrays.toString(tServicios.getSelectedRows()));
+        return new Servicio();
+    }
+
+    private Cliente getCliente() {
+        return new Cliente();
+    }
+
+    private Date getFechaEvt() {
+        return new Date();
+    }
+
+    private Evento getEvento() {
         Evento evento = new Evento();
         evento.setNombre(txtNombreEvt.getText());
-        evento.setCliente(cliente);
+        evento.setCliente(getCliente());
         evento.setFechaEvento(getFechaEvt());
         evento.setDuracion((Integer) spDuracion.getValue());
         evento.setCantidadPersonas((Integer) spCantPersonas.getValue());
-        evento.setSalon(salon);
+        evento.setSalon(getSalon());
         evento.setPrecioBoleto((Float) spPrecio.getValue());
-        evento.setPorcentCliente((Float) spCliente.getValue()/100);
-        evento.setPorcentTeatro((Float) spTeatro.getValue()/100);
+        evento.setPorcentCliente((Float) spCliente.getValue() / 100);
+        evento.setPorcentTeatro((Float) spTeatro.getValue() / 100);
         evento.setFechaRegistro(new Date());
         
+        return evento;
+    }
+
+    private EventoServicio getEvt_Servicio() {
         EventoServicio es = new EventoServicio();
-        es.setEvento(evento);
-        es.setServicio(servicio);
-        es.setPrecio(servicio.getPrecio());
+        es.setEvento(getEvento());
+        es.setServicio(getServicio());
+        es.setPrecio(getServicio().getPrecio());
         es.setFechaRegistro(new Date());
+        
+        return es;
     }
 
     /**
@@ -559,8 +579,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (pServicios.isShowing()) {
             try {
-                setSalon();
-                setServicio();
                 Thread.sleep(1000);
                 JOptionPane.showMessageDialog(this, "Se guardó con Exito!!!");
                 this.dispose();
