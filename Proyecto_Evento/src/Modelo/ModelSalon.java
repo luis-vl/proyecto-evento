@@ -7,7 +7,6 @@ package Modelo;
 
 import Modelo.POJO.Salon;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -22,7 +21,6 @@ public class ModelSalon {
     private final Criteria ctr;
     private final DefaultTableModel tModel;
     List<Salon> salones;
-    private final JTable tabla;
     private final String[] colNames = {"NOMBRE","CAPACIDAD","PRECIO"};
 
     public ModelSalon(javax.swing.JTable tabla) {
@@ -32,8 +30,7 @@ public class ModelSalon {
 
         salones = ctr.list();
 
-        this.tabla = tabla;
-        this.tabla.setModel(tModel);
+        tabla.setModel(tModel);
         tModel.setColumnIdentifiers(colNames);
     }
 
