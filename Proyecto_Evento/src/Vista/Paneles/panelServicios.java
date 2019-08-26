@@ -5,6 +5,7 @@
  */
 package Vista.Paneles;
 
+import Negocio.Backend;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -19,6 +20,7 @@ public class panelServicios extends javax.swing.JPanel {
      */
     public panelServicios() {
         initComponents();
+        Backend.ConsultaServicio(this.tServicios);
     }
 
     /**
