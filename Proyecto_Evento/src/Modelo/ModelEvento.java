@@ -20,7 +20,7 @@ public class ModelEvento {
     private final Criteria ctr;
     private final DefaultTableModel tModel;
     List<Evento> eventos;
-    private final String[] colNames = {"NOMBRE","CAPACIDAD","PRECIO"};
+    private final String[] colNames = {"NOMBRE EVENTO","CLIENTE","FECHA","DURACION","CAPACIDAD"};
 
     public ModelEvento(javax.swing.JTable tabla) {
         tModel = new DefaultTableModel();

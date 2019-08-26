@@ -7,7 +7,6 @@ package Modelo;
 
 import Modelo.POJO.Salon;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
