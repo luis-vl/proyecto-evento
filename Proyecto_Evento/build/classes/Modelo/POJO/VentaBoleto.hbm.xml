@@ -17,5 +17,9 @@
         <property name="cantidadBoletos" type="java.lang.Integer">
             <column name="cantidad_boletos" />
         </property>
+        
+        <property name="cedula" type="string">
+            <column name="Cedula" length="30" />
+        </property>
     </class>
 </hibernate-mapping>

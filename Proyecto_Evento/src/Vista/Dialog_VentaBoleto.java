@@ -96,7 +96,7 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
 
         lblNombreCliente.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         lblNombreCliente.setForeground(new java.awt.Color(207, 207, 207));
-        lblNombreCliente.setText("Nombre del cliente");
+        lblNombreCliente.setText("Número de Cédula");
 
         lblFecha.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         lblFecha.setForeground(new java.awt.Color(207, 207, 207));
@@ -225,15 +225,23 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
 
         tbEvento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre del Salón", "Nombre del Evento", "Hora Inicio", "Boletos Disponibles"
+                "Nombre del Salón", "Nombre del Evento", "Hora Inicio", "Hora Fin", "Cantidad de Personas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbEvento);
 
         lblTotalPagar.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
