@@ -158,6 +158,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewClienteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnFindCliente">
               <Properties>
@@ -166,6 +169,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Cliente"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFindClienteActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -191,21 +197,17 @@
                           <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField3" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtFecha" min="-2" pref="185" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbxHora" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="cbxMinutos" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="cbxPeriodo" min="-2" pref="60" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="cbxMinutos" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -219,7 +221,7 @@
                               <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="114" max="32767" attributes="0"/>
+                      <EmptySpace pref="257" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -234,13 +236,12 @@
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField3" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cbxHora" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbxMinutos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbxPeriodo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="txtFecha" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -274,7 +275,7 @@
                   <Font name="Bahnschrift" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="13">
+                  <StringArray count="24">
                     <StringItem index="0" value="00"/>
                     <StringItem index="1" value="01"/>
                     <StringItem index="2" value="02"/>
@@ -288,6 +289,17 @@
                     <StringItem index="10" value="10"/>
                     <StringItem index="11" value="11"/>
                     <StringItem index="12" value="12"/>
+                    <StringItem index="13" value="13"/>
+                    <StringItem index="14" value="14"/>
+                    <StringItem index="15" value="15"/>
+                    <StringItem index="16" value="16"/>
+                    <StringItem index="17" value="17"/>
+                    <StringItem index="18" value="18"/>
+                    <StringItem index="19" value="19"/>
+                    <StringItem index="20" value="20"/>
+                    <StringItem index="21" value="21"/>
+                    <StringItem index="22" value="22"/>
+                    <StringItem index="23" value="23"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -314,30 +326,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cbxPeriodo">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Bahnschrift" size="18" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="AM"/>
-                    <StringItem index="1" value="PM"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Bahnschrift" size="18" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="10/02/2019"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -404,6 +392,19 @@
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="10" minimum="5" numberType="java.lang.Integer" stepSize="10" type="number"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtFecha">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format subtype="0" type="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new SimpleDateFormat(&quot;dd-MMM-yyyy&quot;).format(new Date())" type="code"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Bahnschrift" size="18" style="0"/>
                 </Property>
               </Properties>
             </Component>
@@ -591,7 +592,7 @@
                   <Font name="Bahnschrift" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="10" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                  <SpinnerModel initial="10.0" minimum="1.0" numberType="java.lang.Float" stepSize="1.0" type="number"/>
                 </Property>
               </Properties>
             </Component>
@@ -601,7 +602,7 @@
                   <Font name="Bahnschrift" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="5" type="number"/>
+                  <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Float" stepSize="5.0" type="number"/>
                 </Property>
               </Properties>
             </Component>
@@ -627,7 +628,7 @@
                   <Font name="Bahnschrift" size="18" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="5" type="number"/>
+                  <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Float" stepSize="5.0" type="number"/>
                 </Property>
               </Properties>
             </Component>

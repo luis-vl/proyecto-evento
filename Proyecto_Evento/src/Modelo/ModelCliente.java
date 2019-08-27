@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Modelo.POJO.Servicio;
+import Modelo.POJO.Cliente;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
@@ -15,31 +15,37 @@ import org.hibernate.Session;
  *
  * @author luisv
  */
-public class ModelServicio {
+public class ModelCliente {
     private final Session session;
     private final Criteria ctr;
     private final DefaultTableModel tModel;
-    List<Servicio> servicios;
-    private final String[] colNames = {"NOMBRE","PRECIO"};
+    private List<Cliente> clientes;
+    private final String[] colNames = {"NOMBRES","APELLIDOS","CEDULA"};
 
-    public ModelServicio(javax.swing.JTable tabla) {
+    public ModelCliente(javax.swing.JTable tabla) {
         tModel = new DefaultTableModel();
         session = HibernateUtil.getSessionFactory().openSession();
-        ctr = session.createCriteria(Servicio.class);
+        ctr = session.createCriteria(Cliente.class);
 
-        servicios = ctr.list();
+        clientes = ctr.list();
 
         tabla.setModel(tModel);
         tModel.setColumnIdentifiers(colNames);
     }
 
     public void cargarDatos() {
-        servicios.forEach((s) -> {
-            tModel.addRow(new Object[]{s.getNombre(),s.getPrecio()});
+        clientes = ctr.list();
+        clientes.forEach((c) -> {
+            tModel.addRow(
+                new Object[]{c.getNombre(),c.getApellido(),c.getCedula()});
         });
     }
     
-    public Servicio getAt(int index) {
-        return servicios.get(index);
+    public Cliente getAt(int index) {
+        return clientes.get(index);
+    }
+    
+    public void addCliente(Cliente c) {
+        session.save(c);
     }
 }

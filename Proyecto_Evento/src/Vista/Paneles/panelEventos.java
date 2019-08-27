@@ -21,7 +21,7 @@ public class panelEventos extends javax.swing.JPanel {
      */
     public panelEventos() {
         initComponents();
-        
+        new ModelEvento(tEventos).cargarDatos();
     }
 
     /**
@@ -69,7 +69,8 @@ public class panelEventos extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         tEventos.setBackground(new java.awt.Color(56, 60, 76));
-        tEventos.setFont(new java.awt.Font("Bahnschrift", 0, 11)); // NOI18N
+        tEventos.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        tEventos.setForeground(new java.awt.Color(240, 240, 240));
         tEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -367,6 +368,7 @@ public class panelEventos extends javax.swing.JPanel {
 
     private void btnEditEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEventoActionPerformed
         // TODO add your handling code here:
+        if(tEventos.getSelectedRow() < 0) return;
         Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
         de.setVisible(true);
     }//GEN-LAST:event_btnEditEventoActionPerformed

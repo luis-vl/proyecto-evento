@@ -5,10 +5,11 @@
  */
 package Vista;
 
-import Modelo.HibernateUtil;
+import Modelo.*;
 import Modelo.POJO.*;
 import java.awt.CardLayout;
-import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,12 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
     private final CardLayout clayout;
     private Session session;
+    private final ModelSalon salon;
+    private final ModelServicio servicio;
+    private Cliente cliente;
+    private Evento evento;
+    private ModelEvento_Servicio evtServicio;
+    private ModelEvento mEvento;
 
     /**
      * Creates new form DialogEvento
@@ -44,13 +51,27 @@ public class Dialog_Evento extends javax.swing.JDialog {
         spTeatro.addChangeListener((ChangeEvent e) -> {
             setPorcentaje((JSpinner) e.getSource());
         });
-        
-        session = HibernateUtil.getSessionFactory().openSession();
+
+        salon = new ModelSalon(tSalon);
+        salon.cargarDatos();
+        servicio = new ModelServicio(tServicios);
+        servicio.cargarDatos();
+
+        evtServicio = new ModelEvento_Servicio();
+        mEvento = new ModelEvento();
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     private void setPorcentaje(JSpinner spinner) {
-        Integer val = (Integer) spinner.getValue();
-        Integer porcentaje = 100 - val;
+        float val = (float) spinner.getValue();
+        float porcentaje = 100 - val;
 
         if (spinner == spCliente) {
             spTeatro.getModel().setValue(porcentaje);
@@ -59,48 +80,54 @@ public class Dialog_Evento extends javax.swing.JDialog {
         }
     }
 
-    private Salon getSalon() {
-        Salon s = new Salon();
-        return new Salon();
-    }
-
-    private Servicio getServicio() {
-        System.out.println("Servicio: " + Arrays.toString(tServicios.getSelectedRows()));
-        return new Servicio();
-    }
-
-    private Cliente getCliente() {
-        return new Cliente();
-    }
-
-    private Date getFechaEvt() {
-        return new Date();
-    }
-
-    private Evento getEvento() {
-        Evento evento = new Evento();
-        evento.setNombre(txtNombreEvt.getText());
-        evento.setCliente(getCliente());
-        evento.setFechaEvento(getFechaEvt());
-        evento.setDuracion((Integer) spDuracion.getValue());
-        evento.setCantidadPersonas((Integer) spCantPersonas.getValue());
-        evento.setSalon(getSalon());
-        evento.setPrecioBoleto((Float) spPrecio.getValue());
-        evento.setPorcentCliente((Float) spCliente.getValue() / 100);
-        evento.setPorcentTeatro((Float) spTeatro.getValue() / 100);
-        evento.setFechaRegistro(new Date());
-        
+    public Evento getEvento() {
         return evento;
     }
 
-    private EventoServicio getEvt_Servicio() {
-        EventoServicio es = new EventoServicio();
-        es.setEvento(getEvento());
-        es.setServicio(getServicio());
-        es.setPrecio(getServicio().getPrecio());
-        es.setFechaRegistro(new Date());
-        
-        return es;
+    private Salon getSalon() {
+        return salon.getAt(tSalon.getSelectedRow());
+    }
+
+    private Cliente getCliente() {
+        return cliente;
+    }
+
+    private Date getFechaEvt() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
+        String dateInString = txtFecha.getText() + " "
+                + cbxHora.getSelectedItem().toString() + ":"
+                + cbxMinutos.getSelectedItem().toString() + ":00";
+        Date date = sdf.parse(dateInString);
+        return date;
+    }
+
+    private Evento getDatosEvento() throws ParseException {
+        Evento e = new Evento();
+        e.setNombre(txtNombreEvt.getText());
+        e.setCliente(cliente);
+        e.setFechaEvento(getFechaEvt());
+        e.setDuracion((Integer) spDuracion.getValue());
+        e.setCantidadPersonas((Integer) spCantPersonas.getValue());
+        e.setSalon(getSalon());
+        e.setPrecioBoleto((Float) spPrecio.getValue());
+        e.setPorcentCliente((Float) spCliente.getValue() / 100);
+        e.setPorcentTeatro((Float) spTeatro.getValue() / 100);
+        e.setFechaRegistro(new Date());
+
+        return e;
+    }
+
+    private void setServicios() {
+        int rows = tServicios.getSelectedRows().length;
+        for (int i = 0; i < rows; i++) {
+            EventoServicio es = new EventoServicio();
+            es.setId(new EventoServicioId(getEvento().getIdEvento(), servicio.getAt(i).getIdServicio()));
+            es.setEvento(getEvento());
+            es.setServicio(servicio.getAt(i));
+            es.setPrecio(servicio.getAt(i).getPrecio());
+            es.setFechaRegistro(new Date());
+            evtServicio.addEvt_Servicio(es);
+        }
     }
 
     /**
@@ -125,8 +152,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         cbxHora = new javax.swing.JComboBox<>();
         cbxMinutos = new javax.swing.JComboBox<>();
-        cbxPeriodo = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -135,6 +160,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         spCantPersonas = new javax.swing.JSpinner();
+        txtFecha = new javax.swing.JFormattedTextField();
         pSalon = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -203,9 +229,19 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
         btnNewCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         btnNewCliente.setText("Nuevo Cliente");
+        btnNewCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewClienteActionPerformed(evt);
+            }
+        });
 
         btnFindCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         btnFindCliente.setText("Buscar Cliente");
+        btnFindCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pClienteLayout = new javax.swing.GroupLayout(pCliente);
         pCliente.setLayout(pClienteLayout);
@@ -244,16 +280,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel3.setText("Datos del Evento");
 
         cbxHora.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        cbxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        cbxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
         cbxMinutos.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         cbxMinutos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "10", "20", "30", "40", "50" }));
-
-        cbxPeriodo.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        cbxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AM", "PM" }));
-
-        jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jTextField3.setText("10/02/2019");
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel4.setText("Fecha");
@@ -279,6 +309,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
         spCantPersonas.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         spCantPersonas.setModel(new javax.swing.SpinnerNumberModel(10, 5, null, 10));
 
+        txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtFecha.setText(new SimpleDateFormat("dd-MMM-yyyy").format(new Date()));
+        txtFecha.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout pDatosLayout = new javax.swing.GroupLayout(pDatos);
         pDatos.setLayout(pDatosLayout);
         pDatosLayout.setHorizontalGroup(
@@ -290,18 +324,15 @@ public class Dialog_Evento extends javax.swing.JDialog {
                     .addComponent(jLabel7)
                     .addGroup(pDatosLayout.createSequentialGroup()
                         .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel4)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pDatosLayout.createSequentialGroup()
-                                .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)))
                     .addGroup(pDatosLayout.createSequentialGroup()
                         .addComponent(spDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +341,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
                     .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(spCantPersonas, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         pDatosLayout.setVerticalGroup(
             pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,12 +353,11 @@ public class Dialog_Evento extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFecha))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -403,10 +433,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel12.setText("Precio del boleto");
 
         spPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        spPrecio.setModel(new javax.swing.SpinnerNumberModel(10, 1, null, 1));
+        spPrecio.setModel(new javax.swing.SpinnerNumberModel(10.0f, 1.0f, null, 1.0f));
 
         spCliente.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        spCliente.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        spCliente.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(5.0f)));
 
         jLabel13.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel13.setText("Porcentaje del cliente");
@@ -415,7 +445,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
         jLabel14.setText("Porcentaje del teatro");
 
         spTeatro.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        spTeatro.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 5));
+        spTeatro.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(5.0f)));
 
         jLabel15.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel15.setText("%");
@@ -579,10 +609,16 @@ public class Dialog_Evento extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (pServicios.isShowing()) {
             try {
+                System.out.println("Gadsfdsf01");
+                mEvento.addEvento(getDatosEvento());
+                /*mEvento = new ModelEvento();
+                setEvento(mEvento.getUltimo());
+                setServicios();*/
                 Thread.sleep(1000);
                 JOptionPane.showMessageDialog(this, "Se guardó con Exito!!!");
                 this.dispose();
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException | ParseException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
                 Logger.getLogger(Dialog_Evento.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
@@ -590,6 +626,20 @@ public class Dialog_Evento extends javax.swing.JDialog {
             clayout.next(pCards);
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnNewClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewClienteActionPerformed
+        // TODO add your handling code here:
+        Dialog_Cliente dc = new Dialog_Cliente(this, true);
+        dc.setVisible(true);
+    }//GEN-LAST:event_btnNewClienteActionPerformed
+
+    private void btnFindClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindClienteActionPerformed
+        // TODO add your handling code here:
+        Dialog_BuscarCliente bc = new Dialog_BuscarCliente(this, true);
+        bc.setVisible(true);
+        setCliente(bc.getCliente());
+        txtCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+    }//GEN-LAST:event_btnFindClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -639,7 +689,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbxHora;
     private javax.swing.JComboBox<String> cbxMinutos;
-    private javax.swing.JComboBox<String> cbxPeriodo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -659,7 +708,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel pBoleto;
     private javax.swing.JPanel pButtons;
     private javax.swing.JPanel pCards;
@@ -676,6 +724,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private javax.swing.JTable tSalon;
     private javax.swing.JTable tServicios;
     private javax.swing.JTextField txtCliente;
+    private javax.swing.JFormattedTextField txtFecha;
     private javax.swing.JTextField txtNombreEvt;
     // End of variables declaration//GEN-END:variables
 }

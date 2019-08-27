@@ -39,5 +39,9 @@ public class ModelSalon {
             tModel.addRow(new Object[]{s.getNombre(),s.getCapacidad(),s.getPrecio()});
         });
     }
+    
+    public Salon getAt(int index) {
+        return salones.get(index);
+    }
 
 }
