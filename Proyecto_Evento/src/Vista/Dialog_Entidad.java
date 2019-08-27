@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Negocio.BackendInserts;
+
 /**
  *
  * @author fernando
@@ -155,6 +157,7 @@ public class Dialog_Entidad extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        BackendInserts.InsertarEntidad(this.txtPrimerNombre.getText(), this.txtDireccion.getText(), this.txtTelefono.getText(), this.txtRUC.getText());
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 

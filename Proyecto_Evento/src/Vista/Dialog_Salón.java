@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Negocio.BackendInserts;
+
 /**
  *
  * @author fernando
@@ -40,9 +42,7 @@ public class Dialog_Salón extends javax.swing.JDialog {
         txtNombreSalon = new javax.swing.JTextField();
         txtCapacidad = new javax.swing.JTextField();
         pInfoE = new javax.swing.JPanel();
-        labelCategoria = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
-        cbCategoria = new javax.swing.JComboBox<>();
         txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -122,7 +122,7 @@ public class Dialog_Salón extends javax.swing.JDialog {
                 .addComponent(lblCapacidad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pSuperior.add(pInfoG, java.awt.BorderLayout.CENTER);
@@ -133,16 +133,9 @@ public class Dialog_Salón extends javax.swing.JDialog {
         pInfoE.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         pInfoE.setPreferredSize(new java.awt.Dimension(517, 200));
 
-        labelCategoria.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        labelCategoria.setForeground(new java.awt.Color(207, 207, 207));
-        labelCategoria.setText("Categoría");
-
         lblPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         lblPrecio.setForeground(new java.awt.Color(207, 207, 207));
         lblPrecio.setText("Precio");
-
-        cbCategoria.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         txtPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
@@ -153,26 +146,21 @@ public class Dialog_Salón extends javax.swing.JDialog {
             .addGroup(pInfoELayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pInfoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPrecio)
-                    .addComponent(labelCategoria)
                     .addGroup(pInfoELayout.createSequentialGroup()
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                        .addGap(150, 150, 150))
-                    .addComponent(cbCategoria, 0, 290, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                        .addGap(200, 200, 200))
+                    .addGroup(pInfoELayout.createSequentialGroup()
+                        .addComponent(lblPrecio)
+                        .addGap(69, 69, 69))))
         );
         pInfoELayout.setVerticalGroup(
             pInfoELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pInfoELayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(labelCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(lblPrecio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pSuperior.add(pInfoE, java.awt.BorderLayout.PAGE_END);
@@ -190,6 +178,7 @@ public class Dialog_Salón extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        BackendInserts.InsertarSalon(this.txtNombreSalon.getText(), Integer.parseInt(this.txtCapacidad.getText()), Float.parseFloat(this.txtPrecio.getText()));
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -239,8 +228,6 @@ public class Dialog_Salón extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOK;
-    private javax.swing.JComboBox<String> cbCategoria;
-    private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel lblCapacidad;
     private javax.swing.JLabel lblNombreSalon;
     private javax.swing.JLabel lblPrecio;
