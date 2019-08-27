@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Negocio.BackendInserts;
+
 /**
  *
  * @author luisv
@@ -31,8 +33,8 @@ public class Dialog_Servicio extends javax.swing.JDialog {
         pSuperior = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         pInferior = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnOK = new javax.swing.JButton();
@@ -50,11 +52,11 @@ public class Dialog_Servicio extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(250, 250, 250));
         jLabel2.setText("Precio");
 
-        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTextField1.setPreferredSize(new java.awt.Dimension(4, 26));
+        txtNombre.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtNombre.setPreferredSize(new java.awt.Dimension(4, 26));
 
-        jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTextField2.setPreferredSize(new java.awt.Dimension(4, 26));
+        txtPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtPrecio.setPreferredSize(new java.awt.Dimension(4, 26));
 
         javax.swing.GroupLayout pSuperiorLayout = new javax.swing.GroupLayout(pSuperior);
         pSuperior.setLayout(pSuperiorLayout);
@@ -64,9 +66,9 @@ public class Dialog_Servicio extends javax.swing.JDialog {
                 .addGap(50, 50, 50)
                 .addGroup(pSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pSuperiorLayout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addGap(150, 150, 150))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(50, 50, 50))
@@ -77,11 +79,11 @@ public class Dialog_Servicio extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -124,6 +126,7 @@ public class Dialog_Servicio extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        BackendInserts.InsertarServicio(this.txtNombre.getText(), Float.parseFloat(this.txtPrecio.getText()));
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -175,9 +178,9 @@ public class Dialog_Servicio extends javax.swing.JDialog {
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel pInferior;
     private javax.swing.JPanel pSuperior;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
