@@ -6,6 +6,7 @@
 package Vista.Paneles;
 
 import Modelo.*;
+import Modelo.POJO.Evento;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -15,13 +16,23 @@ import javax.swing.JFrame;
  */
 public class panelEventos extends javax.swing.JPanel {
     
+    private ModelEvento mEvento;
 
     /**
      * Creates new form panelEventos
      */
     public panelEventos() {
         initComponents();
-        new ModelEvento(tEventos).cargarDatos();
+        mEvento = new ModelEvento(tEventos);
+        mEvento.cargarDatos();
+    }
+    
+    private void setDetalleEvento() {
+        Evento e = mEvento.getAt(tEventos.getSelectedRow());
+        txtPrecBoleto.setText(e.getPrecioBoleto().toString());
+        txtPorCliente.setText(e.getPorcentCliente().toString());
+        txtPorTeatro.setText(e.getPorcentTeatro().toString());
+        txtPrecSalon.setText(e.getPrecioSalon().toString());
     }
 
     /**
@@ -64,7 +75,7 @@ public class panelEventos extends javax.swing.JPanel {
         txtPorTeatro = new javax.swing.JTextField();
         txtPorCliente = new javax.swing.JTextField();
         txtPrecBoleto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnVenderBoleto = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -81,7 +92,20 @@ public class panelEventos extends javax.swing.JPanel {
             new String [] {
                 "Nombre", "Cliente", "Salón", "Inicio", "Finaliza", "# de Personas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tEventos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tEventosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tEventos);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -304,10 +328,15 @@ public class panelEventos extends javax.swing.JPanel {
         txtPrecBoleto.setEditable(false);
         txtPrecBoleto.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(100, 221, 23));
-        jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("VENDER BOLETO");
+        btnVenderBoleto.setBackground(new java.awt.Color(100, 221, 23));
+        btnVenderBoleto.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        btnVenderBoleto.setForeground(new java.awt.Color(0, 0, 0));
+        btnVenderBoleto.setText("VENDER BOLETO");
+        btnVenderBoleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVenderBoletoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pPreciosLayout = new javax.swing.GroupLayout(pPrecios);
         pPrecios.setLayout(pPreciosLayout);
@@ -320,7 +349,7 @@ public class panelEventos extends javax.swing.JPanel {
                     .addGroup(pPreciosLayout.createSequentialGroup()
                         .addGroup(pPreciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVenderBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pPreciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtPorCliente, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtPorTeatro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
@@ -351,7 +380,7 @@ public class panelEventos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrecSalon, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVenderBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -364,6 +393,8 @@ public class panelEventos extends javax.swing.JPanel {
         // TODO add your handling code here:
         Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
         de.setVisible(true);
+        mEvento = new ModelEvento(tEventos);
+        mEvento.cargarDatos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEventoActionPerformed
@@ -371,7 +402,22 @@ public class panelEventos extends javax.swing.JPanel {
         if(tEventos.getSelectedRow() < 0) return;
         Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
         de.setVisible(true);
+        mEvento = new ModelEvento(tEventos);
+        mEvento.cargarDatos();
+        
     }//GEN-LAST:event_btnEditEventoActionPerformed
+
+    private void tEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEventosMouseClicked
+        // TODO add your handling code here:
+        if (tEventos.getSelectedRow()<0) return;
+        setDetalleEvento();
+    }//GEN-LAST:event_tEventosMouseClicked
+
+    private void btnVenderBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderBoletoActionPerformed
+        // TODO add your handling code here:
+        Dialog_VentaBoleto v = new Dialog_VentaBoleto((JFrame) this.getRootPane().getParent(), true);
+        v.setVisible(true);
+    }//GEN-LAST:event_btnVenderBoletoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -379,8 +425,8 @@ public class panelEventos extends javax.swing.JPanel {
     private javax.swing.JButton btnBorrarEvento;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditEvento;
+    private javax.swing.JButton btnVenderBoleto;
     private javax.swing.JComboBox<String> cbFiltro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

@@ -44,8 +44,8 @@ Contributor(s):
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/teatro?serverTimezone=UTC</property>
-    <property name="hibernate.connection.username">Fernando</property>
-    <property name="hibernate.connection.password">Fernando2019*</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Sistema/123</property>
     <mapping resource="Modelo/POJO/Cliente.hbm.xml"/>
     <mapping resource="Modelo/POJO/Entidad.hbm.xml"/>
     <mapping resource="Modelo/POJO/Supervisor.hbm.xml"/>

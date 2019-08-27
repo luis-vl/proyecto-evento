@@ -104,7 +104,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private Evento getDatosEvento() throws ParseException {
         Evento e = new Evento();
         e.setNombre(txtNombreEvt.getText());
-        e.setCliente(cliente);
+        e.setCliente(getCliente());
         e.setFechaEvento(getFechaEvt());
         e.setDuracion((Integer) spDuracion.getValue());
         e.setCantidadPersonas((Integer) spCantPersonas.getValue());
@@ -113,6 +113,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
         e.setPorcentCliente((Float) spCliente.getValue() / 100);
         e.setPorcentTeatro((Float) spTeatro.getValue() / 100);
         e.setFechaRegistro(new Date());
+        e.setPrecioSalon(getSalon().getPrecio());
 
         return e;
     }
@@ -609,11 +610,10 @@ public class Dialog_Evento extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (pServicios.isShowing()) {
             try {
-                System.out.println("Gadsfdsf01");
                 mEvento.addEvento(getDatosEvento());
-                /*mEvento = new ModelEvento();
+                mEvento = new ModelEvento();
                 setEvento(mEvento.getUltimo());
-                setServicios();*/
+                setServicios();
                 Thread.sleep(1000);
                 JOptionPane.showMessageDialog(this, "Se guardó con Exito!!!");
                 this.dispose();
