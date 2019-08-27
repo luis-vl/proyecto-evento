@@ -8,6 +8,8 @@ package Vista.Paneles;
 
 import Negocio.Backend;
 import Vista.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +24,7 @@ public class panelCatalogo extends javax.swing.JPanel {
     public panelCatalogo() {
         initComponents();
         cargar_tablas();
+        ocultar_columna();
     }
     
     private void cargar_tablas(){
@@ -29,25 +32,38 @@ public class panelCatalogo extends javax.swing.JPanel {
         switch (this.cbMostrar.getSelectedIndex()) {
             case 0:
                 Backend.ConsultaCliente(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 1:
                 Backend.ConsultaSupervisor(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 2:
                 Backend.ConsultarEntidad(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 3:
                 Backend.ConsultarEmpresa(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 4:
                 Backend.ConsultaServicio(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 5:
                 Backend.salonesDisponibles(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             default:
                 break;
         }
+    }
+    
+    private void ocultar_columna(){
+        this.tablaRegistrar.getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tablaRegistrar.getColumnModel().getColumn(0).setMinWidth(0);
+        this.tablaRegistrar.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tablaRegistrar.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /** This method is called from within the constructor to
@@ -73,6 +89,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         panelEspacio2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbMostrar = new javax.swing.JComboBox<>();
+        btnEditarRegistro = new javax.swing.JButton();
 
         miCliente.setText("Cliente");
         miCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +166,11 @@ public class panelCatalogo extends javax.swing.JPanel {
                 btnAddRegistroMousePressed(evt);
             }
         });
+        btnAddRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRegistroActionPerformed(evt);
+            }
+        });
         pButtonsTablas.add(btnAddRegistro);
 
         panelEspacio2.setBackground(new java.awt.Color(42, 42, 42));
@@ -182,6 +204,20 @@ public class panelCatalogo extends javax.swing.JPanel {
             }
         });
         pButtonsTablas.add(cbMostrar);
+
+        btnEditarRegistro.setBackground(new java.awt.Color(100, 221, 23));
+        btnEditarRegistro.setText("Editar");
+        btnEditarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEditarRegistroMousePressed(evt);
+            }
+        });
+        btnEditarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarRegistroActionPerformed(evt);
+            }
+        });
+        pButtonsTablas.add(btnEditarRegistro);
 
         add(pButtonsTablas, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -236,9 +272,59 @@ public class panelCatalogo extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cbMostrarActionPerformed
 
+    private void btnEditarRegistroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarRegistroMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEditarRegistroMousePressed
+
+    private void btnEditarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRegistroActionPerformed
+        // TODO add your handling code here:
+        formularios_editar();
+
+    }//GEN-LAST:event_btnEditarRegistroActionPerformed
+
+    private void btnAddRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddRegistroActionPerformed
+
+    private void formularios_editar(){
+        switch(this.cbMostrar.getSelectedIndex()){
+            case 0:
+                Dialog_Cliente c = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);
+                c.setVisible(true);
+                
+                break;
+            case 1:
+                Dialog_Supervisor s = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
+                s.setVisible(true);
+                break;
+            case 2:
+                Dialog_Entidad e = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
+                e.setVisible(true);
+                break;
+            case 3:
+                 Dialog_Entidad em = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
+                 em.setVisible(true);                
+                 break;
+            case 4:
+                Dialog_Servicio sv = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
+                sv.setVisible(true);
+                break;
+            case 5:
+                Dialog_Salón sl = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
+                sl.setVisible(true);
+                break;
+            default:
+                break;
+            
+        }
+    }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRegistro;
+    private javax.swing.JButton btnEditarRegistro;
     private javax.swing.JComboBox<String> cbMostrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;

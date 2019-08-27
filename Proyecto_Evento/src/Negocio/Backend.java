@@ -37,13 +37,13 @@ public class Backend {
         
          table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Salon", "Capacidad", "Precio"};
+        String[] columnNames = new String[]{"ID", "Salon", "Capacidad", "Precio"};
         modelo.setColumnIdentifiers(columnNames);
         
         try{
         Query consulta;
         
-        consulta = s.createSQLQuery("select distinct s.nombre, s.capacidad, s.precio from teatro.salon s\n" +
+        consulta = s.createSQLQuery("select distinct s.id_salon, s.nombre, s.capacidad, s.precio from teatro.salon s\n" +
                                     "inner join teatro.evento e\n" +
                                     "on s.id_salon != e.id_salon\n" +
                                     "where estado = 1");
@@ -73,14 +73,14 @@ public class Backend {
         
         table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Nombre", "RUC", "Teléfono"};
+        String[] columnNames = new String[]{"ID", "Nombre", "RUC", "Dirección", "Teléfono"};
         modelo.setColumnIdentifiers(columnNames);
         
         try{
         Query consulta;
         
-        consulta = s.createQuery("Select e.nombre, e.ruc, e.direccion, e.telefono\n" +
-                                     "from Entidad e");
+        consulta = s.createQuery("Select e.idEntidad, e.nombre, e.ruc, e.direccion, e.telefono\n" +
+                                 "from Entidad e");
         
         List lista_consulta;
         lista_consulta = consulta.list();
@@ -107,12 +107,12 @@ public class Backend {
         
         table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Nombre", "Apellido", "Cédula", "Dirección", "Teléfono", "Fecha Nacimiento"};
+        String[] columnNames = new String[]{"ID", "Nombre", "Apellido", "Cédula", "Dirección", "Teléfono", "Fecha Nacimiento"};
         modelo.setColumnIdentifiers(columnNames);
         try{
         Query consulta;
         
-        consulta = s.createQuery("Select s.nombre, s.apellido, s.cedula, s.direccion, s.telefono, s.fechaNacimiento\n" +
+        consulta = s.createQuery("Select s.idSupervisor, s.nombre, s.apellido, s.cedula, s.direccion, s.telefono, s.fechaNacimiento\n" +
                                  "from Supervisor s\n" +
                                  "where s.estado = 1");
         
@@ -141,13 +141,13 @@ public class Backend {
         
         table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Nombre", "Precio"};
+        String[] columnNames = new String[]{"ID", "Nombre", "Precio"};
         modelo.setColumnIdentifiers(columnNames);
         
         try{
         Query consulta;
         
-        consulta = s.createQuery("Select s.nombre, s.precio\n" +
+        consulta = s.createQuery("Select s.idServicio, s.nombre, s.precio\n" +
                                  "from Servicio s\n" +
                                  "where s.estado = 1");
         
@@ -222,7 +222,7 @@ public class Backend {
         try{
         Query consulta;
         
-        consulta = s.createQuery("Select c.nombre, c.apellido, c.cedula, c.direccion, c.telefono, c.fechaNacimiento\n" +
+        consulta = s.createQuery("Select c.idCliente, c.nombre, c.apellido, c.cedula, c.direccion, c.telefono, c.fechaNacimiento\n" +
                                  "from Cliente c");
         
         List lista_consulta;
@@ -231,7 +231,7 @@ public class Backend {
         Iterator i = lista_consulta.iterator();
         table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Nombre", "Apellido", "Cédula", "Dirección", "Teléfono", "Fecha Nacimiento"};
+        String[] columnNames = new String[]{"ID", "Nombre", "Apellido", "Cédula", "Dirección", "Teléfono", "Fecha Nacimiento"};
         modelo.setColumnIdentifiers(columnNames);
         
         while(i.hasNext()){
@@ -257,7 +257,7 @@ public class Backend {
         try{
         Query consulta;
         
-        consulta = s.createQuery("Select e.nombre, e.direccion, e.telefono from Empresa e");
+        consulta = s.createQuery("Select e.idEmpresa, e.nombre, e.direccion, e.telefono from Empresa e");
         
         List lista_consulta;
         lista_consulta = consulta.list();
@@ -265,7 +265,7 @@ public class Backend {
         Iterator i = lista_consulta.iterator();
         table.setModel(modelo);
         
-        String[] columnNames = new String[]{"Nombre", "Dirección", "Teléfono"};
+        String[] columnNames = new String[]{"ID", "Nombre", "Dirección", "Teléfono"};
         modelo.setColumnIdentifiers(columnNames);
         
         while(i.hasNext()){

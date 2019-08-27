@@ -17,6 +17,11 @@
         <property name="telefono" type="string">
             <column name="telefono" length="20" />
         </property>
+        
+        <property name="ruc" type="string">
+            <column name="ruc" length="50" />
+        </property>
+        
         <set name="mantenimientos" table="mantenimiento" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_empresa" not-null="true" />
