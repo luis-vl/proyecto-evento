@@ -48,12 +48,10 @@ public class panelEventos extends javax.swing.JPanel {
         tEventos = new javax.swing.JTable();
         pBotonesEvento = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
-        cbFiltro = new javax.swing.JComboBox<>();
         panelEspacio1 = new javax.swing.JPanel();
-        txtBuscarEvento = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        btnEditEvento = new javax.swing.JButton();
-        btnBorrarEvento = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         pDetallleEvento = new javax.swing.JPanel();
         pBoletos = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -123,12 +121,6 @@ public class panelEventos extends javax.swing.JPanel {
         });
         pBotonesEvento.add(btnAgregar);
 
-        cbFiltro.setBackground(new java.awt.Color(57, 105, 138));
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtrar por..", "Nombre", "Cliente", "Fecha", "Duracion", "Cantidad" }));
-        cbFiltro.setMaximumSize(new java.awt.Dimension(200, 32767));
-        cbFiltro.setPreferredSize(new java.awt.Dimension(200, 20));
-        pBotonesEvento.add(cbFiltro);
-
         panelEspacio1.setBackground(new java.awt.Color(42, 42, 42));
         panelEspacio1.setMinimumSize(new java.awt.Dimension(10, 100));
         panelEspacio1.setPreferredSize(new java.awt.Dimension(10, 24));
@@ -137,7 +129,7 @@ public class panelEventos extends javax.swing.JPanel {
         panelEspacio1.setLayout(panelEspacio1Layout);
         panelEspacio1Layout.setHorizontalGroup(
             panelEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
+            .addGap(0, 275, Short.MAX_VALUE)
         );
         panelEspacio1Layout.setVerticalGroup(
             panelEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,29 +138,30 @@ public class panelEventos extends javax.swing.JPanel {
 
         pBotonesEvento.add(panelEspacio1);
 
-        txtBuscarEvento.setText("Buscar...");
-        txtBuscarEvento.setMaximumSize(new java.awt.Dimension(350, 2147483647));
-        txtBuscarEvento.setPreferredSize(new java.awt.Dimension(350, 20));
-        pBotonesEvento.add(txtBuscarEvento);
+        txtBuscar.setText("Buscar...");
+        txtBuscar.setMaximumSize(new java.awt.Dimension(350, 2147483647));
+        txtBuscar.setPreferredSize(new java.awt.Dimension(350, 20));
+        pBotonesEvento.add(txtBuscar);
 
         btnBuscar.setBackground(new java.awt.Color(57, 105, 138));
         btnBuscar.setText("Buscar");
-        pBotonesEvento.add(btnBuscar);
-
-        btnEditEvento.setBackground(new java.awt.Color(57, 105, 138));
-        btnEditEvento.setText("Editar");
-        btnEditEvento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnEditEvento.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditEventoActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        pBotonesEvento.add(btnEditEvento);
+        pBotonesEvento.add(btnBuscar);
 
-        btnBorrarEvento.setBackground(new java.awt.Color(57, 105, 138));
-        btnBorrarEvento.setText("Borrar");
-        btnBorrarEvento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        pBotonesEvento.add(btnBorrarEvento);
+        btnEditar.setBackground(new java.awt.Color(57, 105, 138));
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        pBotonesEvento.add(btnEditar);
 
         add(pBotonesEvento, java.awt.BorderLayout.NORTH);
 
@@ -397,20 +390,23 @@ public class panelEventos extends javax.swing.JPanel {
         mEvento.cargarDatos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnEditEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditEventoActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         if(tEventos.getSelectedRow() < 0) return;
         Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
+        de.setEvento(mEvento.getByID(mEvento.getAt(tEventos.getSelectedRow()).getIdEvento()));
+        de.setEdit(true);
         de.setVisible(true);
         mEvento = new ModelEvento(tEventos);
         mEvento.cargarDatos();
         
-    }//GEN-LAST:event_btnEditEventoActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEventosMouseClicked
         // TODO add your handling code here:
         if (tEventos.getSelectedRow()<0) return;
         setDetalleEvento();
+        btnEditar.setEnabled(true);
     }//GEN-LAST:event_tEventosMouseClicked
 
     private void btnVenderBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderBoletoActionPerformed
@@ -419,14 +415,16 @@ public class panelEventos extends javax.swing.JPanel {
         v.setVisible(true);
     }//GEN-LAST:event_btnVenderBoletoActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBorrarEvento;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEditEvento;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVenderBoleto;
-    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -448,7 +446,7 @@ public class panelEventos extends javax.swing.JPanel {
     private javax.swing.JPanel pVendidos;
     private javax.swing.JPanel panelEspacio1;
     private javax.swing.JTable tEventos;
-    private javax.swing.JTextField txtBuscarEvento;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtPorCliente;
     private javax.swing.JTextField txtPorTeatro;
     private javax.swing.JTextField txtPrecBoleto;

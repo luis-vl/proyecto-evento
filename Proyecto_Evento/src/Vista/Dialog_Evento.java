@@ -32,6 +32,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
     private Evento evento;
     private ModelEvento_Servicio evtServicio;
     private ModelEvento mEvento;
+    private boolean isEdit = false;
 
     /**
      * Creates new form DialogEvento
@@ -59,6 +60,16 @@ public class Dialog_Evento extends javax.swing.JDialog {
 
         evtServicio = new ModelEvento_Servicio();
         mEvento = new ModelEvento();
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
+        setCampos(getEvento());
+        tServicios.setEnabled(false);
+    }
+
+    public boolean isEdit() {
+        return isEdit;
     }
 
     public void setEvento(Evento evento) {
@@ -93,12 +104,27 @@ public class Dialog_Evento extends javax.swing.JDialog {
     }
 
     private Date getFechaEvt() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
-        String dateInString = txtFecha.getText() + " "
-                + cbxHora.getSelectedItem().toString() + ":"
-                + cbxMinutos.getSelectedItem().toString() + ":00";
-        Date date = sdf.parse(dateInString);
+        Date date = new Date();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
+            String dateInString = txtFecha.getText() + " "
+                    + cbxHora.getSelectedItem().toString() + ":"
+                    + cbxMinutos.getSelectedItem().toString() + ":00";
+            date = sdf.parse(dateInString);
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         return date;
+    }
+
+    private void setFechaEvt(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        String dateInString = sdf.format(date);
+        txtFecha.setText(dateInString);
+        cbxHora.setSelectedItem(date.getHours());
+        cbxMinutos.setSelectedItem(date.getMinutes());
+        
     }
 
     private Evento getDatosEvento() throws ParseException {
@@ -116,6 +142,34 @@ public class Dialog_Evento extends javax.swing.JDialog {
         e.setPrecioSalon(getSalon().getPrecio());
 
         return e;
+    }
+    
+    private Evento getEditEvento(Evento e) throws ParseException {
+        e.setNombre(txtNombreEvt.getText());
+        e.setCliente(getCliente());
+        e.setFechaEvento(getFechaEvt());
+        e.setDuracion((Integer) spDuracion.getValue());
+        e.setCantidadPersonas((Integer) spCantPersonas.getValue());
+        e.setSalon(getSalon());
+        e.setPrecioBoleto((Float) spPrecio.getValue());
+        e.setPorcentCliente((Float) spCliente.getValue() / 100);
+        e.setPorcentTeatro((Float) spTeatro.getValue() / 100);
+        e.setFechaRegistro(new Date());
+        e.setPrecioSalon(getSalon().getPrecio());
+
+        return e;
+    }
+
+    private void setCampos(Evento e) {
+        txtNombreEvt.setText(e.getNombre());
+        txtCliente.setText(e.getCliente().getNombre() + " " + e.getCliente().getApellido());
+        setFechaEvt(e.getFechaEvento());
+        spDuracion.setValue(e.getDuracion());
+        spCantPersonas.setValue(e.getCantidadPersonas());
+        spPrecio.setValue(e.getPrecioBoleto());
+        spCliente.setValue(e.getPorcentCliente() * 100);
+        spTeatro.setValue(e.getPorcentTeatro() * 100);
+        setCliente(e.getCliente());
     }
 
     private void setServicios() {
@@ -610,11 +664,18 @@ public class Dialog_Evento extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (pServicios.isShowing()) {
             try {
-                mEvento.addEvento(getDatosEvento());
-                mEvento = new ModelEvento();
-                setEvento(mEvento.getUltimo());
-                setServicios();
-                Thread.sleep(1000);
+                if (tSalon.getSelectedRow() < 0) {
+                    return;
+                }
+                if (isEdit()) {
+                    mEvento.updateEvento(getEditEvento(mEvento.getByID(getEvento().getIdEvento())));
+                } else {
+                    mEvento.addEvento(getDatosEvento());
+                    mEvento = new ModelEvento();
+                    setEvento(mEvento.getUltimo());
+                    setServicios();
+                }
+                Thread.sleep(500);
                 JOptionPane.showMessageDialog(this, "Se guardó con Exito!!!");
                 this.dispose();
             } catch (InterruptedException | ParseException ex) {
@@ -638,7 +699,7 @@ public class Dialog_Evento extends javax.swing.JDialog {
         Dialog_BuscarCliente bc = new Dialog_BuscarCliente(this, true);
         bc.setVisible(true);
         setCliente(bc.getCliente());
-        txtCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+        txtCliente.setText(cliente.getNombre() + " " + cliente.getApellido());
     }//GEN-LAST:event_btnFindClienteActionPerformed
 
     /**

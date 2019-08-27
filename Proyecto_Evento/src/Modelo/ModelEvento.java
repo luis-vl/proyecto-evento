@@ -17,13 +17,14 @@ import org.hibernate.Session;
  */
 public class ModelEvento {
 
-    private final Session session;
-    private final Criteria ctr;
+    private Session session;
+    private Criteria ctr;
     private final DefaultTableModel tModel;
     private final List<Evento> eventos;
     private String[] colNames = {"ID", "NOMBRE EVENTO", "CLIENTE", "FECHA", "DURACION", "CAPACIDAD"};
 
     public ModelEvento() {
+        
         tModel = new DefaultTableModel();
         session = HibernateUtil.getSessionFactory().openSession();
         ctr = session.createCriteria(Evento.class);
@@ -67,10 +68,24 @@ public class ModelEvento {
     public Evento getAt(int index) {
         return eventos.get(index);
     }
+    
+    public Evento getByID(int id){
+        session.beginTransaction();
+        Evento e = session.get(Evento.class, id);
+        session.getTransaction().commit();
+        return e;
+    }
 
     public void addEvento(Evento e) {
         session.beginTransaction();
         session.save(e);
+        session.getTransaction().commit();
+        session.close();
+    }
+    
+    public void updateEvento(Evento e){
+        session.beginTransaction();
+        session.update(e);
         session.getTransaction().commit();
     }
 }

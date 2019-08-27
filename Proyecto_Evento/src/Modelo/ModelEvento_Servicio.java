@@ -53,4 +53,10 @@ public class ModelEvento_Servicio {
         session.getTransaction().commit();
     }
     
+    public void updateEvt_Servicio(EventoServicio es) {
+        session.beginTransaction();
+        session.update(es);
+        session.getTransaction().commit();
+    }
+    
 }
