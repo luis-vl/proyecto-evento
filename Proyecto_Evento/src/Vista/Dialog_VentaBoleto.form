@@ -172,7 +172,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cf" green="cf" red="cf" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Nombre del cliente"/>
+                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de C&#xe9;dula"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblFecha">
@@ -393,15 +393,21 @@
                 <Component class="javax.swing.JTable" name="tbEvento">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="Nombre del Sal&#xf3;n" type="java.lang.Object"/>
-                        <Column editable="true" title="Nombre del Evento" type="java.lang.Object"/>
+                      <Table columnCount="5" rowCount="4">
+                        <Column editable="false" title="Nombre del Sal&#xf3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre del Evento" type="java.lang.Object"/>
                         <Column editable="true" title="Hora Inicio" type="java.lang.Object"/>
-                        <Column editable="true" title="Boletos Disponibles" type="java.lang.Object"/>
+                        <Column editable="true" title="Hora Fin" type="java.lang.Object"/>
+                        <Column editable="true" title="Cantidad de Personas" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

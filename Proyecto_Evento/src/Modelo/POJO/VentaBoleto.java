@@ -14,6 +14,7 @@ public class VentaBoleto  implements java.io.Serializable {
      private Evento evento;
      private Date fecha;
      private Integer cantidadBoletos;
+     private String cedula;
 
     public VentaBoleto() {
     }
@@ -23,11 +24,12 @@ public class VentaBoleto  implements java.io.Serializable {
         this.idVentaBoleto = idVentaBoleto;
         this.evento = evento;
     }
-    public VentaBoleto(int idVentaBoleto, Evento evento, Date fecha, Integer cantidadBoletos) {
+    public VentaBoleto(int idVentaBoleto, Evento evento, Date fecha, Integer cantidadBoletos, String cedula) {
        this.idVentaBoleto = idVentaBoleto;
        this.evento = evento;
        this.fecha = fecha;
        this.cantidadBoletos = cantidadBoletos;
+       this.cedula = cedula;
     }
    
     public int getIdVentaBoleto() {
@@ -57,6 +59,14 @@ public class VentaBoleto  implements java.io.Serializable {
     
     public void setCantidadBoletos(Integer cantidadBoletos) {
         this.cantidadBoletos = cantidadBoletos;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
 
