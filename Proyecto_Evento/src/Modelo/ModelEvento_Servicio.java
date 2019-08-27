@@ -47,4 +47,16 @@ public class ModelEvento_Servicio {
         });
     }
     
+    public void addEvt_Servicio(EventoServicio es) {
+        session.beginTransaction();
+        session.save(es);
+        session.getTransaction().commit();
+    }
+    
+    public void updateEvt_Servicio(EventoServicio es) {
+        session.beginTransaction();
+        session.update(es);
+        session.getTransaction().commit();
+    }
+    
 }
