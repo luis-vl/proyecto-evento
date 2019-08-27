@@ -20,7 +20,7 @@ public class ModelEvento_Servicio {
     private final Session session;
     private final Criteria ctr;
     private final DefaultTableModel tModel;
-    private List<EventoServicio> lista;
+    private final List<EventoServicio> lista;
     private final String[] colNames = {"ID EVENTO","ID SERVICIO","PRECIO"};
 
     public ModelEvento_Servicio() {
@@ -42,14 +42,21 @@ public class ModelEvento_Servicio {
     }
 
     public void cargarDatos() {
-        lista = ctr.list();
         lista.forEach((s) -> {
             tModel.addRow(new Object[]{s.getEvento().getIdEvento(),s.getServicio().getIdServicio(),s.getPrecio()});
         });
     }
     
     public void addEvt_Servicio(EventoServicio es) {
+        session.beginTransaction();
         session.save(es);
+        session.getTransaction().commit();
+    }
+    
+    public void updateEvt_Servicio(EventoServicio es) {
+        session.beginTransaction();
+        session.update(es);
+        session.getTransaction().commit();
     }
     
 }
