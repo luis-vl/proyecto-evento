@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 public class panelEventos extends javax.swing.JPanel {
     
     private ModelEvento mEvento;
+    private ModelVentaBoleto venta;
 
     /**
      * Creates new form panelEventos
@@ -25,6 +26,7 @@ public class panelEventos extends javax.swing.JPanel {
         initComponents();
         mEvento = new ModelEvento(tEventos);
         mEvento.cargarDatos();
+        venta = new ModelVentaBoleto();
     }
     
     private void setDetalleEvento() {
@@ -393,8 +395,9 @@ public class panelEventos extends javax.swing.JPanel {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         if(tEventos.getSelectedRow() < 0) return;
+        Evento e = mEvento.getAt(tEventos.getSelectedRow());
         Dialog_Evento de = new Dialog_Evento((JFrame) this.getRootPane().getParent(), true);
-        de.setEvento(mEvento.getByID(mEvento.getAt(tEventos.getSelectedRow()).getIdEvento()));
+        de.setEvento(mEvento.getByID(e.getIdEvento()));
         de.setEdit(true);
         de.setVisible(true);
         mEvento = new ModelEvento(tEventos);
@@ -405,8 +408,13 @@ public class panelEventos extends javax.swing.JPanel {
     private void tEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEventosMouseClicked
         // TODO add your handling code here:
         if (tEventos.getSelectedRow()<0) return;
+        Evento e = mEvento.getAt(tEventos.getSelectedRow());
         setDetalleEvento();
         btnEditar.setEnabled(true);
+        long pendientes = e.getCantidadPersonas()-venta.getSumByEvento(e.getIdEvento());
+        lblPendientes.setText(""+pendientes);
+        lblVendidos.setText(""+venta.getSumByEvento(e.getIdEvento()));
+        lblTotalVentas.setText("$ "+venta.getVentasEvento(e.getIdEvento()));
     }//GEN-LAST:event_tEventosMouseClicked
 
     private void btnVenderBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderBoletoActionPerformed
