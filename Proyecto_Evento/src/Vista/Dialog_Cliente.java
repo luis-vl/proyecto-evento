@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  * @author fernando
  */
 public class Dialog_Cliente extends javax.swing.JDialog {
+    
+    public boolean var;
 
     /**
      * Creates new form Registrar_Cliente
@@ -31,6 +33,9 @@ public class Dialog_Cliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public int setID;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -198,12 +203,18 @@ public class Dialog_Cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        
+        if(var == true){
+            
+        }
+        else{
         try {
             // TODO add your handling code here:
             BackendInserts.InsertarCliente(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNacimiento.getText(), this.txtDireccion.getText(), this.txtTelefono.getText());
             this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(Dialog_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_btnOKActionPerformed
 

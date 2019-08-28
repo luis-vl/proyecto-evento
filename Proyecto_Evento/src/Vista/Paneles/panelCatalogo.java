@@ -10,6 +10,8 @@ import Negocio.Backend;
 import Vista.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -19,12 +21,18 @@ import javax.swing.table.DefaultTableModel;
  * @author luisv
  */
 public class panelCatalogo extends javax.swing.JPanel {
+    
+    public int ID;
 
     /** Creates new form panelCatalogo */
     public panelCatalogo() {
         initComponents();
         cargar_tablas();
         ocultar_columna();
+    }
+    
+    public boolean getEditar(){
+        return true;
     }
     
     private void cargar_tablas(){
@@ -279,7 +287,9 @@ public class panelCatalogo extends javax.swing.JPanel {
 
     private void btnEditarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRegistroActionPerformed
         // TODO add your handling code here:
+        getEditar();
         formularios_editar();
+        
 
     }//GEN-LAST:event_btnEditarRegistroActionPerformed
 
@@ -287,12 +297,33 @@ public class panelCatalogo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddRegistroActionPerformed
 
+     private int metodo(){
+     this.tablaRegistrar.addMouseListener(new MouseAdapter() 
+   {
+       int id = 0;
+      @Override
+      public void mouseClicked(MouseEvent e) 
+      {
+         int fila = tablaRegistrar.rowAtPoint(e.getPoint());
+         int columna = tablaRegistrar.columnAtPoint(e.getPoint());
+         if ((fila > -1) && (columna > -1))
+            btnEditarRegistro.setEnabled(true);
+            JOptionPane.showMessageDialog(null, tablaRegistrar.getValueAt(fila, 0));
+            ID = (int)(tablaRegistrar.getValueAt(fila, 0));
+
+      }
+   });
+     
+     return ID;
+    }
+    
     private void formularios_editar(){
         switch(this.cbMostrar.getSelectedIndex()){
             case 0:
-                Dialog_Cliente c = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);
+                Dialog_Cliente c = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);                
                 c.setVisible(true);
-                
+                c.var = this.getEditar();
+                c.setID = this.ID;
                 break;
             case 1:
                 Dialog_Supervisor s = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
