@@ -5,10 +5,18 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
+import Modelo.POJO.Supervisor;
 import Negocio.BackendInserts;
+import Negocio.BackendUpdate;
+import Vista.Paneles.panelCatalogo;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -19,11 +27,58 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
     /**
      * Creates new form Registrar_Cliente
      */
+    public static boolean var = false;
+    private Session s;
+    private Supervisor sv;
+    public int setID;
+    
     public Dialog_Supervisor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();        
         setLocationRelativeTo(null);
+        estadoBtn();
 
+    }
+    
+    private void editar(){
+            SessionFactory factor = HibernateUtil.getSessionFactory();
+            s = factor.openSession();
+            Criteria c = s.createCriteria(Supervisor.class).add(Restrictions.eq("idSupervisor", panelCatalogo.ID)); 
+            for (Object supervisor : c.list()) {
+             sv = (Supervisor) supervisor;
+             this.txtPrimerNombre.setText(sv.getNombre());
+             this.txtPrimerApellido.setText(sv.getApellido());
+             this.txtCedula.setText(sv.getCedula());
+             this.txtFechaNac.setText(String.valueOf(sv.getFechaNacimiento()));
+             this.txtPrimerNombre.setEditable(false);
+             this.txtPrimerApellido.setEditable(false);
+             this.txtCedula.setEditable(false);
+             this.txtFechaNac.setEditable(false);
+             
+    }
+    }
+    
+        private void nuevo(){
+        try {
+            BackendInserts.InsertarSupervisor(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNac.getText(), this.txtDireccion.getText(), this.txtTelefono.getText());
+            var = false;
+            this.dispose();
+        }   catch (ParseException ex) {
+            Logger.getLogger(Dialog_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void estadoBtn(){
+        if(var == true){
+            editar();
+            
+
+        }
+        
+        else if(var == false){
+            
+        }
+        
     }
 
     /**
@@ -183,17 +238,34 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        if(var == true){
+            s.close();
+        }
+        
+        else{
+            
+        }
+        var = false;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        try {
-            // TODO add your handling code here:
-            BackendInserts.InsertarSupervisor(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNac.getText(), this.txtDireccion.getText(), this.txtDireccion.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(Dialog_Supervisor.class.getName()).log(Level.SEVERE, null, ex);
+//        try {
+//            // TODO add your handling code here:
+//            BackendInserts.InsertarSupervisor(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNac.getText(), this.txtDireccion.getText(), this.txtDireccion.getText());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(Dialog_Supervisor.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        this.dispose();
+          if(var == true){
+            BackendUpdate.EditarSupervisor(String.valueOf(sv.getIdSupervisor()), this.txtDireccion.getText(), this.txtTelefono.getText(), true);
+            s.close();
+            this.dispose();
         }
-        this.dispose();
+        
+           else if(var == false){
+               nuevo();
+           }
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

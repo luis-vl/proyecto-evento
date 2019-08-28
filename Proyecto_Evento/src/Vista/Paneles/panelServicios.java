@@ -8,7 +8,10 @@ package Vista.Paneles;
 import Modelo.ModelEvento_Servicio;
 import Negocio.Backend;
 import Vista.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +20,7 @@ import javax.swing.JFrame;
 public class panelServicios extends javax.swing.JPanel {
     
     private ModelEvento_Servicio evtServicio;
+    public static int ID;
 
     /**
      * Creates new form panelServicios
@@ -26,6 +30,16 @@ public class panelServicios extends javax.swing.JPanel {
         Backend.ConsultaServicio(this.tServicios);
         evtServicio = new ModelEvento_Servicio(tServicioEvento);
         evtServicio.getContratados();
+        this.btnEditServicio.setEnabled(false);
+        ocultar_columna();
+        metodo();
+    }
+    
+    private void ocultar_columna(){
+        this.tServicios.getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tServicios.getColumnModel().getColumn(0).setMinWidth(0);
+        this.tServicios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tServicios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /**
@@ -171,14 +185,20 @@ public class panelServicios extends javax.swing.JPanel {
 
     private void btnAddServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddServicioActionPerformed
         // TODO add your handling code here:
-        Dialog_Servicio ds = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
+        Dialog_Servicio.var = false;
+        Dialog_Servicio ds = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);       
+        this.btnEditServicio.setEnabled(false);
         ds.setVisible(true);
     }//GEN-LAST:event_btnAddServicioActionPerformed
 
     private void btnEditServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditServicioActionPerformed
         // TODO add your handling code here:
+        Dialog_Servicio.var = true;
         Dialog_Servicio v = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
+        v.setID = ID;
+        this.btnEditServicio.setEnabled(false);
+        
     }//GEN-LAST:event_btnEditServicioActionPerformed
 
     private void tServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServiciosMouseClicked
@@ -193,6 +213,24 @@ public class panelServicios extends javax.swing.JPanel {
         System.out.println("qwerty");
     }//GEN-LAST:event_tServicioEventoMouseClicked
 
+         private int metodo(){
+     this.tServicios.addMouseListener(new MouseAdapter() 
+   {
+
+      @Override
+      public void mousePressed(MouseEvent e) 
+      {
+         int fila = tServicios.rowAtPoint(e.getPoint());
+         int columna = tServicios.columnAtPoint(e.getPoint());
+         if ((fila > -1) && (columna > -1))
+            btnEditServicio.setEnabled(true);
+            int idd = (int)(tServicios.getValueAt(fila, 0));
+            ID = idd;
+      }
+   });
+     
+     return ID;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddServicio;

@@ -5,11 +5,18 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
+import Modelo.POJO.Cliente;
 import Negocio.BackendInserts;
+import Negocio.BackendUpdate;
+import Vista.Paneles.panelCatalogo;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -17,7 +24,9 @@ import java.util.logging.Logger;
  */
 public class Dialog_Cliente extends javax.swing.JDialog {
     
-    public boolean var;
+    public static boolean var = false;
+    private Session s;
+    private Cliente cl;
 
     /**
      * Creates new form Registrar_Cliente
@@ -27,15 +36,57 @@ public class Dialog_Cliente extends javax.swing.JDialog {
     public Dialog_Cliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        estadoBtn();
     }
     
     public Dialog_Cliente(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        estadoBtn();
     }
     
     public int setID;
     
+    private void editar(){
+            SessionFactory factor = HibernateUtil.getSessionFactory();
+            s = factor.openSession();
+            Criteria c = s.createCriteria(Cliente.class).add(Restrictions.eq("idCliente", panelCatalogo.ID)); 
+            for (Object cliente : c.list()) {
+             cl = (Cliente) cliente;
+             this.txtPrimerNombre.setText(cl.getNombre());
+             this.txtPrimerApellido.setText(cl.getApellido());
+             this.txtCedula.setText(cl.getCedula());
+             this.txtFechaNacimiento.setText(String.valueOf(cl.getFechaNacimiento()));
+             this.txtPrimerNombre.setEditable(false);
+             this.txtPrimerApellido.setEditable(false);
+             this.txtCedula.setEditable(false);
+             this.txtFechaNacimiento.setEditable(false);
+             
+    }
+    }
+    
+    private void nuevo(){
+        try {
+            BackendInserts.InsertarCliente(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNacimiento.getText(), this.txtDireccion.getText(), this.txtTelefono.getText());
+            var = false;
+            this.dispose();
+        }   catch (ParseException ex) {
+            Logger.getLogger(Dialog_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void estadoBtn(){
+        if(var == true){
+            editar();
+            
+
+        }
+        
+        else if(var == false){
+            
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -199,23 +250,29 @@ public class Dialog_Cliente extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        
+        if(var == true){
+            s.close();
+        }
+        
+        else{
+            
+        }
+        var = false;
         this.dispose();
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        
-        if(var == true){
-            
-        }
-        else{
-        try {
-            // TODO add your handling code here:
-            BackendInserts.InsertarCliente(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNacimiento.getText(), this.txtDireccion.getText(), this.txtTelefono.getText());
+           if(var == true){
+            BackendUpdate.EditarCliente(String.valueOf(cl.getIdCliente()), this.txtDireccion.getText(), this.txtTelefono.getText());
+            s.close();
             this.dispose();
-        } catch (ParseException ex) {
-            Logger.getLogger(Dialog_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        
+           else if(var == false){
+               nuevo();
+           }
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

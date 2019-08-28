@@ -5,13 +5,26 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
+import Modelo.POJO.Entidad;
 import Negocio.BackendInserts;
+import Negocio.BackendUpdate;
+import Vista.Paneles.panelCatalogo;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author fernando
  */
 public class Dialog_Entidad extends javax.swing.JDialog {
+    
+    public static boolean var = false;
+    private Session s;
+    private Entidad e;
+    public int setID;
 
     /**
      * Creates new form Registrar_Entidad
@@ -20,7 +33,41 @@ public class Dialog_Entidad extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();        
         setLocationRelativeTo(null);
+        estadoBtn();
 
+    }
+    
+        private void editar(){
+            SessionFactory factor = HibernateUtil.getSessionFactory();
+            s = factor.openSession();
+            Criteria c = s.createCriteria(Entidad.class).add(Restrictions.eq("idEntidad", panelCatalogo.ID)); 
+            for (Object entidad : c.list()) {
+             e = (Entidad) entidad;
+             this.txtPrimerNombre.setText(e.getNombre());
+             this.txtRUC.setText(String.valueOf(e.getRuc()));
+             this.txtPrimerNombre.setEditable(false);
+             this.txtRUC.setEditable(false);
+             
+    }
+    }
+    
+        private void nuevo(){
+            BackendInserts.InsertarEntidad(this.txtPrimerNombre.getText(), this.txtDireccion.getText(), this.txtTelefono.getText(), this.txtRUC.getText());            
+            var = false;
+            this.dispose();
+    }
+    
+    private void estadoBtn(){
+        if(var == true){
+            editar();
+            
+
+        }
+        
+        else if(var == false){
+            
+        }
+        
     }
 
     /**
@@ -152,13 +199,29 @@ public class Dialog_Entidad extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        if(var == true){
+            s.close();
+        }
+        
+        else{
+            
+        }
+        var = false;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        BackendInserts.InsertarEntidad(this.txtPrimerNombre.getText(), this.txtDireccion.getText(), this.txtTelefono.getText(), this.txtRUC.getText());
-        this.dispose();
+        
+            if(var == true){
+            BackendUpdate.EditarEntidad(String.valueOf(e.getIdEntidad()), this.txtDireccion.getText(), this.txtTelefono.getText());
+            s.close();
+            this.dispose();
+        }
+        
+           else if(var == false){
+               nuevo();
+           }
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**

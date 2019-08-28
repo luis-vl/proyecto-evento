@@ -22,13 +22,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class panelCatalogo extends javax.swing.JPanel {
     
-    public int ID;
+    public static int ID;
 
     /** Creates new form panelCatalogo */
     public panelCatalogo() {
         initComponents();
         cargar_tablas();
         ocultar_columna();
+        metodo();
+        this.btnEditarRegistro.setEnabled(false);
     }
     
     public boolean getEditar(){
@@ -287,30 +289,35 @@ public class panelCatalogo extends javax.swing.JPanel {
 
     private void btnEditarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRegistroActionPerformed
         // TODO add your handling code here:
-        getEditar();
+        Dialog_Cliente.var = true;
+        Dialog_Supervisor.var = true;
+        Dialog_Entidad.var = true;
+        Dialog_Servicio.var = true;
+        Dialog_Salón.var = true;
         formularios_editar();
+        
         
 
     }//GEN-LAST:event_btnEditarRegistroActionPerformed
 
     private void btnAddRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRegistroActionPerformed
         // TODO add your handling code here:
+        this.btnEditarRegistro.setEnabled(false);
     }//GEN-LAST:event_btnAddRegistroActionPerformed
 
      private int metodo(){
      this.tablaRegistrar.addMouseListener(new MouseAdapter() 
    {
-       int id = 0;
+
       @Override
-      public void mouseClicked(MouseEvent e) 
+      public void mousePressed(MouseEvent e) 
       {
          int fila = tablaRegistrar.rowAtPoint(e.getPoint());
          int columna = tablaRegistrar.columnAtPoint(e.getPoint());
          if ((fila > -1) && (columna > -1))
             btnEditarRegistro.setEnabled(true);
-            JOptionPane.showMessageDialog(null, tablaRegistrar.getValueAt(fila, 0));
-            ID = (int)(tablaRegistrar.getValueAt(fila, 0));
-
+            int idd = (int)(tablaRegistrar.getValueAt(fila, 0));
+            ID = idd;            
       }
    });
      
@@ -322,28 +329,38 @@ public class panelCatalogo extends javax.swing.JPanel {
             case 0:
                 Dialog_Cliente c = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);                
                 c.setVisible(true);
-                c.var = this.getEditar();
                 c.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 1:
                 Dialog_Supervisor s = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
                 s.setVisible(true);
+                s.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false); 
                 break;
             case 2:
                 Dialog_Entidad e = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
                 e.setVisible(true);
+                e.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 3:
                  Dialog_Entidad em = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
-                 em.setVisible(true);                
+                 em.setVisible(true);  
+                 em.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                  break;
             case 4:
                 Dialog_Servicio sv = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
                 sv.setVisible(true);
+                sv.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 5:
                 Dialog_Salón sl = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
                 sl.setVisible(true);
+                sl.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             default:
                 break;

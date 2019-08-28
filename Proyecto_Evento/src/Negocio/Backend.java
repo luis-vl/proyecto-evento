@@ -21,6 +21,14 @@ import org.hibernate.SessionFactory;
  */
 public class Backend {
     
+      public static List salon;
+      public static List cliente;
+      public static List entidad;
+      public static List empresa;
+      public static List supervisor;
+      public static List servicio;
+      public static List mantenimiento;
+      
     
     public Backend(){
     
@@ -49,6 +57,7 @@ public class Backend {
                                     "where estado = 1");
         
         List lista_consulta;
+        salon = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -83,6 +92,7 @@ public class Backend {
                                  "from Entidad e");
         
         List lista_consulta;
+        entidad = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -116,7 +126,8 @@ public class Backend {
                                  "from Supervisor s\n" +
                                  "where s.estado = 1");
         
-        java.util.List lista_consulta;
+        List lista_consulta;
+        supervisor = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -151,7 +162,8 @@ public class Backend {
                                  "from Servicio s\n" +
                                  "where s.estado = 1");
         
-        java.util.List lista_consulta;
+        List lista_consulta;
+        servicio = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -193,6 +205,7 @@ public class Backend {
                                     "m.costo, m.fecha_registro");
         
         List lista_consulta;
+        mantenimiento = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -226,6 +239,7 @@ public class Backend {
                                  "from Cliente c");
         
         List lista_consulta;
+        cliente = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
@@ -260,6 +274,7 @@ public class Backend {
         consulta = s.createQuery("Select e.idEmpresa, e.nombre, e.direccion, e.telefono from Empresa e");
         
         List lista_consulta;
+        empresa = consulta.list();
         lista_consulta = consulta.list();
         
         Iterator i = lista_consulta.iterator();
