@@ -40,7 +40,6 @@ public class panelUsuarios extends javax.swing.JPanel {
         pButtonsPerf = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -87,10 +86,6 @@ public class panelUsuarios extends javax.swing.JPanel {
         });
         pButtonsPerf.add(btnEditar);
 
-        btnBorrar.setBackground(new java.awt.Color(57, 105, 138));
-        btnBorrar.setText("Borrar");
-        pButtonsPerf.add(btnBorrar);
-
         panels.add(pButtonsPerf, java.awt.BorderLayout.PAGE_START);
 
         add(panels, java.awt.BorderLayout.CENTER);
@@ -107,6 +102,8 @@ public class panelUsuarios extends javax.swing.JPanel {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         Dialog_Usuario v = new Dialog_Usuario((JFrame) this.getRootPane().getParent(), true);
+        v.setUsuario(user.getAt(tUsuarios.getSelectedRow()));
+        v.setEdit(true);
         v.setVisible(true);
         user = new ModelUser(tUsuarios);
         user.cargarDatos();
@@ -114,7 +111,6 @@ public class panelUsuarios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane3;

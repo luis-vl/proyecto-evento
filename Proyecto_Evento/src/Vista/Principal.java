@@ -88,8 +88,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mReportes = new javax.swing.JMenu();
         factCliente = new javax.swing.JMenuItem();
-        mEvtxCliente = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        EvtxCliente = new javax.swing.JMenuItem();
+        MantSalon = new javax.swing.JMenuItem();
+        servEvento = new javax.swing.JMenuItem();
+        ventas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -214,18 +216,39 @@ public class Principal extends javax.swing.JFrame {
         });
         mReportes.add(factCliente);
 
-        mEvtxCliente.setText("Eventos por cliente");
-        mEvtxCliente.addActionListener(new java.awt.event.ActionListener() {
+        EvtxCliente.setText("Eventos por cliente");
+        EvtxCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mEvtxClienteActionPerformed(evt);
+                EvtxClienteActionPerformed(evt);
             }
         });
-        mReportes.add(mEvtxCliente);
+        mReportes.add(EvtxCliente);
+
+        MantSalon.setText("Mantenimientos Salon");
+        MantSalon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MantSalonActionPerformed(evt);
+            }
+        });
+        mReportes.add(MantSalon);
+
+        servEvento.setText("Servicios Eventos");
+        servEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                servEventoActionPerformed(evt);
+            }
+        });
+        mReportes.add(servEvento);
+
+        ventas.setText("Ventas");
+        ventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ventasActionPerformed(evt);
+            }
+        });
+        mReportes.add(ventas);
 
         jMenuBar1.add(mReportes);
-
-        jMenu5.setText("Seguridad");
-        jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Ayuda");
         jMenuBar1.add(jMenu4);
@@ -296,7 +319,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_factClienteActionPerformed
 
-    private void mEvtxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEvtxClienteActionPerformed
+    private void EvtxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EvtxClienteActionPerformed
         // TODO add your handling code here:
         InputStream reporte = this.getClass().getResourceAsStream("/Reportes/EventosxClientes.jasper");
         JasperPrint jasperPrint;
@@ -312,7 +335,61 @@ public class Principal extends javax.swing.JFrame {
         } catch (JRException ex) {
 
         }
-    }//GEN-LAST:event_mEvtxClienteActionPerformed
+    }//GEN-LAST:event_EvtxClienteActionPerformed
+
+    private void MantSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MantSalonActionPerformed
+        // TODO add your handling code here:
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/Mantenimiento_saln.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, null, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
+    }//GEN-LAST:event_MantSalonActionPerformed
+
+    private void servEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servEventoActionPerformed
+        // TODO add your handling code here:
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/Servicios_eventos.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, null, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
+    }//GEN-LAST:event_servEventoActionPerformed
+
+    private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
+        // TODO add your handling code here:
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/ventas.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, null, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
+    }//GEN-LAST:event_ventasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,6 +431,8 @@ public class Principal extends javax.swing.JFrame {
     private final CardLayout cl;
     private final IconFontUtil iconFont;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem EvtxCliente;
+    private javax.swing.JMenuItem MantSalon;
     private javax.swing.JButton btnEventos;
     private javax.swing.JButton btnMant;
     private javax.swing.JButton btnServicios;
@@ -361,12 +440,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JMenuItem factCliente;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem mEvtxCliente;
     private javax.swing.JMenu mReportes;
     private javax.swing.JPanel panelCards;
     private javax.swing.JPanel panelNevegacion;
+    private javax.swing.JMenuItem servEvento;
     private javax.swing.JPanel statusBar;
+    private javax.swing.JMenuItem ventas;
     // End of variables declaration//GEN-END:variables
 }

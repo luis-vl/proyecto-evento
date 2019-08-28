@@ -151,7 +151,7 @@ public class BackendInserts {
 
     }
 
-    public static void InsertarUsuario(String Usuario, String Contraseña) {
+    public static void InsertarUsuario(String Usuario, String Contraseña, String rol) {
         SessionFactory factor = HibernateUtil.getSessionFactory();
         Session s;
         s = factor.openSession();
@@ -160,6 +160,7 @@ public class BackendInserts {
         Usuario u = new Usuario();
         u.setNombreUsario(Usuario);
         u.setContrasena(Contraseña);
+        u.setRol(rol);
         s.save(u);
         s.getTransaction().commit();
         JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
