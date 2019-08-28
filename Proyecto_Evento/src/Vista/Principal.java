@@ -8,15 +8,21 @@ package Vista;
 import Modelo.IconFontUtil;
 import Vista.Paneles.*;
 import java.awt.*;
+import java.io.InputStream;
+import java.sql.Connection;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicMenuBarUI;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author luisv
  */
 public class Principal extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Principal
      */
@@ -31,11 +37,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void ColorButton(JButton btn) {
         /*Cambiar Color*/
-        btnEventos.setBackground(new Color(57,60,76));
-        btnTablas.setBackground(new Color(57,60,76));
-        btnServicios.setBackground(new Color(57,60,76));
-        btnMant.setBackground(new Color(57,60,76));
-        btnUsuarios.setBackground(new Color(57,60,76));
+        btnEventos.setBackground(new Color(57, 60, 76));
+        btnTablas.setBackground(new Color(57, 60, 76));
+        btnServicios.setBackground(new Color(57, 60, 76));
+        btnMant.setBackground(new Color(57, 60, 76));
+        btnUsuarios.setBackground(new Color(57, 60, 76));
         btnEventos.setForeground(Color.LIGHT_GRAY);
         btnTablas.setForeground(Color.LIGHT_GRAY);
         btnServicios.setForeground(Color.LIGHT_GRAY);
@@ -43,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         btnUsuarios.setForeground(Color.LIGHT_GRAY);
         btn.setBackground(new Color(100, 221, 23));
         btn.setForeground(Color.BLACK);
-        
+
         /*Cambiar Icono*/
         btnEventos.setIcon(iconFont.getEvt_G());
         btnTablas.setIcon(iconFont.getTablas_G());
@@ -51,14 +57,14 @@ public class Principal extends javax.swing.JFrame {
         btnMant.setIcon(iconFont.getMant_G());
         btnUsuarios.setIcon(iconFont.getUsuarios_G());
     }
-    
-    private void cargarVistas(){
+
+    private void cargarVistas() {
         panelCards.add("evento", new panelEventos());
         panelCards.add("servicio", new panelServicios());
         panelCards.add("mantenimiento", new panelMantenimiento());
         panelCards.add("registrar", new panelCatalogo());
         panelCards.add("usuario", new panelUsuarios());
-        
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code NO BORRAR"> 
@@ -80,9 +86,9 @@ public class Principal extends javax.swing.JFrame {
         btnUsuarios = new javax.swing.JButton();
         statusBar = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        mReportes = new javax.swing.JMenu();
+        factCliente = new javax.swing.JMenuItem();
+        mEvtxCliente = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -198,14 +204,25 @@ public class Principal extends javax.swing.JFrame {
 
         getContentPane().add(statusBar, java.awt.BorderLayout.PAGE_END);
 
-        jMenu1.setText("Catalogo");
-        jMenuBar1.add(jMenu1);
+        mReportes.setText("Reportes");
 
-        jMenu2.setText("Operaciones");
-        jMenuBar1.add(jMenu2);
+        factCliente.setText("Factura cliente");
+        factCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                factClienteActionPerformed(evt);
+            }
+        });
+        mReportes.add(factCliente);
 
-        jMenu3.setText("Reportes");
-        jMenuBar1.add(jMenu3);
+        mEvtxCliente.setText("Eventos por cliente");
+        mEvtxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mEvtxClienteActionPerformed(evt);
+            }
+        });
+        mReportes.add(mEvtxCliente);
+
+        jMenuBar1.add(mReportes);
 
         jMenu5.setText("Seguridad");
         jMenuBar1.add(jMenu5);
@@ -261,6 +278,42 @@ public class Principal extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
     }//GEN-LAST:event_formWindowOpened
 
+    private void factClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factClienteActionPerformed
+        // TODO add your handling code here:
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/FactClientes.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, null, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
+    }//GEN-LAST:event_factClienteActionPerformed
+
+    private void mEvtxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEvtxClienteActionPerformed
+        // TODO add your handling code here:
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/EventosxClientes.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, null, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
+    }//GEN-LAST:event_mEvtxClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,12 +359,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnServicios;
     private javax.swing.JButton btnTablas;
     private javax.swing.JButton btnUsuarios;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuItem factCliente;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mEvtxCliente;
+    private javax.swing.JMenu mReportes;
     private javax.swing.JPanel panelCards;
     private javax.swing.JPanel panelNevegacion;
     private javax.swing.JPanel statusBar;
