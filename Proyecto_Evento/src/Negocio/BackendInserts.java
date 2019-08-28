@@ -187,8 +187,5 @@ public class BackendInserts {
 
     }
     
-    public static void InsertarEvento(){
-        
-    }
 
 }

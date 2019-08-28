@@ -5,13 +5,26 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
+import Modelo.POJO.Salon;
 import Negocio.BackendInserts;
+import Negocio.BackendUpdate;
+import Vista.Paneles.panelCatalogo;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author fernando
  */
 public class Dialog_Salón extends javax.swing.JDialog {
+    
+    public static boolean var = false;
+    private Session s;
+    private Salon sl;
+    public int setID;
 
     /**
      * Creates new form Registrar_Salón
@@ -20,7 +33,41 @@ public class Dialog_Salón extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();        
         setLocationRelativeTo(null);
+        estadoBtn();
 
+    }
+    
+    private void editar(){
+            SessionFactory factor = HibernateUtil.getSessionFactory();
+            s = factor.openSession();
+            Criteria c = s.createCriteria(Salon.class).add(Restrictions.eq("idSalon", panelCatalogo.ID)); 
+            for (Object salon : c.list()) {
+             sl = (Salon) salon;
+             this.txtNombreSalon.setText(sl.getNombre());
+             this.txtCapacidad.setText(String.valueOf(sl.getCapacidad()));
+             this.txtPrecio.setText(String.valueOf(sl.getPrecio()));
+
+             
+    }
+    }
+    
+        private void nuevo(){
+            BackendInserts.InsertarSalon(this.txtNombreSalon.getText(), Integer.parseInt(this.txtCapacidad.getText()), Float.parseFloat(this.txtPrecio.getText()));
+            var = false;
+            this.dispose();
+    }
+    
+    private void estadoBtn(){
+        if(var == true){
+            editar();
+            
+
+        }
+        
+        else if(var == false){
+            
+        }
+        
     }
 
     /**
@@ -173,13 +220,28 @@ public class Dialog_Salón extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        if(var == true){
+            s.close();
+        }
+        
+        else{
+            
+        }
+        var = false;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        BackendInserts.InsertarSalon(this.txtNombreSalon.getText(), Integer.parseInt(this.txtCapacidad.getText()), Float.parseFloat(this.txtPrecio.getText()));
-        this.dispose();
+        if(var == true){
+            BackendUpdate.EditarSalon(String.valueOf(sl.getIdSalon()), this.txtNombreSalon.getText(), this.txtCapacidad.getText(), this.txtPrecio.getText(), true);
+            s.close();
+            this.dispose();
+        }
+        
+           else if(var == false){
+               nuevo();
+           }
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**
