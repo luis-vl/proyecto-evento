@@ -5,11 +5,20 @@
  */
 package Vista;
 
+import Modelo.ModelEvento;
+import Modelo.ModelVentaBoleto;
+import Modelo.POJO.Evento;
+import Modelo.POJO.VentaBoleto;
+import java.util.Date;
+
 /**
  *
  * @author fernando
  */
 public class Dialog_VentaBoleto extends javax.swing.JDialog {
+    
+    private ModelEvento evento;
+    private ModelVentaBoleto venta;
 
     /**
      * Creates new form Registar_Venta_Boleto
@@ -17,6 +26,22 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
     public Dialog_VentaBoleto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        evento = new ModelEvento(tEventos);
+        evento.cargarParaVenta();
+        venta = new ModelVentaBoleto();
+    }
+    
+    private Evento getEvento(){
+        return evento.getAt(tEventos.getSelectedRow());
+    }
+    
+    private VentaBoleto getCampos(){
+        VentaBoleto v = new VentaBoleto();
+        v.setEvento(getEvento());
+        v.setCedula(txtCedula.getText());
+        v.setCantidadBoletos((Integer) spCantidad.getValue());
+        v.setFecha(new Date());
+        return v;
     }
 
     /**
@@ -35,21 +60,14 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         pTop = new javax.swing.JPanel();
         pDatosGenerales = new javax.swing.JPanel();
         lblNombreCliente = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
-        lblCantidadPersonas = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jTextField3 = new javax.swing.JTextField();
-        pDetallesEvento = new javax.swing.JPanel();
-        lblEvento = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtCedula = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         lblBoletosDisp = new javax.swing.JLabel();
+        txtBoletosDisponibles = new javax.swing.JTextField();
+        spCantidad = new javax.swing.JSpinner();
         pCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbEvento = new javax.swing.JTable();
+        tEventos = new javax.swing.JTable();
         lblTotalPagar = new javax.swing.JLabel();
         txtTotalPagar = new javax.swing.JTextField();
 
@@ -86,37 +104,31 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         pSuperior.setLayout(new java.awt.BorderLayout());
 
         pTop.setBackground(new java.awt.Color(42, 42, 42));
-        pTop.setPreferredSize(new java.awt.Dimension(695, 250));
+        pTop.setPreferredSize(new java.awt.Dimension(695, 200));
         pTop.setLayout(new javax.swing.BoxLayout(pTop, javax.swing.BoxLayout.LINE_AXIS));
 
         pDatosGenerales.setBackground(new java.awt.Color(57, 60, 76));
         pDatosGenerales.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
         pDatosGenerales.setForeground(new java.awt.Color(255, 255, 255));
-        pDatosGenerales.setPreferredSize(new java.awt.Dimension(400, 300));
+        pDatosGenerales.setMaximumSize(new java.awt.Dimension(32767, 200));
+        pDatosGenerales.setPreferredSize(new java.awt.Dimension(400, 200));
 
         lblNombreCliente.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         lblNombreCliente.setForeground(new java.awt.Color(207, 207, 207));
-        lblNombreCliente.setText("Nombre del cliente");
+        lblNombreCliente.setText("Número de Cédula");
 
-        lblFecha.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblFecha.setForeground(new java.awt.Color(207, 207, 207));
-        lblFecha.setText("Fecha");
+        lblPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(207, 207, 207));
+        lblPrecio.setText("Cantidad de Boletos");
 
-        lblCantidadPersonas.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblCantidadPersonas.setForeground(new java.awt.Color(207, 207, 207));
-        lblCantidadPersonas.setText("Cantidad de Personas");
+        lblBoletosDisp.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblBoletosDisp.setForeground(new java.awt.Color(207, 207, 207));
+        lblBoletosDisp.setText("Boletos Disponibles");
 
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
+        txtBoletosDisponibles.setEditable(false);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
+        spCantidad.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        spCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
 
         javax.swing.GroupLayout pDatosGeneralesLayout = new javax.swing.GroupLayout(pDatosGenerales);
         pDatosGenerales.setLayout(pDatosGeneralesLayout);
@@ -126,125 +138,75 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
                 .addGap(50, 50, 50)
                 .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pDatosGeneralesLayout.createSequentialGroup()
-                        .addComponent(jTextField3)
-                        .addGap(150, 150, 150))
-                    .addComponent(lblNombreCliente)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .addComponent(lblFecha)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                    .addComponent(lblCantidadPersonas))
-                .addGap(50, 50, 50))
+                        .addComponent(spCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pDatosGeneralesLayout.createSequentialGroup()
+                        .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreCliente)
+                            .addComponent(lblPrecio)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 45, Short.MAX_VALUE)
+                        .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBoletosDisp)
+                            .addComponent(txtBoletosDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                        .addGap(68, 68, 68))))
         );
         pDatosGeneralesLayout.setVerticalGroup(
             pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pDatosGeneralesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblNombreCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblFecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblCantidadPersonas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-
-        pTop.add(pDatosGenerales);
-
-        pDetallesEvento.setBackground(new java.awt.Color(57, 60, 76));
-        pDetallesEvento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Evento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
-        pDetallesEvento.setForeground(new java.awt.Color(255, 255, 255));
-        pDetallesEvento.setPreferredSize(new java.awt.Dimension(400, 300));
-
-        lblEvento.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblEvento.setForeground(new java.awt.Color(207, 207, 207));
-        lblEvento.setText("Seleccionar evento");
-
-        jComboBox1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        lblPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblPrecio.setForeground(new java.awt.Color(207, 207, 207));
-        lblPrecio.setText("Precio");
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        lblBoletosDisp.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        lblBoletosDisp.setForeground(new java.awt.Color(207, 207, 207));
-        lblBoletosDisp.setText("Boletos Disponibles");
-
-        javax.swing.GroupLayout pDetallesEventoLayout = new javax.swing.GroupLayout(pDetallesEvento);
-        pDetallesEvento.setLayout(pDetallesEventoLayout);
-        pDetallesEventoLayout.setHorizontalGroup(
-            pDetallesEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pDetallesEventoLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(pDetallesEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPrecio)
-                    .addComponent(lblBoletosDisp)
-                    .addComponent(lblEvento)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pDetallesEventoLayout.createSequentialGroup()
-                        .addGroup(pDetallesEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                        .addGap(131, 131, 131)))
-                .addGap(59, 59, 59))
-        );
-        pDetallesEventoLayout.setVerticalGroup(
-            pDetallesEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pDetallesEventoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblEvento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pDatosGeneralesLayout.createSequentialGroup()
+                        .addComponent(lblNombreCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pDatosGeneralesLayout.createSequentialGroup()
+                        .addComponent(lblBoletosDisp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBoletosDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(lblPrecio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblBoletosDisp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(spCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        pTop.add(pDetallesEvento);
+        pTop.add(pDatosGenerales);
 
         pSuperior.add(pTop, java.awt.BorderLayout.PAGE_START);
 
         pCenter.setBackground(new java.awt.Color(42, 42, 42));
 
-        tbEvento.setModel(new javax.swing.table.DefaultTableModel(
+        tEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nombre del Salón", "Nombre del Evento", "Hora Inicio", "Boletos Disponibles"
+                "Nombre del Salón", "Nombre del Evento", "Hora Inicio", "Hora Fin", "Cantidad de Personas"
             }
-        ));
-        jScrollPane1.setViewportView(tbEvento);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tEventos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tEventos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tEventosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tEventos);
 
         lblTotalPagar.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         lblTotalPagar.setForeground(new java.awt.Color(220, 220, 220));
         lblTotalPagar.setText("Total a Pagar:");
-
-        txtTotalPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalPagarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pCenterLayout = new javax.swing.GroupLayout(pCenter);
         pCenter.setLayout(pCenterLayout);
@@ -253,24 +215,24 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
             .addGroup(pCenterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(pCenterLayout.createSequentialGroup()
                         .addComponent(lblTotalPagar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalPagar)
-                        .addGap(543, 543, 543)))
+                        .addComponent(txtTotalPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addGap(481, 481, 481)))
                 .addContainerGap())
         );
         pCenterLayout.setVerticalGroup(
             pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCenterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(pCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotalPagar)
                     .addComponent(txtTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
+                .addContainerGap())
         );
 
         pSuperior.add(pCenter, java.awt.BorderLayout.CENTER);
@@ -281,14 +243,6 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
-
-    private void txtTotalPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalPagarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalPagarActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -296,16 +250,18 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        if (txtCedula.getText().equals("") || tEventos.getSelectedRow()<0) return;
+        venta.addVenta(getCampos());
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void tEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEventosMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+        int index = tEventos.getSelectedRow();
+        if(index<0) return;
+        txtTotalPagar.setText("$ "+(evento.getAt(index).getPrecioBoleto()*(int)spCantidad.getValue()));
+        txtBoletosDisponibles.setText((evento.getAt(index).getCantidadPersonas())+"");
+    }//GEN-LAST:event_tEventosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -338,44 +294,35 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Dialog_VentaBoleto dialog = new Dialog_VentaBoleto(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            Dialog_VentaBoleto dialog = new Dialog_VentaBoleto(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOK;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblBoletosDisp;
-    private javax.swing.JLabel lblCantidadPersonas;
-    private javax.swing.JLabel lblEvento;
-    private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblTotalPagar;
     private javax.swing.JPanel pCenter;
     private javax.swing.JPanel pDatosGenerales;
-    private javax.swing.JPanel pDetallesEvento;
     private javax.swing.JPanel pInferior;
     private javax.swing.JPanel pSuperior;
     private javax.swing.JPanel pTop;
-    private javax.swing.JTable tbEvento;
+    private javax.swing.JSpinner spCantidad;
+    private javax.swing.JTable tEventos;
+    private javax.swing.JTextField txtBoletosDisponibles;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtTotalPagar;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Negocio.BackendInserts;
+
 /**
  *
  * @author luisv
@@ -30,12 +32,12 @@ public class Dialog_Usuario extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        txtContraseña1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtContraseña2 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnOK = new javax.swing.JButton();
@@ -46,15 +48,15 @@ public class Dialog_Usuario extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(56, 60, 76));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jTextField1.setText("Usuario");
-        jTextField1.setMinimumSize(new java.awt.Dimension(4, 26));
+        txtUsuario.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtUsuario.setText("Usuario");
+        txtUsuario.setMinimumSize(new java.awt.Dimension(4, 26));
 
-        jPasswordField1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setMinimumSize(new java.awt.Dimension(4, 26));
+        txtContraseña1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtContraseña1.setText("jPasswordField1");
+        txtContraseña1.setMinimumSize(new java.awt.Dimension(4, 26));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(250, 250, 250));
@@ -68,9 +70,9 @@ public class Dialog_Usuario extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(250, 250, 250));
         jLabel3.setText("Confirmar contraseña:");
 
-        jPasswordField2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jPasswordField2.setText("jPasswordField2");
-        jPasswordField2.setMinimumSize(new java.awt.Dimension(4, 26));
+        txtContraseña2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtContraseña2.setText("jPasswordField2");
+        txtContraseña2.setMinimumSize(new java.awt.Dimension(4, 26));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -79,12 +81,12 @@ public class Dialog_Usuario extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContraseña2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -93,15 +95,15 @@ public class Dialog_Usuario extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContraseña2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -146,6 +148,7 @@ public class Dialog_Usuario extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        BackendInserts.InsertarUsuario(this.txtUsuario.getText(), this.txtContraseña1.getText());
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
@@ -201,8 +204,8 @@ public class Dialog_Usuario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txtContraseña1;
+    private javax.swing.JPasswordField txtContraseña2;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

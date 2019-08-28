@@ -5,6 +5,12 @@
  */
 package Vista;
 
+import Negocio.BackendInserts;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fernando
@@ -13,12 +19,17 @@ public class Dialog_Cliente extends javax.swing.JDialog {
 
     /**
      * Creates new form Registrar_Cliente
+     * @param parent
+     * @param modal
      */
     public Dialog_Cliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();        
-        setLocationRelativeTo(null);
-
+        initComponents();
+    }
+    
+    public Dialog_Cliente(java.awt.Dialog parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
     }
 
     /**
@@ -38,8 +49,8 @@ public class Dialog_Cliente extends javax.swing.JDialog {
         txtPrimerApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JFormattedTextField();
-        txtCorreo1 = new javax.swing.JFormattedTextField();
+        txtCedula = new javax.swing.JFormattedTextField();
+        txtFechaNacimiento = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -89,14 +100,14 @@ public class Dialog_Cliente extends javax.swing.JDialog {
 
         txtTelefono.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
-        txtCorreo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+        txtCedula.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
+                txtCedulaActionPerformed(evt);
             }
         });
 
-        txtCorreo1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtFechaNacimiento.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel1.setText("Nombres");
@@ -105,13 +116,13 @@ public class Dialog_Cliente extends javax.swing.JDialog {
         jLabel2.setText("Apellidos");
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jLabel3.setText("Direccion");
+        jLabel3.setText("Dirección");
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jLabel4.setText("Telefono");
+        jLabel4.setText("Teléfono");
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        jLabel5.setText("Cedula");
+        jLabel5.setText("Cédula");
 
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel6.setText("Fecha de nacimiento");
@@ -123,19 +134,27 @@ public class Dialog_Cliente extends javax.swing.JDialog {
             .addGroup(pDatosUsuarioLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCorreo1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txtPrimerApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txtPrimerNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
+                    .addGroup(pDatosUsuarioLayout.createSequentialGroup()
+                        .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pDatosUsuarioLayout.createSequentialGroup()
+                        .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrimerApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                            .addComponent(txtPrimerNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pDatosUsuarioLayout.createSequentialGroup()
+                                .addGroup(pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         pDatosUsuarioLayout.setVerticalGroup(
             pDatosUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +167,14 @@ public class Dialog_Cliente extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrimerApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -156,15 +183,7 @@ public class Dialog_Cliente extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         getContentPane().add(pDatosUsuario, java.awt.BorderLayout.CENTER);
@@ -179,13 +198,18 @@ public class Dialog_Cliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        try {
+            // TODO add your handling code here:
+            BackendInserts.InsertarCliente(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNacimiento.getText(), this.txtDireccion.getText(), this.txtTelefono.getText());
+            this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(Dialog_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,17 +240,15 @@ public class Dialog_Cliente extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Dialog_Cliente dialog = new Dialog_Cliente(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            Dialog_Cliente dialog = new Dialog_Cliente(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
@@ -241,9 +263,9 @@ public class Dialog_Cliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel pDatosUsuario;
     private javax.swing.JPanel pInferior;
-    private javax.swing.JFormattedTextField txtCorreo;
-    private javax.swing.JFormattedTextField txtCorreo1;
+    private javax.swing.JFormattedTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JFormattedTextField txtFechaNacimiento;
     private javax.swing.JTextField txtPrimerApellido;
     private javax.swing.JTextField txtPrimerNombre;
     private javax.swing.JTextField txtTelefono;

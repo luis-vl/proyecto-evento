@@ -5,6 +5,7 @@
  */
 package Vista.Paneles;
 
+import Modelo.ModelUser;
 import Vista.*;
 import javax.swing.JFrame;
 
@@ -14,11 +15,14 @@ import javax.swing.JFrame;
  */
 public class panelUsuarios extends javax.swing.JPanel {
 
+    private ModelUser user;
     /**
      * Creates new form panelUsuarios
      */
     public panelUsuarios() {
         initComponents();
+        user = new ModelUser(tUsuarios);
+        user.cargarDatos();
     }
 
     /**
@@ -32,11 +36,11 @@ public class panelUsuarios extends javax.swing.JPanel {
 
         panels = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tUsuarios = new javax.swing.JTable();
         pButtonsPerf = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnBorrar = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -44,8 +48,9 @@ public class panelUsuarios extends javax.swing.JPanel {
         panels.setPreferredSize(new java.awt.Dimension(300, 0));
         panels.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setBackground(new java.awt.Color(56, 60, 76));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tUsuarios.setBackground(new java.awt.Color(56, 60, 76));
+        tUsuarios.setForeground(new java.awt.Color(250, 250, 250));
+        tUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -56,60 +61,65 @@ public class panelUsuarios extends javax.swing.JPanel {
                 "Usuario", "Contraseña", "Rol"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tUsuarios);
 
         panels.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
         pButtonsPerf.setBackground(new java.awt.Color(42, 42, 42));
         pButtonsPerf.setLayout(new javax.swing.BoxLayout(pButtonsPerf, javax.swing.BoxLayout.LINE_AXIS));
 
-        jButton12.setBackground(new java.awt.Color(100, 221, 23));
-        jButton12.setText("Nuevo");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo.setBackground(new java.awt.Color(100, 221, 23));
+        btnNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnNuevoActionPerformed(evt);
             }
         });
-        pButtonsPerf.add(jButton12);
+        pButtonsPerf.add(btnNuevo);
 
-        jButton13.setBackground(new java.awt.Color(57, 105, 138));
-        jButton13.setText("Editar");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(57, 105, 138));
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        pButtonsPerf.add(jButton13);
+        pButtonsPerf.add(btnEditar);
 
-        jButton14.setBackground(new java.awt.Color(57, 105, 138));
-        jButton14.setText("Borrar");
-        pButtonsPerf.add(jButton14);
+        btnBorrar.setBackground(new java.awt.Color(57, 105, 138));
+        btnBorrar.setText("Borrar");
+        pButtonsPerf.add(btnBorrar);
 
         panels.add(pButtonsPerf, java.awt.BorderLayout.PAGE_START);
 
         add(panels, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
         Dialog_Usuario v = new Dialog_Usuario((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
-    }//GEN-LAST:event_jButton12ActionPerformed
+        user = new ModelUser(tUsuarios);
+        user.cargarDatos();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         Dialog_Usuario v = new Dialog_Usuario((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
-    }//GEN-LAST:event_jButton13ActionPerformed
+        user = new ModelUser(tUsuarios);
+        user.cargarDatos();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
+    private javax.swing.JButton btnBorrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel pButtonsPerf;
     private javax.swing.JPanel panels;
+    private javax.swing.JTable tUsuarios;
     // End of variables declaration//GEN-END:variables
 }

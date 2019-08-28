@@ -5,11 +5,21 @@
  */
 package Vista;
 
+import Modelo.ModelEvento;
+import Modelo.ModelEvento_Servicio;
+import Modelo.ModelServicio;
+import Modelo.POJO.*;
+import java.util.Date;
+
 /**
  *
  * @author luisv
  */
 public class Dialog_ContratarServicio extends javax.swing.JDialog {
+
+    private ModelServicio servicios;
+    private ModelEvento eventos;
+    private ModelEvento_Servicio evtServicio;
 
     /**
      * Creates new form DialogServicio
@@ -17,7 +27,11 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
     public Dialog_ContratarServicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
+        servicios = new ModelServicio(tServicios);
+        servicios.cargarDatos();
+        eventos = new ModelEvento();
+        eventos.cargarLista(listEventos);
+        evtServicio = new ModelEvento_Servicio();
     }
 
     /**
@@ -35,12 +49,12 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listEventos = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblMonto = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tServicios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,12 +91,12 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
         jPanel3.setBackground(new java.awt.Color(42, 42, 42));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Evento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        listEventos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listEventos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -101,13 +115,13 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
         );
 
         jPanel4.setBackground(new java.awt.Color(42, 42, 42));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Evento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total a Pagar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         jPanel4.setForeground(new java.awt.Color(250, 250, 250));
 
-        jLabel1.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(250, 250, 250));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("$ 00.00");
+        lblMonto.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
+        lblMonto.setForeground(new java.awt.Color(250, 250, 250));
+        lblMonto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMonto.setText("$ 00.00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -115,12 +129,12 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(lblMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(lblMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -150,7 +164,7 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar Servicios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tServicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -161,7 +175,12 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tServiciosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tServicios);
 
         jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -178,8 +197,34 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
+        if (tServicios.getSelectedRow() < 0 || listEventos.getSelectedIndex() < 0) {
+            return;
+        }
+        Evento e = eventos.getAt(listEventos.getSelectedIndex());
+        for (int i = 0; i < tServicios.getSelectedRowCount(); i++) {
+            Servicio s = servicios.getAt(tServicios.getSelectedRows()[i]);
+            EventoServicio es = new EventoServicio();
+            es.setEvento(e);
+            es.setServicio(s);
+            es.setId(new EventoServicioId(e.getIdEvento(), s.getIdServicio()));
+            es.setPrecio(s.getPrecio());
+            es.setFechaRegistro(new Date());
+            evtServicio.addEvt_Servicio(es);
+        }
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void tServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServiciosMouseClicked
+        // TODO add your handling code here:
+        if (tServicios.getSelectedRow() < 0) {
+            return;
+        }
+        int monto = 0;
+        for (int i = 0; i < tServicios.getSelectedRows().length; i++) {
+            monto += servicios.getAt(tServicios.getSelectedRows()[i]).getPrecio();
+        }
+        lblMonto.setText("$ " + monto);
+    }//GEN-LAST:event_tServiciosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -229,8 +274,6 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOK;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -238,6 +281,8 @@ public class Dialog_ContratarServicio extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblMonto;
+    private javax.swing.JList<String> listEventos;
+    private javax.swing.JTable tServicios;
     // End of variables declaration//GEN-END:variables
 }
