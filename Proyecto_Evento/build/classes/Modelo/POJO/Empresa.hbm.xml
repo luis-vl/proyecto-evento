@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
@@ -31,32 +30,3 @@
         </set>
     </class>
 </hibernate-mapping>
-=======
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 14-ago-2019 19:09:41 by Hibernate Tools 4.3.1 -->
-<hibernate-mapping>
-    <class name="Modelo.POJO.Empresa" table="empresa" catalog="teatro" optimistic-lock="version">
-        <id name="idEmpresa" type="int">
-            <column name="id_empresa" />
-            <generator class="assigned" />
-        </id>
-        <property name="nombre" type="string">
-            <column name="nombre" length="80" />
-        </property>
-        <property name="direccion" type="string">
-            <column name="direccion" length="150" />
-        </property>
-        <property name="telefono" type="string">
-            <column name="telefono" length="20" />
-        </property>
-        <set name="mantenimientos" table="mantenimiento" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_empresa" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.POJO.Mantenimiento" />
-        </set>
-    </class>
-</hibernate-mapping>
->>>>>>> 278e1dbbeda55d415579cdb12840421d2526e6ab
