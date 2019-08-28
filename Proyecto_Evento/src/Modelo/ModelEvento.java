@@ -7,9 +7,12 @@ package Modelo;
 
 import Modelo.POJO.Evento;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -24,7 +27,7 @@ public class ModelEvento {
     private String[] colNames = {"ID", "NOMBRE EVENTO", "CLIENTE", "FECHA", "DURACION", "CAPACIDAD"};
 
     public ModelEvento() {
-        
+
         tModel = new DefaultTableModel();
         session = HibernateUtil.getSessionFactory().openSession();
         ctr = session.createCriteria(Evento.class);
@@ -45,18 +48,27 @@ public class ModelEvento {
     }
 
     public void cargarParaVenta() {
-        colNames = new String[]{"NOMBRE EVENTO", "FECHA", "DURACION", "CAPACIDAD","PRECIO"};
+        colNames = new String[]{"NOMBRE EVENTO", "FECHA", "DURACION", "CAPACIDAD", "PRECIO"};
         tModel.setColumnIdentifiers(colNames);
         eventos.forEach((e) -> {
             tModel.addRow(
-                    new Object[]{e.getNombre(), e.getFechaEvento(), e.getDuracion(), e.getCantidadPersonas(),e.getPrecioBoleto()});
+                    new Object[]{e.getNombre(), e.getFechaEvento(), e.getDuracion(), e.getCantidadPersonas(), e.getPrecioBoleto()});
         });
+    }
+
+    public void cargarLista(JList<String> list) {
+        DefaultListModel<String> lmodel = new DefaultListModel<>();
+        list.setModel(lmodel);
+        eventos.forEach((e) -> {
+            lmodel.addElement(e.getNombre());
+        });
+
     }
 
     public void cargarDatos() {
         eventos.forEach((e) -> {
             tModel.addRow(
-                    new Object[]{e.getIdEvento(), e.getNombre(), (e.getCliente().getNombre() + "  " + e.getCliente().getApellido()), 
+                    new Object[]{e.getIdEvento(), e.getNombre(), (e.getCliente().getNombre() + "  " + e.getCliente().getApellido()),
                         e.getFechaEvento(), e.getDuracion(), e.getCantidadPersonas()});
         });
     }
@@ -68,8 +80,8 @@ public class ModelEvento {
     public Evento getAt(int index) {
         return eventos.get(index);
     }
-    
-    public Evento getByID(int id){
+
+    public Evento getByID(int id) {
         session.beginTransaction();
         Evento e = session.get(Evento.class, id);
         session.getTransaction().commit();
@@ -82,8 +94,8 @@ public class ModelEvento {
         session.getTransaction().commit();
         session.close();
     }
-    
-    public void updateEvento(Evento e){
+
+    public void updateEvento(Evento e) {
         session.beginTransaction();
         session.update(e);
         session.getTransaction().commit();
