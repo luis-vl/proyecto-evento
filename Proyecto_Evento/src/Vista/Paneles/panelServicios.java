@@ -5,6 +5,7 @@
  */
 package Vista.Paneles;
 
+import Modelo.ModelEvento_Servicio;
 import Negocio.Backend;
 import Vista.*;
 import javax.swing.JFrame;
@@ -14,6 +15,8 @@ import javax.swing.JFrame;
  * @author luisv
  */
 public class panelServicios extends javax.swing.JPanel {
+    
+    private ModelEvento_Servicio evtServicio;
 
     /**
      * Creates new form panelServicios
@@ -21,6 +24,8 @@ public class panelServicios extends javax.swing.JPanel {
     public panelServicios() {
         initComponents();
         Backend.ConsultaServicio(this.tServicios);
+        evtServicio = new ModelEvento_Servicio(tServicioEvento);
+        evtServicio.getContratados();
     }
 
     /**
@@ -103,7 +108,7 @@ public class panelServicios extends javax.swing.JPanel {
         add(pBotonesServicio, java.awt.BorderLayout.PAGE_START);
 
         pServicioEvt.setBackground(new java.awt.Color(42, 42, 42));
-        pServicioEvt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios contratados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
+        pServicioEvt.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Servicios contratados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         pServicioEvt.setLayout(new java.awt.BorderLayout());
 
         tServicioEvento.setModel(new javax.swing.table.DefaultTableModel(
@@ -117,6 +122,11 @@ public class panelServicios extends javax.swing.JPanel {
                 "Evento", "Servicio", "Precio"
             }
         ));
+        tServicioEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tServicioEventoMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tServicioEvento);
 
         pServicioEvt.add(jScrollPane5, java.awt.BorderLayout.CENTER);
@@ -124,7 +134,7 @@ public class panelServicios extends javax.swing.JPanel {
         add(pServicioEvt, java.awt.BorderLayout.CENTER);
 
         pServicios.setBackground(new java.awt.Color(42, 42, 42));
-        pServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalogo Servicios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(250, 250, 250))); // NOI18N
+        pServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Catalogo Servicios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(250, 250, 250))); // NOI18N
         pServicios.setPreferredSize(new java.awt.Dimension(400, 448));
         pServicios.setLayout(new java.awt.BorderLayout());
 
@@ -139,6 +149,11 @@ public class panelServicios extends javax.swing.JPanel {
                 "Nombre Servicio", "Precio"
             }
         ));
+        tServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tServiciosMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tServicios);
 
         pServicios.add(jScrollPane6, java.awt.BorderLayout.CENTER);
@@ -150,6 +165,8 @@ public class panelServicios extends javax.swing.JPanel {
         // TODO add your handling code here:
         Dialog_ContratarServicio v = new Dialog_ContratarServicio((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
+        evtServicio = new ModelEvento_Servicio(tServicioEvento);
+        evtServicio.getContratados();
     }//GEN-LAST:event_btnContratServicioActionPerformed
 
     private void btnAddServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddServicioActionPerformed
@@ -163,6 +180,18 @@ public class panelServicios extends javax.swing.JPanel {
         Dialog_Servicio v = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
         v.setVisible(true);
     }//GEN-LAST:event_btnEditServicioActionPerformed
+
+    private void tServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServiciosMouseClicked
+        // TODO add your handling code here:
+        if (tServicios.getSelectedRow()<0) return;
+        System.out.println("asdf");
+    }//GEN-LAST:event_tServiciosMouseClicked
+
+    private void tServicioEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServicioEventoMouseClicked
+        // TODO add your handling code here:
+        if (tServicioEvento.getSelectedRow()<0) return;
+        System.out.println("qwerty");
+    }//GEN-LAST:event_tServicioEventoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

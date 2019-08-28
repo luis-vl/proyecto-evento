@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d01c170a-cdf3-49ca-b010-c01d46809626">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select 
+e.nombre as Nombre_Empresa,
+s.nombre as Nombre_salon,
+m.tipo_mantenimiento,
+m.costo
+from mantenimiento m
+inner join salon s on s.id_salon=m.id_salon
+inner join empresa e on m.id_empresa=e.id_empresa;]]>
+	</queryString>
+	<field name="Nombre_Empresa" class="java.lang.String"/>
+	<field name="Nombre_salon" class="java.lang.String"/>
+	<field name="tipo_mantenimiento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="costo" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="18" width="170" height="20" uuid="9a84bd60-d37a-4d1a-b0ea-c15705481bc4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mantenimiento de Salones]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="417" y="50" width="100" height="20" uuid="aecbd10f-ea18-47f5-96a9-2a5eba70bf3f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="53" y="2" width="100" height="20" uuid="10c7c3b9-1373-4354-9ad6-ce4cf5aef149"/>
+				<text><![CDATA[Nombre_Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="203" y="2" width="100" height="20" uuid="db908383-a104-4406-9b39-cd85c4043484"/>
+				<text><![CDATA[Nombre_salon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="2" width="100" height="20" uuid="ad72009a-5944-43a1-bfad-e795c71dda6e"/>
+				<text><![CDATA[costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="2" width="100" height="20" uuid="656518f9-41f4-48c7-8cab-c927db8b7b50"/>
+				<text><![CDATA[tipo_mantenimiento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="53" y="28" width="100" height="20" uuid="ac1f0a6f-0561-4c53-90fa-18681759d4d4"/>
+				<textFieldExpression><![CDATA[$F{Nombre_Empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="27" width="100" height="20" uuid="61a84d84-ba15-4841-bf0d-c5e91440153c"/>
+				<textFieldExpression><![CDATA[$F{Nombre_salon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="28" width="100" height="20" uuid="3aba8279-bb67-43d0-aaf4-54b0cb073a00"/>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="28" width="100" height="20" uuid="b86e0e47-add9-453d-b3db-289ad3b73732"/>
+				<textFieldExpression><![CDATA[$F{tipo_mantenimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="474" y="16" width="100" height="20" uuid="3a0baa38-f6e3-4560-abed-e54cc934d23a"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="1" splitType="Stretch"/>
+	</summary>
+</jasperReport>
