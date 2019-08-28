@@ -15,6 +15,7 @@ public class Empresa  implements java.io.Serializable {
      private String nombre;
      private String direccion;
      private String telefono;
+     private String ruc;
      private Set<Mantenimiento> mantenimientos = new HashSet<Mantenimiento>(0);
 
     public Empresa() {
@@ -24,12 +25,14 @@ public class Empresa  implements java.io.Serializable {
     public Empresa(int idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
-    public Empresa(int idEmpresa, String nombre, String direccion, String telefono, Set<Mantenimiento> mantenimientos) {
+    public Empresa(int idEmpresa, String nombre, String direccion, String telefono, String ruc, Set<Mantenimiento> mantenimientos) {
        this.idEmpresa = idEmpresa;
        this.nombre = nombre;
        this.direccion = direccion;
        this.telefono = telefono;
+       this.ruc = ruc;
        this.mantenimientos = mantenimientos;
+       
     }
    
     public int getIdEmpresa() {
@@ -66,6 +69,14 @@ public class Empresa  implements java.io.Serializable {
     
     public void setMantenimientos(Set<Mantenimiento> mantenimientos) {
         this.mantenimientos = mantenimientos;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
 

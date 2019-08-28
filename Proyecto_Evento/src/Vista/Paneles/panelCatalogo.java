@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +8,10 @@ package Vista.Paneles;
 
 import Negocio.Backend;
 import Vista.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,11 +21,20 @@ import javax.swing.table.DefaultTableModel;
  * @author luisv
  */
 public class panelCatalogo extends javax.swing.JPanel {
+    
+    public static int ID;
 
     /** Creates new form panelCatalogo */
     public panelCatalogo() {
         initComponents();
         cargar_tablas();
+        ocultar_columna();
+        metodo();
+        this.btnEditarRegistro.setEnabled(false);
+    }
+    
+    public boolean getEditar(){
+        return true;
     }
     
     private void cargar_tablas(){
@@ -30,25 +42,38 @@ public class panelCatalogo extends javax.swing.JPanel {
         switch (this.cbMostrar.getSelectedIndex()) {
             case 0:
                 Backend.ConsultaCliente(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 1:
                 Backend.ConsultaSupervisor(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 2:
                 Backend.ConsultarEntidad(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 3:
                 Backend.ConsultarEmpresa(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 4:
                 Backend.ConsultaServicio(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             case 5:
                 Backend.salonesDisponibles(this.tablaRegistrar);
+                ocultar_columna();
                 break;
             default:
                 break;
         }
+    }
+    
+    private void ocultar_columna(){
+        this.tablaRegistrar.getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tablaRegistrar.getColumnModel().getColumn(0).setMinWidth(0);
+        this.tablaRegistrar.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        this.tablaRegistrar.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /** This method is called from within the constructor to
@@ -74,6 +99,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         panelEspacio2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cbMostrar = new javax.swing.JComboBox<>();
+        btnEditarRegistro = new javax.swing.JButton();
 
         miCliente.setText("Cliente");
         miCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +176,11 @@ public class panelCatalogo extends javax.swing.JPanel {
                 btnAddRegistroMousePressed(evt);
             }
         });
+        btnAddRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddRegistroActionPerformed(evt);
+            }
+        });
         pButtonsTablas.add(btnAddRegistro);
 
         panelEspacio2.setBackground(new java.awt.Color(42, 42, 42));
@@ -183,6 +214,20 @@ public class panelCatalogo extends javax.swing.JPanel {
             }
         });
         pButtonsTablas.add(cbMostrar);
+
+        btnEditarRegistro.setBackground(new java.awt.Color(100, 221, 23));
+        btnEditarRegistro.setText("Editar");
+        btnEditarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEditarRegistroMousePressed(evt);
+            }
+        });
+        btnEditarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarRegistroActionPerformed(evt);
+            }
+        });
+        pButtonsTablas.add(btnEditarRegistro);
 
         add(pButtonsTablas, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
@@ -237,267 +282,97 @@ public class panelCatalogo extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cbMostrarActionPerformed
 
+    private void btnEditarRegistroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarRegistroMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEditarRegistroMousePressed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddRegistro;
-    private javax.swing.JComboBox<String> cbMostrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JMenuItem miCliente;
-    private javax.swing.JMenuItem miEmpresaM;
-    private javax.swing.JMenuItem miEntidad;
-    private javax.swing.JMenuItem miSalon;
-    private javax.swing.JMenuItem miSupervisor;
-    private javax.swing.JMenuItem miVtaBoleto;
-    private javax.swing.JPanel pButtonsTablas;
-    private javax.swing.JPanel panelEspacio2;
-    private javax.swing.JPopupMenu popupRegistrar;
-    private javax.swing.JTable tablaRegistrar;
-    // End of variables declaration//GEN-END:variables
+    private void btnEditarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarRegistroActionPerformed
+        // TODO add your handling code here:
+        Dialog_Cliente.var = true;
+        Dialog_Supervisor.var = true;
+        Dialog_Entidad.var = true;
+        Dialog_Servicio.var = true;
+        Dialog_Salón.var = true;
+        formularios_editar();
+        
+        
 
-}
-=======
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    }//GEN-LAST:event_btnEditarRegistroActionPerformed
 
-package Vista.Paneles;
+    private void btnAddRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRegistroActionPerformed
+        // TODO add your handling code here:
+        this.btnEditarRegistro.setEnabled(false);
+    }//GEN-LAST:event_btnAddRegistroActionPerformed
 
-import Negocio.Backend;
-import Vista.*;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+     private int metodo(){
+     this.tablaRegistrar.addMouseListener(new MouseAdapter() 
+   {
 
-/**
- *
- * @author luisv
- */
-public class panelCatalogo extends javax.swing.JPanel {
-
-    /** Creates new form panelCatalogo */
-    public panelCatalogo() {
-        initComponents();
-        cargar_tablas();
+      @Override
+      public void mousePressed(MouseEvent e) 
+      {
+         int fila = tablaRegistrar.rowAtPoint(e.getPoint());
+         int columna = tablaRegistrar.columnAtPoint(e.getPoint());
+         if ((fila > -1) && (columna > -1))
+            btnEditarRegistro.setEnabled(true);
+            int idd = (int)(tablaRegistrar.getValueAt(fila, 0));
+            ID = idd;            
+      }
+   });
+     
+     return ID;
     }
     
-    private void cargar_tablas(){
-
-        switch (this.cbMostrar.getSelectedIndex()) {
+    private void formularios_editar(){
+        switch(this.cbMostrar.getSelectedIndex()){
             case 0:
-                Backend.ConsultaCliente(this.tablaRegistrar);
+                Dialog_Cliente c = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);                
+                c.setVisible(true);
+                c.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 1:
-                Backend.ConsultaSupervisor(this.tablaRegistrar);
+                Dialog_Supervisor s = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
+                s.setVisible(true);
+                s.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false); 
                 break;
             case 2:
-                Backend.ConsultarEntidad(this.tablaRegistrar);
+                Dialog_Entidad e = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
+                e.setVisible(true);
+                e.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 3:
-                Backend.ConsultarEmpresa(this.tablaRegistrar);
-                break;
+                 Dialog_Entidad em = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
+                 em.setVisible(true);  
+                 em.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
+                 break;
             case 4:
-                Backend.ConsultaServicio(this.tablaRegistrar);
+                Dialog_Servicio sv = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
+                sv.setVisible(true);
+                sv.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             case 5:
-                Backend.salonesDisponibles(this.tablaRegistrar);
+                Dialog_Salón sl = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
+                sl.setVisible(true);
+                sl.setID = this.ID;
+                this.btnEditarRegistro.setEnabled(false);
                 break;
             default:
                 break;
+            
         }
     }
-
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        popupRegistrar = new javax.swing.JPopupMenu();
-        miCliente = new javax.swing.JMenuItem();
-        miSalon = new javax.swing.JMenuItem();
-        miEntidad = new javax.swing.JMenuItem();
-        miVtaBoleto = new javax.swing.JMenuItem();
-        miEmpresaM = new javax.swing.JMenuItem();
-        miSupervisor = new javax.swing.JMenuItem();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaRegistrar = new javax.swing.JTable();
-        pButtonsTablas = new javax.swing.JPanel();
-        btnAddRegistro = new javax.swing.JButton();
-        panelEspacio2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        cbMostrar = new javax.swing.JComboBox<>();
-
-        miCliente.setText("Cliente");
-        miCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miClienteActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miCliente);
-
-        miSalon.setText("Salón");
-        miSalon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSalonActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miSalon);
-
-        miEntidad.setText("Entidad Cliente");
-        miEntidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEntidadActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miEntidad);
-
-        miVtaBoleto.setText("Venta Boletos");
-        miVtaBoleto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miVtaBoletoActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miVtaBoleto);
-
-        miEmpresaM.setText("Empresa de Mantenimiento");
-        miEmpresaM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miEmpresaMActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miEmpresaM);
-
-        miSupervisor.setText("Supervisor");
-        miSupervisor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSupervisorActionPerformed(evt);
-            }
-        });
-        popupRegistrar.add(miSupervisor);
-
-        setLayout(new java.awt.BorderLayout());
-
-        tablaRegistrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tablaRegistrar);
-
-        add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        pButtonsTablas.setBackground(new java.awt.Color(42, 42, 42));
-        pButtonsTablas.setLayout(new javax.swing.BoxLayout(pButtonsTablas, javax.swing.BoxLayout.LINE_AXIS));
-
-        btnAddRegistro.setBackground(new java.awt.Color(100, 221, 23));
-        btnAddRegistro.setText("Agregar..");
-        btnAddRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnAddRegistroMousePressed(evt);
-            }
-        });
-        pButtonsTablas.add(btnAddRegistro);
-
-        panelEspacio2.setBackground(new java.awt.Color(42, 42, 42));
-        panelEspacio2.setMinimumSize(new java.awt.Dimension(10, 100));
-        panelEspacio2.setPreferredSize(new java.awt.Dimension(10, 24));
-
-        javax.swing.GroupLayout panelEspacio2Layout = new javax.swing.GroupLayout(panelEspacio2);
-        panelEspacio2.setLayout(panelEspacio2Layout);
-        panelEspacio2Layout.setHorizontalGroup(
-            panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 298, Short.MAX_VALUE)
-        );
-        panelEspacio2Layout.setVerticalGroup(
-            panelEspacio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        pButtonsTablas.add(panelEspacio2);
-
-        jLabel1.setForeground(new java.awt.Color(220, 220, 220));
-        jLabel1.setText("Mostrar: ");
-        pButtonsTablas.add(jLabel1);
-
-        cbMostrar.setBackground(new java.awt.Color(57, 105, 138));
-        cbMostrar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Clientes", "Supervisores", "Entidades", "Empresas", "Servicios", "Salones Disponibles" }));
-        cbMostrar.setMaximumSize(new java.awt.Dimension(300, 32767));
-        cbMostrar.setPreferredSize(new java.awt.Dimension(300, 20));
-        cbMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbMostrarActionPerformed(evt);
-            }
-        });
-        pButtonsTablas.add(cbMostrar);
-
-        add(pButtonsTablas, java.awt.BorderLayout.PAGE_START);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAddRegistroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddRegistroMousePressed
-        // TODO add your handling code here:
-        popupRegistrar.show(evt.getComponent(),
-            3, //PosicionX
-            evt.getComponent().getY()+evt.getComponent().getHeight()-2); //PosicionY
-    }//GEN-LAST:event_btnAddRegistroMousePressed
-
-    private void miClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miClienteActionPerformed
-        // TODO add your handling code here:
-        Dialog_Cliente rc = new Dialog_Cliente((JFrame) this.getRootPane().getParent(), true);
-        rc.setVisible(true);
-    }//GEN-LAST:event_miClienteActionPerformed
-
-    private void miSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalonActionPerformed
-        // TODO add your handling code here:
-        Dialog_Salón rs = new Dialog_Salón((JFrame) this.getRootPane().getParent(), true);
-        rs.setVisible(true);
-    }//GEN-LAST:event_miSalonActionPerformed
-
-    private void miEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEntidadActionPerformed
-        // TODO add your handling code here:
-        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
-        re.setVisible(true);
-    }//GEN-LAST:event_miEntidadActionPerformed
-
-    private void miVtaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVtaBoletoActionPerformed
-        // TODO add your handling code here:
-        Dialog_VentaBoleto rvb = new Dialog_VentaBoleto((JFrame) this.getRootPane().getParent(), true);
-        rvb.setVisible(true);
-    }//GEN-LAST:event_miVtaBoletoActionPerformed
-
-    private void miEmpresaMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEmpresaMActionPerformed
-        // TODO add your handling code here:
-        Dialog_Entidad re = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
-        re.setVisible(true);
-    }//GEN-LAST:event_miEmpresaMActionPerformed
-
-    private void miSupervisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSupervisorActionPerformed
-        // TODO add your handling code here:
-        Dialog_Supervisor rs = new Dialog_Supervisor((JFrame) this.getRootPane().getParent(), true);
-        rs.setVisible(true);
-    }//GEN-LAST:event_miSupervisorActionPerformed
-
-    private void cbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMostrarActionPerformed
-        // TODO add your handling code here:
-       cargar_tablas();
-
-        
-    }//GEN-LAST:event_cbMostrarActionPerformed
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddRegistro;
+    private javax.swing.JButton btnEditarRegistro;
     private javax.swing.JComboBox<String> cbMostrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -514,4 +389,3 @@ public class panelCatalogo extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 }
->>>>>>> 16ae818084db68c58647f11b921736d836ca68c4

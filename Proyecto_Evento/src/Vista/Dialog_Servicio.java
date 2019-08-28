@@ -5,7 +5,15 @@
  */
 package Vista;
 
+import Modelo.HibernateUtil;
+import Modelo.POJO.Servicio;
 import Negocio.BackendInserts;
+import Negocio.BackendUpdate;
+import Vista.Paneles.panelCatalogo;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -16,9 +24,48 @@ public class Dialog_Servicio extends javax.swing.JDialog {
     /**
      * Creates new form DialogServicio
      */
+    
+    public static boolean var = false;
+    private Session s;
+    private Servicio sv;
+    public int setID;
+    
     public Dialog_Servicio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        estadoBtn();
+    }
+    
+            private void editar(){
+            SessionFactory factor = HibernateUtil.getSessionFactory();
+            s = factor.openSession();
+            Criteria c = s.createCriteria(Servicio.class).add(Restrictions.eq("idServicio", panelCatalogo.ID)); 
+            for (Object servicio : c.list()) {
+             sv = (Servicio) servicio;
+             this.txtNombre.setText(sv.getNombre());
+             this.txtPrecio.setText(String.valueOf(sv.getPrecio()));
+
+             
+    }
+    }
+    
+        private void nuevo(){
+            BackendInserts.InsertarServicio(this.txtNombre.getText(), Float.parseFloat(this.txtPrecio.getText()));
+            var = false;
+            this.dispose();
+    }
+    
+    private void estadoBtn(){
+        if(var == true){
+            editar();
+            
+
+        }
+        
+        else if(var == false){
+            
+        }
+        
     }
 
     /**
@@ -121,13 +168,29 @@ public class Dialog_Servicio extends javax.swing.JDialog {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        if(var == true){
+            s.close();
+        }
+        
+        else{
+            
+        }
+        var = false;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        BackendInserts.InsertarServicio(this.txtNombre.getText(), Float.parseFloat(this.txtPrecio.getText()));
-        this.dispose();
+        if(var == true){
+            BackendUpdate.EditarServicio(String.valueOf(sv.getIdServicio()), this.txtNombre.getText(), this.txtPrecio.getText(), true);
+            s.close();
+            this.dispose();
+        }
+        
+           else if(var == false){
+               nuevo();
+           }
+
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**
