@@ -39,18 +39,16 @@ public class ModelMantenimiento {
         return e;
     }
     
-    public void updateEvento(Mantenimiento e) {
+    public void update(Mantenimiento e) {
         session.beginTransaction();
         session.update(e);
         session.getTransaction().commit();
     }
     
-    /*public void cargarLista(JList<String> list) {
-        DefaultListModel<String> lmodel = new DefaultListModel<>();
-        list.setModel(lmodel);
-        lista.forEach((e) -> {
-            lmodel.addElement(e.getEmpresa());
-        });
-
-    }*/
+    public void add(Mantenimiento m) {
+        session.beginTransaction();
+        session.save(m);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

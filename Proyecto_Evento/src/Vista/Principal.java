@@ -23,10 +23,13 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Principal extends javax.swing.JFrame {
 
+    panelServicios pServicios;
+    
     /**
      * Creates new form Principal
      */
     public Principal() {
+        this.pServicios = new panelServicios();
         initComponents();
         cl = (CardLayout) panelCards.getLayout();
         cargarVistas();
@@ -60,11 +63,25 @@ public class Principal extends javax.swing.JFrame {
 
     private void cargarVistas() {
         panelCards.add("evento", new panelEventos());
-        panelCards.add("servicio", new panelServicios());
+        panelCards.add("servicio", pServicios);
         panelCards.add("mantenimiento", new panelMantenimiento());
         panelCards.add("registrar", new panelCatalogo());
         panelCards.add("usuario", new panelUsuarios());
 
+    }
+    
+    public void setRol(String rol){
+        switch (rol) {
+            case "vendedor":
+                btnTablas.setVisible(false);
+                btnUsuarios.setVisible(false);
+                mReportes.setVisible(false);
+                pServicios.btnAddServicio.setVisible(false);
+                pServicios.btnEditServicio.setVisible(false);
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="Generated Code NO BORRAR"> 
@@ -92,7 +109,8 @@ public class Principal extends javax.swing.JFrame {
         MantSalon = new javax.swing.JMenuItem();
         servEvento = new javax.swing.JMenuItem();
         ventas = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        mAyuda = new javax.swing.JMenu();
+        About = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eventos");
@@ -250,8 +268,17 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(mReportes);
 
-        jMenu4.setText("Ayuda");
-        jMenuBar1.add(jMenu4);
+        mAyuda.setText("Ayuda");
+
+        About.setText("Autores");
+        About.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AboutActionPerformed(evt);
+            }
+        });
+        mAyuda.add(About);
+
+        jMenuBar1.add(mAyuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -391,6 +418,11 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ventasActionPerformed
 
+    private void AboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutActionPerformed
+        // TODO add your handling code here:
+        new vistaAyuda(this, true).setVisible(true);
+    }//GEN-LAST:event_AboutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -431,6 +463,7 @@ public class Principal extends javax.swing.JFrame {
     private final CardLayout cl;
     private final IconFontUtil iconFont;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem About;
     private javax.swing.JMenuItem EvtxCliente;
     private javax.swing.JMenuItem MantSalon;
     private javax.swing.JButton btnEventos;
@@ -439,8 +472,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnTablas;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JMenuItem factCliente;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mAyuda;
     private javax.swing.JMenu mReportes;
     private javax.swing.JPanel panelCards;
     private javax.swing.JPanel panelNevegacion;

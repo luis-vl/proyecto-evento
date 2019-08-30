@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author luisv
  */
 public class panelServicios extends javax.swing.JPanel {
-    
+
     private ModelEvento_Servicio evtServicio;
     public static int ID;
 
@@ -34,8 +34,8 @@ public class panelServicios extends javax.swing.JPanel {
         ocultar_columna();
         metodo();
     }
-    
-    private void ocultar_columna(){
+
+    private void ocultar_columna() {
         this.tServicios.getColumnModel().getColumn(0).setMaxWidth(0);
         this.tServicios.getColumnModel().getColumn(0).setMinWidth(0);
         this.tServicios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -56,7 +56,6 @@ public class panelServicios extends javax.swing.JPanel {
         pEspacio1 = new javax.swing.JPanel();
         btnAddServicio = new javax.swing.JButton();
         btnEditServicio = new javax.swing.JButton();
-        btnBorrarServicio = new javax.swing.JButton();
         pServicioEvt = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tServicioEvento = new javax.swing.JTable();
@@ -88,7 +87,7 @@ public class panelServicios extends javax.swing.JPanel {
         pEspacio1.setLayout(pEspacio1Layout);
         pEspacio1Layout.setHorizontalGroup(
             pEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 511, Short.MAX_VALUE)
         );
         pEspacio1Layout.setVerticalGroup(
             pEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,17 +106,15 @@ public class panelServicios extends javax.swing.JPanel {
         pBotonesServicio.add(btnAddServicio);
 
         btnEditServicio.setBackground(new java.awt.Color(57, 105, 138));
+        btnEditServicio.setForeground(new java.awt.Color(250, 250, 250));
         btnEditServicio.setText("Editar");
+        btnEditServicio.setEnabled(false);
         btnEditServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditServicioActionPerformed(evt);
             }
         });
         pBotonesServicio.add(btnEditServicio);
-
-        btnBorrarServicio.setBackground(new java.awt.Color(57, 105, 138));
-        btnBorrarServicio.setText("Borrar");
-        pBotonesServicio.add(btnBorrarServicio);
 
         add(pBotonesServicio, java.awt.BorderLayout.PAGE_START);
 
@@ -136,11 +133,6 @@ public class panelServicios extends javax.swing.JPanel {
                 "Evento", "Servicio", "Precio"
             }
         ));
-        tServicioEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tServicioEventoMouseClicked(evt);
-            }
-        });
         jScrollPane5.setViewportView(tServicioEvento);
 
         pServicioEvt.add(jScrollPane5, java.awt.BorderLayout.CENTER);
@@ -186,7 +178,7 @@ public class panelServicios extends javax.swing.JPanel {
     private void btnAddServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddServicioActionPerformed
         // TODO add your handling code here:
         Dialog_Servicio.var = false;
-        Dialog_Servicio ds = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);       
+        Dialog_Servicio ds = new Dialog_Servicio((JFrame) this.getRootPane().getParent(), true);
         this.btnEditServicio.setEnabled(false);
         ds.setVisible(true);
     }//GEN-LAST:event_btnAddServicioActionPerformed
@@ -198,45 +190,38 @@ public class panelServicios extends javax.swing.JPanel {
         v.setVisible(true);
         v.setID = ID;
         this.btnEditServicio.setEnabled(false);
-        
+
     }//GEN-LAST:event_btnEditServicioActionPerformed
 
     private void tServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServiciosMouseClicked
         // TODO add your handling code here:
-        if (tServicios.getSelectedRow()<0) return;
-        System.out.println("asdf");
+        if (tServicios.getSelectedRow() > 0) {
+            btnEditServicio.setEnabled(true);
+        }
     }//GEN-LAST:event_tServiciosMouseClicked
 
-    private void tServicioEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tServicioEventoMouseClicked
-        // TODO add your handling code here:
-        if (tServicioEvento.getSelectedRow()<0) return;
-        System.out.println("qwerty");
-    }//GEN-LAST:event_tServicioEventoMouseClicked
+    private int metodo() {
+        this.tServicios.addMouseListener(new MouseAdapter() {
 
-         private int metodo(){
-     this.tServicios.addMouseListener(new MouseAdapter() 
-   {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int fila = tServicios.rowAtPoint(e.getPoint());
+                int columna = tServicios.columnAtPoint(e.getPoint());
+                if ((fila > -1) && (columna > -1)) {
+                    btnEditServicio.setEnabled(true);
+                }
+                int idd = (int) (tServicios.getValueAt(fila, 0));
+                ID = idd;
+            }
+        });
 
-      @Override
-      public void mousePressed(MouseEvent e) 
-      {
-         int fila = tServicios.rowAtPoint(e.getPoint());
-         int columna = tServicios.columnAtPoint(e.getPoint());
-         if ((fila > -1) && (columna > -1))
-            btnEditServicio.setEnabled(true);
-            int idd = (int)(tServicios.getValueAt(fila, 0));
-            ID = idd;
-      }
-   });
-     
-     return ID;
+        return ID;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddServicio;
-    private javax.swing.JButton btnBorrarServicio;
+    public javax.swing.JButton btnAddServicio;
     private javax.swing.JButton btnContratServicio;
-    private javax.swing.JButton btnEditServicio;
+    public javax.swing.JButton btnEditServicio;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPanel pBotonesServicio;
