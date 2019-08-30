@@ -219,9 +219,9 @@ public class panelServicios extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddServicio;
+    public javax.swing.JButton btnAddServicio;
     private javax.swing.JButton btnContratServicio;
-    private javax.swing.JButton btnEditServicio;
+    public javax.swing.JButton btnEditServicio;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JPanel pBotonesServicio;

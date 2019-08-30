@@ -6,20 +6,17 @@
 package Vista;
 
 import Controlador.TextPrompt;
-import Modelo.HibernateUtil;
+import Modelo.ModelUser;
 import Modelo.POJO.Usuario;
-import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author fernando
  */
 public class Login extends javax.swing.JDialog {
+
+    private ModelUser user;
 
     /**
      * Creates new form Login
@@ -30,6 +27,7 @@ public class Login extends javax.swing.JDialog {
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        user = new ModelUser();
         TextPrompt placeholder1 = new TextPrompt("Introduce tu usuario", this.txtUsuario);
         TextPrompt placeholder2 = new TextPrompt("Introduce tu contraseña", this.txtContraseña);
     }
@@ -52,7 +50,6 @@ public class Login extends javax.swing.JDialog {
         txtContraseña = new Controlador.PasswordField();
         btnIniciarSesion = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        cbxRol = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Acceso");
@@ -75,6 +72,10 @@ public class Login extends javax.swing.JDialog {
 
         lblIconoContraseña.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contraseña.png"))); // NOI18N
 
+        txtUsuario.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+
+        txtContraseña.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+
         btnIniciarSesion.setBackground(new java.awt.Color(100, 221, 23));
         btnIniciarSesion.setFont(new java.awt.Font("HP Simplified", 0, 14)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesión");
@@ -94,18 +95,15 @@ public class Login extends javax.swing.JDialog {
             }
         });
 
-        cbxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbxRol.setPreferredSize(new java.awt.Dimension(56, 35));
-
         javax.swing.GroupLayout pFormularioLayout = new javax.swing.GroupLayout(pFormulario);
         pFormulario.setLayout(pFormularioLayout);
         pFormularioLayout.setHorizontalGroup(
             pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pFormularioLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblIconoUsuario)
-                    .addComponent(lblIconoContraseña))
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblIconoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIconoContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,7 +111,6 @@ public class Login extends javax.swing.JDialog {
                         .addComponent(btnIniciarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(4, 4, 4)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(cbxRol, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(100, 100, 100))
         );
@@ -121,16 +118,14 @@ public class Login extends javax.swing.JDialog {
             pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pFormularioLayout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconoUsuario))
-                .addGap(18, 18, 18)
-                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIconoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addComponent(cbxRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblIconoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblIconoContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
                 .addGroup(pFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,24 +152,16 @@ public class Login extends javax.swing.JDialog {
             return;
         }
 
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            String str = txtUsuario.getText().trim();
-            
-            Criteria criteria = session.createCriteria(Usuario.class).add(Restrictions.eq("nombreUsario", str));
-            Usuario u = (Usuario) criteria.uniqueResult();
-            
-            if (txtUsuario.getText().trim().equals(u.getNombreUsario()) && txtContraseña.getText().equals(u.getContrasena())) {
-                session.close();
-                Principal p = new Principal();
-                p.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta...", "Error de Credenciales", JOptionPane.ERROR_MESSAGE);
-            }
+        Usuario u = new Usuario(txtUsuario.getText(), "", txtContraseña.getText());
 
-        } catch (HeadlessException | HibernateException e) {
-            JOptionPane.showConfirmDialog(null, e);
+        if (user.verificar(u)) {
+            u = user.getUsuario(u);
+            Principal p = new Principal();
+            p.setRol(u.getRol());
+            p.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta...", "Error de Credenciales", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -224,7 +211,6 @@ public class Login extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JComboBox<String> cbxRol;
     private javax.swing.JLabel lblIconoContraseña;
     private javax.swing.JLabel lblIconoUsuario;
     private javax.swing.JLabel lblNombrePrograma;
