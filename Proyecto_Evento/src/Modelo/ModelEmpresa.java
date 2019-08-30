@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Modelo.POJO.Mantenimiento;
+import Modelo.POJO.Empresa;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -16,39 +16,41 @@ import org.hibernate.Session;
  *
  * @author luisv
  */
-public class ModelMantenimiento {
+public class ModelEmpresa {
     private final Session session;
     private final Criteria ctr;
-    List<Mantenimiento> lista;
+    List<Empresa> lista;
 
-    public ModelMantenimiento() {
+    public ModelEmpresa() {
         session = HibernateUtil.getSessionFactory().openSession();
-        ctr = session.createCriteria(Mantenimiento.class);
+        ctr = session.createCriteria(Empresa.class);
 
         lista = ctr.list();
     }
     
-    public Mantenimiento getAt(int index) {
+    public Empresa getAt(int index) {
         return lista.get(index);
     }
     
-    public Mantenimiento getByID(int id) {
+    public void cargarLista(JList<String> list) {
+        DefaultListModel<String> lmodel = new DefaultListModel<>();
+        list.setModel(lmodel);
+        lista.forEach((e) -> {
+            lmodel.addElement(e.getNombre());
+        });
+
+    }
+    
+    public Empresa getByID(int id) {
         session.beginTransaction();
-        Mantenimiento e = session.get(Mantenimiento.class, id);
+        Empresa e = session.get(Empresa.class, id);
         session.getTransaction().commit();
         return e;
     }
     
-    public void update(Mantenimiento e) {
+    public void updateEvento(Empresa e) {
         session.beginTransaction();
         session.update(e);
         session.getTransaction().commit();
-    }
-    
-    public void add(Mantenimiento m) {
-        session.beginTransaction();
-        session.save(m);
-        session.getTransaction().commit();
-        session.close();
     }
 }

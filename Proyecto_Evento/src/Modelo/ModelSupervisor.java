@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Modelo.POJO.Mantenimiento;
+import Modelo.POJO.Supervisor;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -16,39 +16,41 @@ import org.hibernate.Session;
  *
  * @author luisv
  */
-public class ModelMantenimiento {
+public class ModelSupervisor {
     private final Session session;
     private final Criteria ctr;
-    List<Mantenimiento> lista;
+    List<Supervisor> lista;
 
-    public ModelMantenimiento() {
+    public ModelSupervisor() {
         session = HibernateUtil.getSessionFactory().openSession();
-        ctr = session.createCriteria(Mantenimiento.class);
+        ctr = session.createCriteria(Supervisor.class);
 
         lista = ctr.list();
     }
     
-    public Mantenimiento getAt(int index) {
+    public Supervisor getAt(int index) {
         return lista.get(index);
     }
     
-    public Mantenimiento getByID(int id) {
+    public void cargarLista(JList<String> list) {
+        DefaultListModel<String> lmodel = new DefaultListModel<>();
+        list.setModel(lmodel);
+        lista.forEach((e) -> {
+            lmodel.addElement(e.getNombre()+" "+e.getApellido());
+        });
+
+    }
+    
+    public Supervisor getByID(int id) {
         session.beginTransaction();
-        Mantenimiento e = session.get(Mantenimiento.class, id);
+        Supervisor e = session.get(Supervisor.class, id);
         session.getTransaction().commit();
         return e;
     }
     
-    public void update(Mantenimiento e) {
+    public void updateEvento(Supervisor e) {
         session.beginTransaction();
         session.update(e);
         session.getTransaction().commit();
-    }
-    
-    public void add(Mantenimiento m) {
-        session.beginTransaction();
-        session.save(m);
-        session.getTransaction().commit();
-        session.close();
     }
 }

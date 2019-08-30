@@ -60,6 +60,11 @@ public class panelUsuarios extends javax.swing.JPanel {
                 "Usuario", "Contraseña", "Rol"
             }
         ));
+        tUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tUsuarios);
 
         panels.add(jScrollPane3, java.awt.BorderLayout.CENTER);
@@ -78,7 +83,9 @@ public class panelUsuarios extends javax.swing.JPanel {
         pButtonsPerf.add(btnNuevo);
 
         btnEditar.setBackground(new java.awt.Color(57, 105, 138));
+        btnEditar.setForeground(new java.awt.Color(250, 250, 250));
         btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -107,7 +114,13 @@ public class panelUsuarios extends javax.swing.JPanel {
         v.setVisible(true);
         user = new ModelUser(tUsuarios);
         user.cargarDatos();
+        btnEditar.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tUsuariosMouseClicked
+        // TODO add your handling code here:
+        if(tUsuarios.getSelectedRow()>0) btnEditar.setEnabled(true);
+    }//GEN-LAST:event_tUsuariosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

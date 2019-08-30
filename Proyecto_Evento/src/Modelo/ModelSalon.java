@@ -7,6 +7,8 @@ package Modelo;
 
 import Modelo.POJO.Salon;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -23,6 +25,14 @@ public class ModelSalon {
     List<Salon> salones;
     private final String[] colNames = {"NOMBRE","CAPACIDAD","PRECIO"};
 
+    public ModelSalon() {
+        tModel = new DefaultTableModel();
+        session = HibernateUtil.getSessionFactory().openSession();
+        ctr = session.createCriteria(Salon.class);
+
+        salones = ctr.list();
+    }
+    
     public ModelSalon(javax.swing.JTable tabla) {
         tModel = new DefaultTableModel();
         session = HibernateUtil.getSessionFactory().openSession();
@@ -32,6 +42,14 @@ public class ModelSalon {
 
         tabla.setModel(tModel);
         tModel.setColumnIdentifiers(colNames);
+    }
+    
+    public void cargarComboBox(JComboBox cbx){
+        DefaultComboBoxModel cbxModel = new DefaultComboBoxModel();
+        cbx.setModel(cbxModel);
+        salones.forEach((s)->{
+            cbxModel.addElement(s.getNombre());
+        });
     }
 
     public void cargarDatos() {

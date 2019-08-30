@@ -51,8 +51,6 @@ public class panelEventos extends javax.swing.JPanel {
         pBotonesEvento = new javax.swing.JPanel();
         btnAgregar = new javax.swing.JButton();
         panelEspacio1 = new javax.swing.JPanel();
-        txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         pDetallleEvento = new javax.swing.JPanel();
         pBoletos = new javax.swing.JPanel();
@@ -131,7 +129,7 @@ public class panelEventos extends javax.swing.JPanel {
         panelEspacio1.setLayout(panelEspacio1Layout);
         panelEspacio1Layout.setHorizontalGroup(
             panelEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+            .addGap(0, 694, Short.MAX_VALUE)
         );
         panelEspacio1Layout.setVerticalGroup(
             panelEspacio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,21 +138,8 @@ public class panelEventos extends javax.swing.JPanel {
 
         pBotonesEvento.add(panelEspacio1);
 
-        txtBuscar.setText("Buscar...");
-        txtBuscar.setMaximumSize(new java.awt.Dimension(350, 2147483647));
-        txtBuscar.setPreferredSize(new java.awt.Dimension(350, 20));
-        pBotonesEvento.add(txtBuscar);
-
-        btnBuscar.setBackground(new java.awt.Color(57, 105, 138));
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        pBotonesEvento.add(btnBuscar);
-
         btnEditar.setBackground(new java.awt.Color(57, 105, 138));
+        btnEditar.setForeground(new java.awt.Color(250, 250, 250));
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -402,7 +387,7 @@ public class panelEventos extends javax.swing.JPanel {
         de.setVisible(true);
         mEvento = new ModelEvento(tEventos);
         mEvento.cargarDatos();
-        
+        btnEditar.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tEventosMouseClicked
@@ -423,14 +408,9 @@ public class panelEventos extends javax.swing.JPanel {
         v.setVisible(true);
     }//GEN-LAST:event_btnVenderBoletoActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVenderBoleto;
     private javax.swing.JLabel jLabel10;
@@ -454,7 +434,6 @@ public class panelEventos extends javax.swing.JPanel {
     private javax.swing.JPanel pVendidos;
     private javax.swing.JPanel panelEspacio1;
     private javax.swing.JTable tEventos;
-    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtPorCliente;
     private javax.swing.JTextField txtPorTeatro;
     private javax.swing.JTextField txtPrecBoleto;
