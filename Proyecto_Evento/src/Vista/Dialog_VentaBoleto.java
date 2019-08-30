@@ -9,7 +9,14 @@ import Modelo.ModelEvento;
 import Modelo.ModelVentaBoleto;
 import Modelo.POJO.Evento;
 import Modelo.POJO.VentaBoleto;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.util.Date;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -42,6 +49,26 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         v.setCantidadBoletos((Integer) spCantidad.getValue());
         v.setFecha(new Date());
         return v;
+    }
+    
+    private void mostrarFact(int id){
+        InputStream reporte = this.getClass().getResourceAsStream("/Reportes/FactBoleto.jasper");
+        JasperPrint jasperPrint;
+
+        Conexion con = new Conexion();
+        Connection Conn = con.conectar();
+        
+        HashMap params = new HashMap();
+        params.put("id_venta", id);
+
+        try {
+            jasperPrint = JasperFillManager.fillReport(reporte, params, Conn);
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("Factura");
+            jv.setVisible(true);
+        } catch (JRException ex) {
+
+        }
     }
 
     /**
@@ -259,6 +286,8 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (txtCedula.getText().equals("") || tEventos.getSelectedRow()<0) return;
         venta.addVenta(getCampos());
+        venta = new ModelVentaBoleto();
+        mostrarFact(venta.getUltimo().getIdVentaBoleto());
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 

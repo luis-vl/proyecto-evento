@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e48dadf5-6774-4a51-9c4b-28296835e3f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_venta" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+e.nombre,
+sum(v.cantidad_boletos*e.precio_boleto) as monto
+from venta_boleto v 
+inner join evento e 
+on e.id_evento = v.id_evento
+where v.id_venta_boleto = $P{id_venta}
+group by e.nombre]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="31" uuid="a4ba3765-e26c-45af-bc5f-89ecb698fc5a"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[FACTURA COMPRA BOLETO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="5" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="367" y="0" width="100" height="20" uuid="027f70d0-339c-496d-bb02-f8124a493840"/>
+				<text><![CDATA[MONTO A PAGAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="0" width="100" height="20" uuid="f08f8864-e5a9-4383-8d82-a4026cce6f9e"/>
+				<text><![CDATA[NOMBRE EVENTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="73" y="0" width="190" height="20" uuid="113a2a79-b5df-4fc5-8bee-d3d92018fe39"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="0" width="100" height="20" uuid="f10f25f4-53ab-4ee1-bec7-d7d75f37766f"/>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

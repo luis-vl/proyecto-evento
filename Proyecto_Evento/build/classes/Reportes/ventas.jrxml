@@ -5,23 +5,18 @@
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select 
-month(e.fecha_registro) as mes,
+month(v.fecha) as mes,
 e.nombre,
-e.fecha_registro,
-sum(e.cantidad_personas*e.precio_boleto*e.duracion) as ventasboleto
+sum(v.cantidad_boletos) * e.precio_boleto as ventasboleto
 
 from venta_boleto v
-inner join evento e on v.id_evento=v.id_evento
+inner join evento e on v.id_evento=e.id_evento
 group by 
-month(e.fecha_registro),
-e.nombre,
-e.fecha_registro;]]>
+mes,
+e.nombre]]>
 	</queryString>
 	<field name="mes" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fecha_registro" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="ventasboleto" class="java.lang.Double"/>
@@ -31,11 +26,11 @@ e.fecha_registro;]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="183" y="25" width="213" height="20" uuid="2ed9a187-9b40-45db-8523-3a36a8af66ae"/>
-				<textElement>
+				<reportElement x="0" y="12" width="555" height="20" uuid="2ed9a187-9b40-45db-8523-3a36a8af66ae"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ventas Mensuales de Boletos]]></text>
+				<text><![CDATA[VENTAS DE BOLETOS POR MES]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -45,31 +40,31 @@ e.fecha_registro;]]>
 	<columnHeader>
 		<band height="43" splitType="Stretch">
 			<staticText>
-				<reportElement x="98" y="2" width="100" height="20" uuid="baefcd08-2e4e-47dc-a71c-af26eb6c7858"/>
-				<text><![CDATA[mes]]></text>
+				<reportElement x="46" y="2" width="100" height="20" uuid="baefcd08-2e4e-47dc-a71c-af26eb6c7858"/>
+				<text><![CDATA[MES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="250" y="2" width="100" height="20" uuid="211a7502-bd76-4c0b-bcd5-47d9b73ac16f"/>
-				<text><![CDATA[nombre]]></text>
+				<reportElement x="226" y="2" width="100" height="20" uuid="211a7502-bd76-4c0b-bcd5-47d9b73ac16f"/>
+				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="435" y="2" width="100" height="20" uuid="3980de03-1e23-44e4-8831-2c339693cb1b"/>
-				<text><![CDATA[ventasboleto]]></text>
+				<text><![CDATA[MONTOS]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="77" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<textField>
-				<reportElement x="98" y="30" width="100" height="20" uuid="f858594f-0053-4c73-b91f-24a9de48b901"/>
+				<reportElement x="46" y="0" width="100" height="20" uuid="f858594f-0053-4c73-b91f-24a9de48b901"/>
 				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="250" y="37" width="100" height="20" uuid="270c7a77-68fe-4b3c-8a42-7489cd7b2465"/>
+				<reportElement x="226" y="0" width="100" height="20" uuid="270c7a77-68fe-4b3c-8a42-7489cd7b2465"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="435" y="39" width="100" height="20" uuid="d621acd4-c055-4c9d-8e22-5fc85edc9b49"/>
+				<reportElement x="435" y="0" width="100" height="20" uuid="d621acd4-c055-4c9d-8e22-5fc85edc9b49"/>
 				<textFieldExpression><![CDATA[$F{ventasboleto}]]></textFieldExpression>
 			</textField>
 		</band>
