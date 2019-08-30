@@ -6,19 +6,17 @@
 	<queryString>
 		<![CDATA[select 
 c.nombre as Nombre_Cliente,
-((e.cantidad_personas*e.precio_boleto*e.duracion)+(sum(es.precio))+(e.precio_salon)) as Total_Pagar
+sum(e.precio_salon)+sum(es.precio) as Total_Pagar
 
 from evento e
 inner join cliente c
 on c.id_cliente=e.id_cliente
 inner join evento_servicio es 
 on es.id_evento=e.id_evento
-inner join venta_boleto vb
-on vb.id_evento=e.id_evento
 inner join salon sa on 
 sa.id_salon=e.id_salon
 
-group by c.nombre ]]>
+group by c.nombre]]>
 	</queryString>
 	<field name="Nombre_Cliente" class="java.lang.String"/>
 	<field name="Total_Pagar" class="java.lang.Double"/>
@@ -28,11 +26,11 @@ group by c.nombre ]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="218" y="28" width="138" height="26" uuid="f2affccb-e3df-421a-a107-d2cb82433848"/>
+				<reportElement x="217" y="13" width="138" height="26" uuid="f2affccb-e3df-421a-a107-d2cb82433848"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Factura de Clientes]]></text>
+				<text><![CDATA[Ingresos por Clientes]]></text>
 			</staticText>
 			<textField pattern="h.mm a">
 				<reportElement x="455" y="54" width="100" height="20" uuid="fdb16517-b5ca-47bb-b911-585deac0b781"/>
