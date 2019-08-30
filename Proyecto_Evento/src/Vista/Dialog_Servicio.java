@@ -10,6 +10,7 @@ import Modelo.POJO.Servicio;
 import Negocio.BackendInserts;
 import Negocio.BackendUpdate;
 import Vista.Paneles.panelCatalogo;
+import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -101,9 +102,19 @@ public class Dialog_Servicio extends javax.swing.JDialog {
 
         txtNombre.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         txtNombre.setPreferredSize(new java.awt.Dimension(4, 26));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         txtPrecio.setPreferredSize(new java.awt.Dimension(4, 26));
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pSuperiorLayout = new javax.swing.GroupLayout(pSuperior);
         pSuperior.setLayout(pSuperiorLayout);
@@ -192,6 +203,36 @@ public class Dialog_Servicio extends javax.swing.JDialog {
            }
 
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+             char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        // TODO add your handling code here:
+                char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+           JOptionPane.showMessageDialog(null, "INGRESE SOLO NUMEROS");
+               
+          } 
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
     /**
      * @param args the command line arguments

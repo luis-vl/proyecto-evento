@@ -60,11 +60,11 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         pTop = new javax.swing.JPanel();
         pDatosGenerales = new javax.swing.JPanel();
         lblNombreCliente = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
         lblBoletosDisp = new javax.swing.JLabel();
         txtBoletosDisponibles = new javax.swing.JTextField();
         spCantidad = new javax.swing.JSpinner();
+        txtCedula = new javax.swing.JFormattedTextField();
         pCenter = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tEventos = new javax.swing.JTable();
@@ -130,6 +130,12 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
         spCantidad.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         spCantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
 
+        try {
+            txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-######-####U")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout pDatosGeneralesLayout = new javax.swing.GroupLayout(pDatosGenerales);
         pDatosGenerales.setLayout(pDatosGeneralesLayout);
         pDatosGeneralesLayout.setHorizontalGroup(
@@ -144,8 +150,8 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
                         .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombreCliente)
                             .addComponent(lblPrecio)
-                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 45, Short.MAX_VALUE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                         .addGroup(pDatosGeneralesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBoletosDisp)
                             .addComponent(txtBoletosDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
@@ -159,7 +165,8 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
                     .addGroup(pDatosGeneralesLayout.createSequentialGroup()
                         .addComponent(lblNombreCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
                     .addGroup(pDatosGeneralesLayout.createSequentialGroup()
                         .addComponent(lblBoletosDisp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,7 +329,7 @@ public class Dialog_VentaBoleto extends javax.swing.JDialog {
     private javax.swing.JSpinner spCantidad;
     private javax.swing.JTable tEventos;
     private javax.swing.JTextField txtBoletosDisponibles;
-    private javax.swing.JTextField txtCedula;
+    private javax.swing.JFormattedTextField txtCedula;
     private javax.swing.JTextField txtTotalPagar;
     // End of variables declaration//GEN-END:variables
 }

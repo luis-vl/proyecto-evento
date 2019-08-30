@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author luisv
@@ -80,6 +82,7 @@ public class Dialog_Mantenimiento extends javax.swing.JDialog {
 
         jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jTextField2.setText("Seleccione..");
         jTextField2.setPreferredSize(new java.awt.Dimension(4, 26));
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -88,6 +91,16 @@ public class Dialog_Mantenimiento extends javax.swing.JDialog {
 
         jTextField3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jTextField3.setPreferredSize(new java.awt.Dimension(4, 26));
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(250, 250, 250));
@@ -95,6 +108,11 @@ public class Dialog_Mantenimiento extends javax.swing.JDialog {
 
         jTextField4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jTextField4.setPreferredSize(new java.awt.Dimension(4, 26));
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField4KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -225,6 +243,40 @@ public class Dialog_Mantenimiento extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+            char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+        // TODO add your handling code here:
+              char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+               
+          } 
+    }//GEN-LAST:event_jTextField4KeyTyped
 
     /**
      * @param args the command line arguments

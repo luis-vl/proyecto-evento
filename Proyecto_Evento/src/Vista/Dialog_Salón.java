@@ -10,6 +10,7 @@ import Modelo.POJO.Salon;
 import Negocio.BackendInserts;
 import Negocio.BackendUpdate;
 import Vista.Paneles.panelCatalogo;
+import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -140,8 +141,23 @@ public class Dialog_Salón extends javax.swing.JDialog {
         lblCapacidad.setText("Capacidad");
 
         txtNombreSalon.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtNombreSalon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreSalonKeyTyped(evt);
+            }
+        });
 
         txtCapacidad.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtCapacidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCapacidadActionPerformed(evt);
+            }
+        });
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacidadKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pInfoGLayout = new javax.swing.GroupLayout(pInfoG);
         pInfoG.setLayout(pInfoGLayout);
@@ -185,6 +201,16 @@ public class Dialog_Salón extends javax.swing.JDialog {
         lblPrecio.setText("Precio");
 
         txtPrecio.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pInfoELayout = new javax.swing.GroupLayout(pInfoE);
         pInfoE.setLayout(pInfoELayout);
@@ -243,6 +269,57 @@ public class Dialog_Salón extends javax.swing.JDialog {
                nuevo();
            }
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void txtNombreSalonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreSalonKeyTyped
+              char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_txtNombreSalonKeyTyped
+
+    private void txtCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCapacidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCapacidadActionPerformed
+
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
+        // TODO add your handling code here:
+            char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+           JOptionPane.showMessageDialog(null, "INGRESE SOLO NUMEROS");
+               
+          } 
+    }//GEN-LAST:event_txtCapacidadKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+           char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+           JOptionPane.showMessageDialog(null, "INGRESE SOLO NUMEROS");
+               
+          } 
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
 
     /**
      * @param args the command line arguments
