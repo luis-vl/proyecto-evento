@@ -73,6 +73,24 @@ public class BackendInserts {
         s.close();
 
     }
+    
+    public static void InsertarEmpresa(String Nombre, String Direccion, String Telefono, String RUC) {
+        SessionFactory factor = HibernateUtil.getSessionFactory();
+        Session s;
+        s = factor.openSession();
+
+        s.beginTransaction();
+        Empresa e = new Empresa();
+        e.setNombre(Nombre);
+        e.setDireccion(Direccion);
+        e.setTelefono(Telefono);
+        e.setRuc(RUC);
+        s.save(e);
+        s.getTransaction().commit();
+        JOptionPane.showMessageDialog(null, "Registro guardado exitosamente");
+        s.close();
+
+    }
 
     public static void InsertarMantenimiento(Salon Salon, Empresa Empresa, Supervisor Supervisor, String TipoMto, Float Costo) {
         SessionFactory factor = HibernateUtil.getSessionFactory();

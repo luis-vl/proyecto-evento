@@ -13,6 +13,7 @@ import Vista.Paneles.panelCatalogo;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -142,13 +143,28 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
         pDatosSupervisor.setForeground(new java.awt.Color(255, 255, 255));
 
         txtPrimerNombre.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtPrimerNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrimerNombreKeyTyped(evt);
+            }
+        });
 
         txtPrimerApellido.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        txtPrimerApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrimerApellidoKeyTyped(evt);
+            }
+        });
 
         txtDireccion.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         txtTelefono.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
+        try {
+            txtCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-######-####U")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCedula.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +172,11 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
             }
         });
 
+        try {
+            txtFechaNac.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##-##-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtFechaNac.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
@@ -250,14 +271,11 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-//        try {
-//            // TODO add your handling code here:
-//            BackendInserts.InsertarSupervisor(this.txtPrimerNombre.getText(), this.txtPrimerApellido.getText(), this.txtCedula.getText(), this.txtFechaNac.getText(), this.txtDireccion.getText(), this.txtDireccion.getText());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(Dialog_Supervisor.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        this.dispose();
-          if(var == true){
+    if (txtPrimerNombre.getText() == null && txtPrimerApellido.getText() == null && txtDireccion.getText() == null
+                && txtCedula.getText() == null && txtTelefono.getText() == null && txtFechaNac.getText()==null) {
+        
+            
+             if(var == true){
             BackendUpdate.EditarSupervisor(String.valueOf(sv.getIdSupervisor()), this.txtDireccion.getText(), this.txtTelefono.getText(), true);
             s.close();
             this.dispose();
@@ -266,11 +284,46 @@ public class Dialog_Supervisor extends javax.swing.JDialog {
            else if(var == false){
                nuevo();
            }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo vacío rellenalo");
+        } 
+       
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCedulaActionPerformed
+
+    private void txtPrimerApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimerApellidoKeyTyped
+        // TODO add your handling code here:
+         char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_txtPrimerApellidoKeyTyped
+
+    private void txtPrimerNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimerNombreKeyTyped
+        // TODO add your handling code here:
+         char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_txtPrimerNombreKeyTyped
 
     /**
      * @param args the command line arguments

@@ -140,9 +140,9 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblNombreCliente" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblPrecio" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtCedula" alignment="0" min="-2" pref="301" max="-2" attributes="0"/>
+                                      <Component id="txtCedula" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" pref="45" max="32767" attributes="0"/>
+                                  <EmptySpace pref="54" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblBoletosDisp" min="-2" max="-2" attributes="0"/>
                                       <Component id="txtBoletosDisponibles" pref="264" max="32767" attributes="0"/>
@@ -161,7 +161,8 @@
                               <Group type="102" attributes="0">
                                   <Component id="lblNombreCliente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtCedula" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="txtCedula" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="lblBoletosDisp" min="-2" max="-2" attributes="0"/>
@@ -189,8 +190,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="N&#xfa;mero de C&#xe9;dula"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtCedula">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblPrecio">
                   <Properties>
@@ -226,6 +225,13 @@
                     </Property>
                     <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                       <SpinnerModel initial="1" maximum="20" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JFormattedTextField" name="txtCedula">
+                  <Properties>
+                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                      <Format format="###-######-####U" subtype="-1" type="5"/>
                     </Property>
                   </Properties>
                 </Component>

@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -292,6 +294,7 @@ public class panelCatalogo extends javax.swing.JPanel {
         Dialog_Entidad.var = true;
         Dialog_Servicio.var = true;
         Dialog_Salón.var = true;
+        Dialog_Empresa.var = true;
         formularios_editar();
         
         
@@ -301,6 +304,13 @@ public class panelCatalogo extends javax.swing.JPanel {
     private void btnAddRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRegistroActionPerformed
         // TODO add your handling code here:
         this.btnEditarRegistro.setEnabled(false);
+        Dialog_Cliente.var = false;
+        Dialog_Supervisor.var = false;
+        Dialog_Entidad.var = false;
+        Dialog_Servicio.var = false;
+        Dialog_Salón.var = false;
+        Dialog_Empresa.var = false;
+        
     }//GEN-LAST:event_btnAddRegistroActionPerformed
 
      private int metodo(){
@@ -343,7 +353,7 @@ public class panelCatalogo extends javax.swing.JPanel {
                 this.btnEditarRegistro.setEnabled(false);
                 break;
             case 3:
-                 Dialog_Entidad em = new Dialog_Entidad((JFrame) this.getRootPane().getParent(), true);
+                 Dialog_Empresa em = new Dialog_Empresa((JFrame) this.getRootPane().getParent(), true);
                  em.setVisible(true);  
                  em.setID = this.ID;
                 this.btnEditarRegistro.setEnabled(false);

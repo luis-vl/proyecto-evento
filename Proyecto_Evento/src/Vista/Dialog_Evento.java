@@ -201,7 +201,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
         pCliente = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        btnNewCliente = new javax.swing.JButton();
         btnFindCliente = new javax.swing.JButton();
         pDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -246,6 +245,11 @@ public class Dialog_Evento extends javax.swing.JDialog {
         pNombreEvt.setBackground(new java.awt.Color(57, 60, 76));
 
         txtNombreEvt.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        txtNombreEvt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreEvtKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -282,14 +286,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
         txtCliente.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         txtCliente.setText("Pepe José Luna");
 
-        btnNewCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        btnNewCliente.setText("Nuevo Cliente");
-        btnNewCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewClienteActionPerformed(evt);
-            }
-        });
-
         btnFindCliente.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         btnFindCliente.setText("Buscar Cliente");
         btnFindCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -302,26 +298,23 @@ public class Dialog_Evento extends javax.swing.JDialog {
         pCliente.setLayout(pClienteLayout);
         pClienteLayout.setHorizontalGroup(
             pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(pClienteLayout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addGroup(pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pClienteLayout.createSequentialGroup()
-                        .addComponent(btnNewCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                        .addGap(144, 144, 144)
-                        .addComponent(btnFindCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
-                    .addComponent(txtCliente))
+                .addComponent(txtCliente)
                 .addGap(77, 77, 77))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFindCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(219, 219, 219))
         );
         pClienteLayout.setVerticalGroup(
             pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pClienteLayout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFindCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
+                .addComponent(btnFindCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
@@ -688,12 +681,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private void btnNewClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewClienteActionPerformed
-        // TODO add your handling code here:
-        Dialog_Cliente dc = new Dialog_Cliente(this, true);
-        dc.setVisible(true);
-    }//GEN-LAST:event_btnNewClienteActionPerformed
-
     private void btnFindClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindClienteActionPerformed
         // TODO add your handling code here:
         Dialog_BuscarCliente bc = new Dialog_BuscarCliente(this, true);
@@ -701,6 +688,21 @@ public class Dialog_Evento extends javax.swing.JDialog {
         setCliente(bc.getCliente());
         txtCliente.setText(cliente.getNombre() + " " + cliente.getApellido());
     }//GEN-LAST:event_btnFindClienteActionPerformed
+
+    private void txtNombreEvtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEvtKeyTyped
+        // TODO add your handling code here:
+            char c=evt.getKeyChar(); 
+             
+         
+          if(Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); 
+               
+             JOptionPane.showMessageDialog(null, "Ingrese solo letras");
+               
+          } 
+    }//GEN-LAST:event_txtNombreEvtKeyTyped
 
     /**
      * @param args the command line arguments
@@ -746,7 +748,6 @@ public class Dialog_Evento extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnFindCliente;
-    private javax.swing.JButton btnNewCliente;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> cbxHora;
     private javax.swing.JComboBox<String> cbxMinutos;
